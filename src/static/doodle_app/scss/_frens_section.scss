@@ -1,0 +1,21 @@
+
+@use '@scss/_theme.scss' as theme;
+@use '@scss/_fonts.scss' as fonts;
+
+
+.frens-box{
+    position: relative;
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1rem;
+
+    width: calc(100% - 1rem);
+    height: calc(100vh - 20vh);
+    overflow: auto;
+
+    border: 2px solid theme.$purple-002;
+    //background-color: yellow;
+    border-radius: 0.5rem;
+}

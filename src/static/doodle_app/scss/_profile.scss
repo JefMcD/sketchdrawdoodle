@@ -1,0 +1,117 @@
+
+
+@use "@scss/_theme.scss" as theme;
+@use "@scss/_fonts.scss" as fonts;
+
+.profile-banner{
+    position: relative;
+    display: block;
+
+    width: 100%;
+    height: 12vh;
+
+    color: theme.$dk-003;
+    font-family: fonts.$writing;
+
+    border: 2px solid theme.$purple-003;
+
+    overflow: hidden;
+    .banner-img{
+      width: 100%;
+      height: 100%;
+      object-fit:cover;
+    }
+
+}
+
+.profile-avatar{
+  position:absolute;
+  display: block;
+  top: 0;
+  left: 0;
+
+  width: 5rem;
+  aspect-ratio: 1/1;
+
+  border: 2px solid theme.$purple-002;
+  border-radius: 50%;
+  overflow: hidden;
+
+  .avatar-img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+  }
+
+}
+
+.edit-profile-box{
+  position: absolute;
+  display:block;
+  top: 1rem;
+  left: 1rem;
+
+  height: 80vh;
+  width: 70vw;
+  background-color: theme.$dk-001;
+
+  border: 2px solid theme.$purple-002;
+  border-radius: 1rem;
+
+  z-index: 2;
+}
+
+
+.profile-username{
+  position:absolute;
+  display: block;
+  top: 0;
+  right: 0;
+
+  width: 5rem;
+  height: auto;
+
+  font-family: fonts.$writing;
+  color: theme.$lt-002;
+
+}
+
+.profile-caption{
+  position:absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+
+  justify-content: center;
+  width: 100%;
+  height: auto;
+
+  font-family: fonts.$writing;
+  color: theme.$lt-002;
+
+}
+
+.profile-story{
+    position: relative;
+    display: block;
+
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+
+    color: theme.$dk-003;
+    font-family: fonts.$writing;
+
+    //border: 2px solid theme.$purple-002;
+
+}
+
+.profile-gallery{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(100% - 20vh);
+
+  border: 2px solid theme.$purple-001;
+  border-radius: 0.5rem;
+}

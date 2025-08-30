@@ -1,0 +1,68 @@
+
+$header: zallord, Arial, sans-serif;
+
+$writing: architectsDoge, indieFlower, Arial, sans-serif;
+$writing-bold: indieFlower, Arial, sans-serif;
+
+$reg-text:   caveatReg, indieFlower, Arial, sans-serif;
+$bold-text:  caveatBold, indieFlower, Arial, sans-serif;
+$light-text: caveatVariable, indieFlower, Arial, sans-serif;
+$variable-text: caveatVariable, indieFlower, Arial, sans-serif;
+
+$emphasis: caveatreg, indieFlower, Arial, sans-serif;
+$error: amaticReg, indieFlower,  Arial, sans-serif;
+$error-bold: amaticBold, indieFlower,  Arial, sans-serif;
+
+$logo: zallord, Arial, sans-serif;
+
+// general text sans-serif
+@font-face{
+    font-family: drybrush;
+    src: url('/static/doodle_app/fonts/woff2/drybrush.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face{
+    font-family: zallord;
+    src: url('/static/doodle_app/fonts/woff2/Zallord.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face{
+    font-family: caveatReg;
+    src: url('/static/doodle_app/fonts/woff2/Caveat-Regular.woff2');
+}
+@font-face{
+    font-family: caveatMed;
+    src: url('/static/doodle_app/fonts/woff2/Caveat-Medium.woff2');
+}
+@font-face{
+    font-family: caveatSemi;
+    src: url('/static/doodle_app/fonts/woff2/Caveat-SemiBold.woff2');
+}
+// Variable Font
+@font-face{
+    font-family: caveatVariable;
+    src: url('/static/doodle_app/fonts/woff2/Caveat-Variable.woff2');
+}
+// Variable Font
+@font-face{
+    font-family: architectsDoge;
+    src: url('/static/doodle_app/fonts/woff2/Architects-Doge.woff2');
+
+}
+@font-face{
+    font-family:indieFlower;
+    src: url("/static/doodle_app/fonts/woff/indieFlower.woff")
+}
+
+@font-face{
+    font-family: amaticReg;
+    src: url("/static/doodle_app/fonts/woff2/amatic-reg.woff2")
+}
+@font-face{
+    font-family:amaticBold;
+    src: url("/static/doodle_app/fonts/woff2/amatic-bold.woff2")
+}

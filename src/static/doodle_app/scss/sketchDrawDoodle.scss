@@ -1,0 +1,54 @@
+
+
+
+// fonts and theme added by vite.config
+@use "@scss/_fonts.scss" as fonts;
+@use "@scss/_theme.scss" as theme;
+@use "@scss/_general.scss"; 
+@use "@scss/_spinner.scss";
+@use "@scss/_nav_panel.scss";
+@use "@scss/_tabs.scss";
+@use "@scss/_account.scss";
+@use "@scss/_main_panel.scss";
+@use "@scss/_extras_panel.scss";
+@use "@scss/_forms.scss";
+@use "@scss/_authenticate.scss";
+@use "@scss/_welcome_section.scss";
+@use "@scss/_draw_section.scss";
+@use "@scss/_frens_section.scss";
+@use "@scss/profile.scss";
+@use "@scss/_text.scss";
+
+
+/******************************************************
+//
+// Main Window Structure and General Layout
+// 
+/******************************************************/
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: theme.$purple-003;
+}
+.app-container{
+    display: flex;
+    position:relative;
+    flex-direction: row;
+
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    max-width: 80rem;
+
+    font-family: fonts.$writing;
+    //background-color: theme.$purple-001;
+    //border: 5px solid red;
+
+    overflow: auto;
+
+}

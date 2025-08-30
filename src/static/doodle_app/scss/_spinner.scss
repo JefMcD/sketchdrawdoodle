@@ -1,0 +1,107 @@
+
+
+@use '@scss/_theme' as theme;
+@use '@scss/_fonts' as fonts;
+
+/* star spinner */
+.spinner{
+    position: absolute;
+    display: block;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: auto;
+    aspect-ratio: 1/1;
+
+    //border: 2px solid green;
+    z-index: 10;
+}
+
+.svg-star-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    height: 6rem;
+    /* border: 2px solid red; */
+
+    animation:  spin 1000ms infinite linear; 
+}
+
+.svg-star-icon svg{
+
+    width: 5rem;
+    height: 5rem;
+}
+
+
+#path1-star-spinner{
+    fill: theme.$purple-002;
+    stroke:theme.$turq-002;
+    stroke-width:0.113169;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:20.8;
+    stroke-dashoffset:190.753;
+
+}
+
+// This class may be useful for something else 
+.loading-message{
+    position: relative;
+    display: flex; 
+    //display:none;
+    justify-content: center;
+    align-items: center;
+    font-family: fonts.$writing;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 3rem;
+
+    animation:  pulse 1000ms infinite ease-in-out;
+}
+
+#jeffers-path1{
+    fill: theme.$red-002;
+}
+
+
+@keyframes fade-in-out{
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.3;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
+
+@keyframes bounce{
+    0% {
+        width: 6rem;
+        height: 6rem;
+    }
+    50% {
+        width: 10rem;
+        height: 10rem;
+    }
+    100% {
+        width: 6rem;
+        height: 6rem;
+    }
+}
+
+/* end star-spinner */

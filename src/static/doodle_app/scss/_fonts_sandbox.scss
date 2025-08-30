@@ -1,0 +1,166 @@
+
+$header: badbrush, Arial, sans-serif;
+
+$writing: amatic_reg, indieFlower, Arial, sans-serif;
+$writing-bold: indieFlower, Arial, sans-serif;
+
+$reg-text:      nunitoReg, amatic_reg, comforta_reg, amatic, Arial, sans-serif;
+$bold-text:     nunitoBold, comforta_reg, amatic, Arial, sans-serif;
+$light-text:    comforta_reg, amatic, Arial, sans-serif;
+
+$subtext:   nunitoReg, Arial, sans-serif;
+
+$shoutout: drybrush, Arial, sans-serif;
+$emphasis: nunitoReg, Arial, sans-serif;
+
+$logo: drybrush, Arial, sans-serif;
+
+// general text sans-serif
+
+@font-face{
+    font-family:montserrat;
+    src: url("/static/doodle_app/fonts/woff2/montserrat/montserrat.regular.woff2");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face{
+    font-family:quicksandReg;
+    src: url("/static/doodle_app/fonts/woff/quicksandReg.woff");
+
+}
+@font-face{
+    font-family:quicksandBold;
+    src: url("/static/doodle_app/fonts/woff/quicksandBold.woff");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face{
+    font-family:quicksandLight;
+    src: url("/static/doodle_app/fonts/woff/quicksandLight.woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+
+
+@font-face{
+    font-family:indieFlower;
+    src: url("/static/doodle_app/fonts/woff/indieFlower.woff")
+}
+
+/*
+@font-face{
+    font-family:comforta_bold;
+    src: url("/static/doodle_app/fonts/tiff/comforta/Comfortaa-Bold.ttf")
+}
+@font-face{
+    font-family:comforta_reg;
+    src: url("/static/doodle_app/fonts/tiff/comforta/Comfortaa-Regular.ttf")
+}
+@font-face{
+    font-family:comforta_lt;
+    src: url("/static/doodle_app/fonts/tiff/comforta/Comfortaa-Light.ttf")
+}
+
+
+@font-face{
+    font-family:indie_flower;
+    src: url("/static/doodle_app/fonts/tiff/indie_flower/IndieFlower.ttf")
+}
+
+
+
+*/
+
+
+
+
+@font-face{
+    font-family:amatic_reg;
+    src: url("/static/doodle_app/fonts/woff2/amatic/amatic-sc.regular.woff2");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face{
+    font-family:amatic_bold;
+    src: url("/static/doodle_app/fonts/woff2/amatic/amatic-sc.bold.woff2");
+    font-weight: 400;
+    font-style: normal
+}
+
+
+
+@font-face{
+    font-family:nunitoReg;
+    src: url("/static/doodle_app/fonts/woff2/nunito/nunito.regular.woff2");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face{
+    font-family:nunitoBold;
+    src: url("/static/doodle_app/fonts/woff2/nunito/nunito.bold.woff2");
+    font-weight: 400;
+    font-style: normal
+}
+
+
+@font-face{
+    font-family:varelaReg;
+    src: url("/static/doodle_app/fonts/woff/varelaReg.woff")
+}
+
+
+
+
+@font-face {
+    font-family: badbrush;
+    src: url('/static/doodle_app/fonts/woff2/badbrush.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face{
+    font-family: gooddog;
+    src: url('/static/doodle_app/fonts/woff2/gooddog.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face{
+    font-family: drybrush;
+    src: url('/static/doodle_app/fonts/woff2/drybrush.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face{
+    font-family: ninjanaruto;
+    src: url('/static/doodle_app/fonts/woff2/ninjanaruto.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: radbrush;
+    src: url('/static/doodle_app/fonts/woff2/radbrush.woff2');
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: babyBlue;
+    src: url('/static/doodle_app/fonts/woff/babyBlue.woff');
+    font-weight: 400;
+    font-style: normal
+}
+
+
+
+
+
+
+
+
+
+
+
