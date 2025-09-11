@@ -69,9 +69,13 @@ export default defineConfig({
       "@auth"       : resolve(__dirname, "./src/components/sections/authentication"),
       "@draw"       : resolve(__dirname, "./src/components/sections/draw"),
       "@profile"    : resolve(__dirname, "./src/components/sections/profile"),
-    
+
+      // svg icons
+      "@svgIcons"   : resolve(__dirname, "./src/components/svgIcons"),
+      "@navLinks"   : resolve(__dirname, "./src/components/svgIcons/navLinks"),
+      "@socialIcons": resolve(__dirname, "./src/components/svgIcons/socialMedia"),
+
       // Forms
-      "@navLinks"   : resolve(__dirname, "./src/components/navLinks"),
       "@forms"      : resolve(__dirname, "./src/components/forms"),
       "@authForms"  : resolve(__dirname, "./src/components/forms/authentication"),
       "@drawForms"  : resolve(__dirname, "./src/components/forms/draw"),
@@ -79,6 +83,9 @@ export default defineConfig({
       
       "@tabs"       : resolve(__dirname, "./src/components/tabs"),
 
+      // Context Providers
+      "@providers"   : resolve(__dirname, "./src/providers"),
+      
       // modules
       "@modules"    : resolve(__dirname, "./src/modules"),
     }

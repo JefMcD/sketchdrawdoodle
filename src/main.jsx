@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import AppWrapper from "@components/AppWrapper"
+import AppWrapper from "@components/AppWrapper";
+import 'react-tooltip/dist/react-tooltip.css';
 // Test CSRF
 // import runCookieTest from "@modules/runCsrfTest.js";
 // import {runPOSTTest} from "@modules/runCsrfTest.js";
@@ -9,9 +10,9 @@ import AppWrapper from "@components/AppWrapper"
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
+ 
     <AppWrapper />
-  </StrictMode>
+
 )
 
 

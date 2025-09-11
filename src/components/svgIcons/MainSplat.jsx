@@ -1,10 +1,15 @@
 
-function MainSplat(){
+function MainSplat({setActiveSection}){
+	
+	function handleClick(e){
+		e.stopPropagation();
+		setActiveSection("draw-section")
+	}
 
   return(
   <>
-		<div className = "splat-container" >
-				<svg className='ink-splat-svg' id="splat1-svg" viewBox="0 0 13.135829 13.183939"
+		<div  className = "splat-container" >
+				<svg onClick={handleClick}  className='ink-splat-svg' id="splat1-svg" viewBox="0 0 13.135829 13.183939"
 						
 						>
 						<g id="splat1-svg-group" data-section="session-config">

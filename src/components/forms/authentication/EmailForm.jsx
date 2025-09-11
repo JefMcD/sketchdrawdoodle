@@ -3,16 +3,16 @@
     Form used for the password reset process
 */
 
-import {useState} from "react"
+import {useState} from "react";
+import {checkCookie} from "@modules/manageApi";
 import FormError from "@forms/FormError"
 
 export default function EmailForm({
+    server,
     setSubheader,
     setMessage,
     setStep,
-    csrfToken,
-    server}
-){
+}){
     const [formError, setFormError] = useState("");
     const [email, setEmail] = useState("")
 
@@ -29,6 +29,7 @@ export default function EmailForm({
         resetForm.append("email", email)
 
         // fetch
+        const csrfToken = checkCookie(server) 
         const request_password_reset = server+"request_password_reset/";
         const response = await fetch(request_password_reset, {
             method:"POST",
@@ -52,7 +53,7 @@ export default function EmailForm({
     }
 
 
-  return(
+    return(
     <div className="form-wrapper">
         <form onSubmit={handleSubmit} className='standard-form verify-form'>
             {/* CSKA Moskva URRRAH! */}
@@ -60,12 +61,12 @@ export default function EmailForm({
             <input onChange={handleInputChange} type="email" className="form-input" name="email" placeholder="Email" required autoFocus />
 
             <div className="form-submit">
-                <input className = "form-submit-btn" type="submit" value="Send Reset" />
+                <input className = "form-btn" type="submit" value="Send Reset" />
             </div>
         </form>
 
         <FormError formError = {formError} />
 
     </div>
-  )
+    )
 }

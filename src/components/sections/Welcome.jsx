@@ -1,16 +1,16 @@
 
+import SocialMediaLinks from "@components/SocialMediaLinks";
+
 import sketchDrawDoodleLogo from "@images/logo1_w500.png"
 import alfieReg from "@images/alfie_ink.webp"
 
 import MainSplat from "@components/svgIcons/MainSplat.jsx"
 
 export default function Welcome({
-	userData,
-	setUserData,
 	setActiveSection,
 }){
 	function handleLinkClick(e){
-		e.stopPropagation();
+		//e.stopPropagation();
 		setActiveSection("draw-section")
 	}
 
@@ -22,13 +22,13 @@ export default function Welcome({
 					<img className="logo-img" src = {sketchDrawDoodleLogo} />
 			</div>
 
-			<div className='text-container'>
+			<div className='text-container center'>
 					<div className="writing fs5">
 							"Doodle, draw and sketch your way to Drawsomeness!
 					</div>
 			</div>
 
-			<div className='text-container'>
+			<div className='text-container center'>
 					<div className="subtext fs5">
 							Doodle Master Alfie
 					</div>
@@ -39,24 +39,31 @@ export default function Welcome({
 					<img className="hero-img" src = {alfieReg} title="Doodle Master Alfie" />
 			</div>
 
-			<div className="text-container">
+			<div className="text-container center">
 					<div className="writing fs6">
 							Pick from millions of inspiring subjects and epic references. Sci-fi, Horror, fantasy and more!
 					</div>
 			</div>
 
-			<div className="text-container">
+			<div className="text-container center">
 					<div className="emphasis fs7">
 							Fun and Free for all!
 					</div>
 			</div>
 
-			<MainSplat />
+			<MainSplat setActiveSection={setActiveSection}/>
 
-			<div onClick={handleLinkClick} className="text-container" id="get-drawing">
+			<div onClick={handleLinkClick} className="text-container center" id="get-drawing">
 					<div className="header large-font text-link" >
 							Get Drawing!
 					</div>
+			</div>
+
+			<div className="social-media-links-box">
+				<div className="welcome-sm-links">
+					<SocialMediaLinks />
+
+				</div>
 			</div>
 
 		</div>

@@ -5,14 +5,16 @@
 */
 
 import {useState} from "react";
-import FormError from "@forms/FormError"
+
+import {checkCookie} from "@modules/manageApi";
+
+import FormError from "@forms/FormError";
 
 export default function CodeForm({
+  server,
   setSubheader,
   setMessage,
   setStep,
-  csrfToken,
-  server
 }){
 
   const [formError, setFormError] = useState("");
@@ -33,6 +35,7 @@ export default function CodeForm({
     verifyForm.append("secret_code",formCode);
 
     // Fetch: Send FormData to Django for Validation
+    const csrfToken = checkCookie(server) 
     const verify_secret_code = server+"verify_secret_code/";
     try{
       const response = await fetch(verify_secret_code, {
@@ -73,7 +76,7 @@ export default function CodeForm({
             <input onChange={handleInput} className="form-input" type="number" name="secret_code" placeholder="Secret Code" autoFocus required/>
 
             <div className="form-submit">
-                <input className = "form-submit-btn" type="submit" value="Confirm" />
+                <input className = "form-btn" type="submit" value="Confirm" />
             </div>
         </form>
 

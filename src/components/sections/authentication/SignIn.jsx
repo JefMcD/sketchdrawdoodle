@@ -1,12 +1,26 @@
 
-import SignInForm from "@authForms/SignInForm"
-import sketchDrawDoodleLogo from "@images/logo1_w500.png"
+import {useEffect} from "react";
 
-function SignIn({
+import {tapDjangoCsrf} from "@modules/manageApi";
+
+import SignInForm from "@authForms/SignInForm";
+import sketchDrawDoodleLogo from "@images/logo1_w500.png";
+
+export default function SignIn({
+    userData,
     setUserData,
     setActiveSection,
-    server
 }){
+
+  console.log("SIGNIN")
+  // When a user signs out the session is flushed and the csrftoken becomes invalid
+  // When they sign in they need a new token
+  useEffect( ()=> {
+    async function ensureCsrf(){
+      await tapDjangoCsrf(userData.server) // Shake out a new csrftoken
+    };
+    ensureCsrf();
+  }, []) // Empty dependencies], run once when component mounts
 
   return(
     <>
@@ -24,9 +38,10 @@ function SignIn({
                 </div>
 
                 <SignInForm 
+                    userData = {userData}
                     setUserData={setUserData}
                     setActiveSection={setActiveSection}
-                    server={server}/>
+                />
 
                 <div className="authenticate-redirect fs5">
                     Not a member? 
@@ -49,5 +64,4 @@ function SignIn({
 
 
 }
-export default SignIn
 

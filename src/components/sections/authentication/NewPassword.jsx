@@ -5,7 +5,6 @@ export default function NewPassword({
 	userData,
 	setUserData,
 	setActiveSection,
-	server
 }){
 
 	return(
@@ -21,7 +20,7 @@ export default function NewPassword({
 						userData={userData} 
 						setUserData={setUserData}
 						setActiveSection={setActiveSection}
-						server={server}/>
+					/>
 
 					<div className="form-message">
 							Finally!

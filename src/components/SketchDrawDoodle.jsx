@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 import NavPanel    from "@panels/NavPanel.jsx";
 import ExtrasPanel from "@panels/ExtrasPanel.jsx";
+
+// Context Providers
+import {ProfileContext} from "@providers/ProfileContext";
 
 // Authentication sections
 import SignIn   from "@auth/SignIn";
@@ -10,92 +13,95 @@ import Reset    from "@auth/Reset";
 
 // Drawing Session sections
 import Draw     from "@draw/Draw";
-import Summary  from "@draw/Summary";
+//import Summary  from "@draw/Summary";
 
 // User Profile sections
-import Account    from "@profile/Account";
 import Profile    from "@profile/Profile";
-import Sketchbook from "@profile/Sketchbook";
+//import Account    from "@profile/Account";
+//import Sketchbook from "@profile/Sketchbook";
 
 // General sections
 import Welcome  from "@sections/Welcome";
 import About    from "@sections/About";
-import Frens    from "@sections/Frens";
-import Support  from "@sections/Support";
+import Coffee   from "@sections/Coffee";
 import Help     from "@sections/Help";
-
-
+//import Frens    from "@sections/Frens";
 
 export default function SketchDrawDoodle({
   initialData,
-  server,
+  server
 }) { 
-    
+  console.log(`********* SketchDrawDoodle *********`)
+
   const [activeSection, setActiveSection] = useState(initialData["initial_section"]);
+
+  // User data is mainly for authorisation (Signin, Join, Reset Password, Nav Panel)
   const [userData, setUserData] = useState({
     is_authenticated: initialData["is_authenticated"],
-    username:         initialData["initial_username"],
-    avatar:           initialData["initial_avatar"],
-  	banner      : null,
-		story       : null,
-		caption     : null,
-		website     : null,
+    username : initialData["initial_username"],
+    server : server
   });
+
+  // Profile Data is generally used by Many components throught the app)
+  const profileBanner = `${initialData.initial_banner}`
+  const profileAvatar = `${initialData.initial_avatar}`
+  const [profileData, setProfileData] = useState({
+    banner   : profileBanner,
+    avatar   : profileAvatar,
+    story    : initialData.initial_story,
+    caption  : initialData.initial_caption,
+    website  : initialData.initial_website,
+  })
+
 
   // Note: No quotes around the component name. Its a function not a string!
   const sectionsArray = [
+		{id:"welcome-section",   component: Welcome},
 		{id:"signin-section",    component: SignIn},
 		{id:"join-section",      component: Join},
 		{id:"reset-section",     component: Reset},
- //   {id:"verify-section",    component: Verify},
-//    {id:"new-password",      component: NewPassword},        
-//    {id:"verify-reset-code", component: VerifyResetCode},
     
 		{id:"draw-section",      component: Draw},
-		{id:"summary-section" ,  component: Summary},
+		//{id:"summary-section" ,  component: Summary},
 
-		{id:"account-section",   component: Account},
+		//{id:"account-section",   component: Account},
 		{id:"profile-section",   component: Profile},
-		{id:"sketchbook-section",component: Sketchbook},
+		//{id:"sketchbook-section",component: Sketchbook},
 
-		{id:"welcome-section",   component: Welcome},
-		{id:"about-section",     component: About},
-		{id:"frens-section",     component: Frens},
-		{id:"support-section",   component: Support},
+		//{id:"frens-section",     component: Frens},
+		{id:"coffee-section",    component: Coffee},
   	{id:"help-section",      component: Help},
+		{id:"about-section",     component: About},
   ]
 
   // Find the active section
   // ActiveSection is a psudo component that dynamically created and used to render the chosen App section
   const activeObj = sectionsArray.find(section => section.id === activeSection);
   const ActiveSection = activeObj?.component; // Dynamically created component
-
   return (
-    <>
+    <ProfileContext.Provider value={{profileData, setProfileData}}>
     <div className="flex-container">
       <div className = "app-container">
         <NavPanel  
           userData = {userData}
           setUserData = {setUserData}
           setActiveSection={setActiveSection}
-          server={server}
         />
 
         {/* If ActiveSection is a real component - render it*/}
         {/* Pass setActiveSection as a prop to allow nav links inside the section */}
         {ActiveSection && 
           <ActiveSection 
-            userData = {userData}
+            userData    = {userData}
             setUserData = {setUserData}
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-            server={server}
+            activeSection    ={activeSection}
+            setActiveSection ={setActiveSection}
           />}
 
         <ExtrasPanel />
       </div>
     </div>
-    </>
+    </ProfileContext.Provider>
   )
 }
 

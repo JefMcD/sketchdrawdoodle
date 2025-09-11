@@ -1,21 +1,28 @@
 
 
 import {useState} from "react";
-import FormError from "@forms/FormError"
-import getCsrfCookie from "@modules/getCsrfCookie.js"
+import {useProfile} from "@providers/ProfileContext";
+import {checkCookie} from "@modules/manageApi";
+import FormError from "@forms/FormError";
 
 export default function SignInForm({
     userData,
     setUserData,
     setActiveSection,
-    server,
+  
 }){
+  console.log("bootstrap")
 
+  const {profileData, setProfileData} = useProfile();
   const [formError, setFormError] = useState("");
   const [formInputs, setFormInputs] = useState({
     "username":"",
     "password": ""
   });
+
+  const server = userData.server
+  const csrfToken = checkCookie(server) 
+
 
   function handleInputChange(e){
     e.stopPropagation();
@@ -39,7 +46,6 @@ export default function SignInForm({
 
     // Fetch: 
     const signin = server+"signin/";
-    const csrfToken = getCsrfCookie();
     const response = await fetch(signin, {
       method: "POST",
       credentials: "include",
@@ -57,12 +63,27 @@ export default function SignInForm({
         ["is_authenticated"]:data.is_authenticated,
         ["username"]:data.username,
       }))
+
+      console.log(`banner = ${data.banner}`)
+
+      // set profileData
+      setProfileData( (prev)=> ({
+          ...prev,
+          ["banner"] : data.banner,
+          ["avatar"] : data.avatar,
+          ["story"]  : data.story,
+          ["caption"]: data.caption,
+          ["website"]: data.website
+      }))
   
       setActiveSection("draw-section");
     }else{
       setFormError(`React: ${data.error}`);
     }
   }
+
+
+  
 
 
   return(
@@ -73,7 +94,7 @@ export default function SignInForm({
             <input onChange={handleInputChange} className="form-input" type="password" placeholder="Password" name="password" id="signin-form-password" maxLength="45" required />
 
             <div className="form-submit">
-                <button className = "form-submit-btn" type="submit">Sign In!"</button>
+                <button className = "form-btn" type="submit">Sign In!"</button>
             </div>
         </form>
         <FormError formError={formError} />

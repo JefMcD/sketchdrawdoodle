@@ -1,17 +1,26 @@
 
-import {useState} from "react"
+import {useState, useEffect} from "react";
+import {tapDjangoCsrf} from "@modules/manageApi";
 
-import JoinForm from "@authForms/JoinForm"
-import JoinVerifyForm from "@authForms/JoinVerifyForm"
-import sketchDrawDoodleLogo from "@images/logo1_w500.png"
-
-
+import JoinForm from "@authForms/JoinForm";
+import JoinVerifyForm from "@authForms/JoinVerifyForm";
+import sketchDrawDoodleLogo from "@images/logo1_w500.png";
 
 export default function Join({
+	userData,
 	setUserData,
-	setActiveSection,
-	server
+	setActiveSection
 }){
+
+	// When a user signs out the session is flushed and the csrftoken becomes invalid
+  // Join is only available when not signed in, so they need a new csrftoken
+	const server = userData.server;
+	useEffect( ()=> {
+		async function ensureCsrf(){
+			await tapDjangoCsrf(server) // Shake out a new csrftoken
+		};
+		ensureCsrf();
+	}, []) // Empty dependencies], run once when component mounts
 	
 	// isJoinOk - has the joinForm been processed and API response is Ok?
 	const [isJoinOk, setIsJoinOk] = useState(false);
@@ -28,16 +37,14 @@ export default function Join({
 			<div className="authenticate-inner-wrapper">
 				{isJoinOk ?
 					<JoinVerifyForm 
+					  userData={userData}
 						setUserData={setUserData}
 						setActiveSection={setActiveSection}
-						setIsJoinOk={setIsJoinOk}
-						server={server}
 					/>				
 				:
 					<JoinForm 
-						setActiveSection={setActiveSection}
+						userData = {userData}
 						setIsJoinOk={setIsJoinOk}
-						server={server}
 					/>
 				}
 				<div className="authenticate-redirect">     

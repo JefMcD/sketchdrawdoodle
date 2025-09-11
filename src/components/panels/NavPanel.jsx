@@ -1,48 +1,62 @@
+
+import {useProfile} from "@providers/ProfileContext"
+
 import inkBrushes from "@images/ink_brushes.png";
 import navPanelBackground from "@images/backgrounds/side_panel.jpg";
 
+// Authentication
+import SignInLink   from "@navLinks/SignInLink.jsx";
+import JoinLink     from "@navLinks/JoinLink.jsx";
+
 import WelcomeLink  from "@navLinks/WelcomeLink";
-import FrensLink    from "@navLinks/FrensLink.jsx";
+//import FrensLink    from "@navLinks/FrensLink.jsx";
+import CoffeeLink   from "@navLinks/CoffeeLink.jsx";
 import DrawLink     from "@navLinks/DrawLink";
 import ProfileLink  from "@navLinks/ProfileLink.jsx";
-import JoinLink     from "@navLinks/JoinLink.jsx";
-import SignInLink   from "@navLinks/SignInLink.jsx";
 
-import AboutLink    from "@navLinks/AboutLink";
-import SupportLink  from "@navLinks/SupportLink.jsx";
-import AccountLink  from "@navLinks/AccountLink.jsx";
-import SummaryLink  from "@navLinks/SummaryLink.jsx";
-import SketchbookLink from "@navLinks/SketchbookLink.jsx";
+import AboutLink    from "@navLinks/AboutLink3";
+
+// import WFLink       from "@navLinks/WFLink.jsx";
+// import AccountLink  from "@navLinks/AccountLink.jsx";
+// import SummaryLink  from "@navLinks/SummaryLink.jsx";
+// import SketchbookLink from "@navLinks/SketchbookLink.jsx";
 
 import VerticalTab1 from "@components/tabs/VerticalTab1.jsx";
-import AccountBall  from "@profile/AccountBall.jsx";
+import NavPanelAvatar  from "@panels/NavPanelAvatar.jsx";
 
-function NavPanel({
+export default function NavPanel({
   userData,
   setUserData,
   setActiveSection, 
-  server}) {
-    // userData.isAuthenticated - Boolean, is the user logged in 
-    // userData.username        - String
-    // userData.avatar          - String, url of the users avatar
-    // setActiveSection         - function, Set Active Section state to new value
-    // server                   - production or developmet server
+  // userData.isAuthenticated - Boolean, is the user logged in 
+  // userData.username        - String
+  // setActiveSection         - function, Set Active Section state to new value
+}) {
+  const {profileData, setProfileData} = useProfile()
+  console.log(`NavPanel: avatar = ${profileData.avatar}`)
 
+  // The order here is the order they're rendered in the nav
   const navLinkData = [
     {id:"welcome-link",  component: WelcomeLink,  linkType: "open"},
-    {id:"frens-link",    component: FrensLink,    linkType: "open"},
     {id:"draw-link",     component: DrawLink,     linkType: "open"},
     {id:"profile-link",  component: ProfileLink,  linkType: "fren"}, 
+    {id:"coffee-link",   component: CoffeeLink,   linkType: "open"},
     {id:"signin-link",   component: SignInLink,   linkType: "guest"}, 
     {id:"join-link",     component: JoinLink,     linkType: "guest"}, 
-
+    {id:"about-link",    component: AboutLink,    linkType: "open"},
+    
+    
     // Possible Later Additions
+    //{id:"wf-link",       component: WFLink,       linkType: "open"},
+    //{id:"frens-link",    component: FrensLink,    linkType: "open"},
     //{id:"summary-link",  component: SummaryLink,  linkType: "fren"},
     //{id:"account-link",  component: AccountLink,  linkType: "fren"}, 
     //{id:"support-link",  component: SupportLink,  linkType: "open"},
-    //{id:"about-link",    component: AboutLink,    linkType: "open"},
-
+    //{id:"help-link",     component: HelpLink,     linkType: "open"},
+    
   ]
+
+  console.log(`Nav Links setActiveSection and rerender SketchDrawDoodle`)
 
   return (
     <>
@@ -56,7 +70,7 @@ function NavPanel({
         </div>
 
         {/*  Nav Links */}
-        <div className= "nav-icons-container">
+        <div className= "nav-icons-container main-nav">
           { // Get The Links
             navLinkData.filter(({linkType})=>(
               userData["is_authenticated"] ? 
@@ -73,20 +87,19 @@ function NavPanel({
         </div>
 
         {/* Tabs */}
-        <VerticalTab1 />
+        {/* <VerticalTab1 /> */}
 
         {/* User Account Avatar */}
-        <AccountBall 
+        <NavPanelAvatar 
           userData = {userData}
           setUserData = {setUserData}
           setActiveSection={setActiveSection}
-          server={server}/>
+        />
       
       </div>
     </>
   );
 }
-export default NavPanel;
 
 
 /**

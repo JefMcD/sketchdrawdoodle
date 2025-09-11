@@ -6,27 +6,29 @@
 .text-container{
     display: block;
     position: relative;
-
-    // Align text Centre
-    align-items: center;
-    text-align: center;
-
+    
     padding-left: 0.5rem;
     padding-right: 0.5rem; 
     //padding-bottom: 0.2rem;
-
+    
     width: 100%;
-    min-height: 2rem;
     height: auto;
+    min-height: 2rem;
+
+    overflow: hidden;
     //border: 2px solid blue;
     //background-color: aqua;
 }
+
+.center{
+    // Align text Centre
+    align-items: center;
+    text-align: center;
+}
 .header{
-    height: 2.5rem;
+    height: 3rem;
     font-family: fonts.$header;
-    font-size: 1.5rem;
-    line-height: 1.3rem;  
-    padding-top: 0.3rem;
+    line-height: 2.8rem;  
     //border: 2px solid green;
 }
 

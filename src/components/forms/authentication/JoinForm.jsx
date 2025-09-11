@@ -1,19 +1,15 @@
 
 
-
-
-
-
-
 import {useState} from "react";
-import FormError from "@forms/FormError"
-import getCsrfCookie from "@modules/getCsrfCookie.js"
+import {checkCookie} from "@modules/manageApi";
+import FormError from "@forms/FormError";
 
 export default function JoinForm({
+  userData,
   setIsJoinOk,
-  server,
 }){
-
+  const server = userData.server;
+  const csrfToken = checkCookie();
   const [formError, setFormError] = useState("");
   const [formInputs, setFormInputs] = useState({
     first_name:"",
@@ -24,7 +20,12 @@ export default function JoinForm({
     confirm:"",
   });
 
+  //const {apiData, setApiDat} = useApi(); Context Provider 
+  //const server = apiData.server;
+
   function handleInputChange(e){
+    e.stopPropagation()
+
     // get the event object(the input field) and destructure its name and value attributes
     const {name, value} = e.target;
 
@@ -48,7 +49,6 @@ export default function JoinForm({
     try{
       // fetch 
       const validate_join_form = server+"validate_join_form/";
-      const csrfToken = getCsrfCookie();
       const response = await fetch(validate_join_form, {
         method: "POST",
         credentials: "include", // Include cookies (sessionid)
@@ -93,7 +93,7 @@ export default function JoinForm({
         </div>
 
         <div className="form-submit">
-            <input className="form-submit-btn" type="submit" value="Join Up!" />
+            <input className="form-btn" type="submit" value="Join Up!" />
         </div>
 
       </form>

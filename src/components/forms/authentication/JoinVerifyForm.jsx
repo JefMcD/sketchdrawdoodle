@@ -1,16 +1,21 @@
 
-import {useState} from "react";
+import { useState } from "react";
+import { useProfile} from "@providers/ProfileContext";
+
+import {checkCookie} from "@modules/manageApi";
+
 import FormError from "@forms/FormError"
-import getCsrfCookie from "@modules/getCsrfCookie.js"
 
 export default function JoinVerifyForm({
+  userData,
   setUserData,
   setActiveSection,
-  setIsJoinOk,
-  server
 }){
 
-  console.log("Verify Form")
+  const server = userData.server;
+  const csrfToken = checkCookie();
+
+  const {profileData, setProfileData} = useProfile();
   const [formError, setFormError] = useState("");
   const [formInput, setFormInput] = useState("");
   
@@ -21,16 +26,14 @@ export default function JoinVerifyForm({
   }
   
   async function handleSubmit(e){
-    console.log("handleSubmit")
     e.preventDefault(); // Hurra! Prevent app being re rendered by form submission
-    
+
     // create FormData
     const verifyForm = new FormData();
     verifyForm.append("secret_code",formInput);
 
     // Fetch: Send FormData to Django for Validation
     const create_new_user = server+"create_new_user/";
-    const csrfToken = getCsrfCookie();
     try{
       const response = await fetch(create_new_user, {
           method: "POST",
@@ -52,8 +55,20 @@ export default function JoinVerifyForm({
       // Handle response
       if (response.ok){
         // Sucesss User has been created and logged in
+        // Django login invalidates csrftoken. 
+        // Django @ensure_csrf_token sends DOM a new csrftoken for new session
         setUserData((prev)=>({...prev, ["is_authenticated"]:signedIn, ["username"]:username}))
+        // set profileData
+        setProfileData( (prev)=> ({
+          ...prev,
+          ["banner"] : data.banner,
+          ["avatar"] : data.avatar,
+          ["story"]  : data.story,
+          ["caption"]: data.caption,
+          ["website"]: data.website
+        }))
         setActiveSection("profile-section");
+
       }else{
         setFormError(verifyError);
       }
@@ -71,7 +86,7 @@ export default function JoinVerifyForm({
             <input onChange={handleInput} className="form-input" type="number" name="secret_code" placeholder="Secret Code" autoFocus required/>
 
             <div className="form-submit">
-                <input className = "form-submit-btn" type="submit" value="Confirm" />
+                <input className = "form-btn" type="submit" value="Confirm" />
             </div>
         </form>
 

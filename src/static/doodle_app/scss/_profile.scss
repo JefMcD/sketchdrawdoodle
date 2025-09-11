@@ -3,6 +3,22 @@
 @use "@scss/_theme.scss" as theme;
 @use "@scss/_fonts.scss" as fonts;
 
+
+.profile-header{
+    position: relative;
+    display: block;
+
+    width: 100%;
+    height: 12vh;
+
+    color: theme.$dk-003;
+    font-family: fonts.$writing;
+
+    //border: 2px solid theme.$turq-001;
+
+    //overflow: hidden;
+
+}
 .profile-banner{
     position: relative;
     display: block;
@@ -13,29 +29,77 @@
     color: theme.$dk-003;
     font-family: fonts.$writing;
 
-    border: 2px solid theme.$purple-003;
+    border-top: 2px solid theme.$purple-001;
+    border-bottom: 2px solid theme.$purple-002;
 
     overflow: hidden;
+
     .banner-img{
-      width: 100%;
+      width:  100%;
       height: 100%;
-      object-fit:cover;
+      object-fit: cover;
     }
 
 }
 
+.banner-overlay{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height:12vh;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid green;
+
+}
+.upload-component-wrapper{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  aspect-ratio: 1/1;
+
+  background-color: theme.$semi-opaque-004;
+  border: 2px solid theme.$turq-004;
+  border-radius: 50%;
+
+  .upload-component{
+    position: relative;
+    display: block;
+    width: 2rem;
+    aspect-ratio:1/1;
+
+    //border: 1px solid white;
+
+  }
+
+}
+
+.avatar-wrapper{
+  position: absolute;
+  display: block;
+  top: 8vh;
+  left: 0.5rem;
+  width: 4rem;
+  aspect-ratio: 1/1;
+  
+  border: 2px solid theme.$purple-002;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 .profile-avatar{
-  position:absolute;
+  position:relative;
   display: block;
   top: 0;
   left: 0;
 
-  width: 5rem;
+  width: 4rem;
   aspect-ratio: 1/1;
-
-  border: 2px solid theme.$purple-002;
-  border-radius: 50%;
-  overflow: hidden;
 
   .avatar-img{
     width: 100%;
@@ -45,18 +109,46 @@
 
 }
 
-.edit-profile-box{
+.avatar-overlay{
   position: absolute;
-  display:block;
-  top: 1rem;
-  left: 1rem;
+  display: flex;
+  width: 4rem;
+  aspect-ratio: 1/1;
+  top: 8vh;
+  left: 0.5rem;
+  justify-content: center;
+  align-items: center;
 
-  height: 80vh;
-  width: 70vw;
-  background-color: theme.$dk-001;
+  //border: 2px solid green;
+
+}
+
+.edit-profile-wrapper{
+  position: absolute;
+  display: flex;
+  top: 3rem;
+  left: 0;
+  justify-content: center;
+
+  height: 90vh;
+  width: 100%;
+}
+
+
+.edit-profile-box{
+  position: relative;
+  display:block;
+  top: 1.5rem;
+  left: 0rem;
+
+  width: 100%;
+  max-width: 30rem;
+  height: 60vh;
+  padding: 0.5rem;
+  background-color: theme.$purple-003;
 
   border: 2px solid theme.$purple-002;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   z-index: 2;
 }
@@ -68,26 +160,31 @@
   top: 0;
   right: 0;
 
-  width: 5rem;
+  width: auto;
   height: auto;
+  margin-right: 0.5rem;
 
   font-family: fonts.$writing;
-  color: theme.$lt-002;
+  color: theme.$lt-001;
+
+  //border: 1px solid theme.$green-001;
 
 }
 
 .profile-caption{
-  position:absolute;
+  position:relative;
   display: flex;
-  bottom: 0;
-  left: 0;
+  justify-content: flex-start;
+  align-items: center;
 
-  justify-content: center;
-  width: 100%;
+  width: calc(100% - 4.5rem);
   height: auto;
+  margin-left:4.5rem;
 
   font-family: fonts.$writing;
-  color: theme.$lt-002;
+  color: theme.$dk-002;
+
+  //border: 2px solid blue;
 
 }
 
@@ -96,7 +193,7 @@
     display: block;
 
     width: 100%;
-    height: auto;
+    height: 4rem;
     padding: 0.5rem;
 
     color: theme.$dk-003;
@@ -109,9 +206,141 @@
 .profile-gallery{
   position: relative;
   display: block;
-  width: 100%;
-  height: calc(100% - 20vh);
+  width: calc(100% - 1rem);
+  height: calc(100% - 30vh);
+  margin: 0.5rem;
 
-  border: 2px solid theme.$purple-001;
+  border: 1px solid theme.$turq-001;
   border-radius: 0.5rem;
+}
+
+
+
+
+
+
+
+
+/*
+*
+* Edit Profile Form
+*
+*/
+
+.form-upload-box{
+    position: relative;
+    display: block;
+
+    width: 100%;
+    height: 10rem;
+
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    border: 2px solid theme.$purple-002;
+    border-radius: 0.5rem;
+    
+}
+
+.file-selector-icon{
+    position: absolute;
+    display: block;
+    width: 2rem;
+    aspect-ratio:1/1;
+    z-index: 1;
+    //border: 2px solid theme.$purple-002;
+}
+
+.profile-form-inputs{
+  position: relative;
+  display: block;
+  width: auto;
+  height: auto;
+  margin-top: 2rem;
+
+  //border: 1px solid theme.$turq-002;
+}
+
+.profile-form-buttons-box{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 1;
+  width: auto;
+  height: 5rem;
+
+  //border: 2px solid theme.$white-001;
+}
+.banner-upload{
+    top: 0;
+    left: 0;
+}
+.avatar-upload{
+    top: 0;
+    left: 5rem;
+}
+
+
+.toggle-form-btn{
+  position:absolute;
+  display:block;
+  bottom: -1rem;
+  right:0.5rem;
+  width: 3rem;
+  height: 2rem;
+
+  //border: 2px solid white;
+}
+
+
+
+// Image Upload button
+.choose-file-btn{
+    display:none
+}
+
+.turq-svg{
+
+    path{
+        fill: theme.$turq-002;
+        stroke: theme.$turq-003;
+        stroke-width:0.03; // icon outline (invisible)
+    }
+}
+
+.purple-svg{
+    path{
+        fill: theme.$purple-002;
+        stroke: theme.$turq-003;
+        stroke-width:0.03; // icon outline (invisible)
+    }
+}
+
+.grey-svg{
+    path{
+        fill: theme.$grey-003;
+        stroke: theme.$turq-003;
+        stroke-width:0.03; // icon outline (invisible)
+    }
+}
+
+
+.profile-upload-icon {
+  path {
+    fill: theme.$grey-003;
+    stroke: theme.$turq-003;
+    stroke-width: 0.03; // icon outline (invisible)
+    transition: all 0.3s ease; // Smooth transition for fill and filter
+  }
+
+  &:hover {
+    path {
+
+      fill: theme.$grey-002; 
+      stroke: theme.$turq-002; 
+
+      // filter: brightness(1.2); // 20% brighter
+    }
+  }
 }

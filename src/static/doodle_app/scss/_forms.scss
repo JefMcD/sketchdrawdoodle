@@ -100,9 +100,28 @@
     //border: 2px solid   theme.$red-002;
 }
 
-.toggle-form-btn{
-    display:block
+.form-password{
+    font-size: 2.5rem;
+    line-height: 2.5rem
+
+    //border: 2px solid   theme.$red-002;
 }
+
+.form-text{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 30rem;
+    height: auto;
+    padding-left: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    line-height: 1rem
+
+    //border: 2px solid   theme.$red-002;
+}
+
 
 
 
@@ -111,45 +130,54 @@
 .form-submit{
     position: relative;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left:auto;
+    margin-right:auto;
     width: 100%;
     max-width: 30rem;
-    //border: 2px solid   theme.$turq-002;
+   // border: 2px solid theme.$turq-002;
 
-    .form-submit-btn{
-        position: relative;
-        display: block;
-        text-align: center;
-        margin-top: 1rem;
-        margin-left: auto;
+}
 
-        width:7rem;
-        height: 2.5rem;
-        //margin-bottom: 1rem;
-        font-family: fonts.$header;
-        font-size: 1.2rem;
-        line-height: 2rem;
+.form-btn-wrapper{
+    position: relative;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 100%;
+    max-width: 10rem;
+    //border: 2px solid theme.$purple-002;
+}
 
-        border-radius: 0.5rem;
-        border: 2px solid theme.$dk-001;
-
-        cursor: pointer;
-        color: theme.$dk-004;
-        background-color: theme.$lt-001;
+.form-btn{
+    position: relative;
+    display: block;
+    text-align: center;
 
 
-        transition-property: background-color, color;
-        transition-duration: 350ms;
-        transition-timing-function: ease-in-out;
-    }
-    .form-btn:hover,
-    .form-btn:focus,
-    .form-btn:target{
-        background-color:   theme.$white-001;
-        color: theme.$red-002;
-    }
+    width:7rem;
+    height: 2.5rem;
+    //margin-bottom: 1rem;
+    font-family: fonts.$header;
+    font-size: 1.2rem;
+    line-height: 2rem;
 
+    border-radius: 0.5rem;
+    border: 2px solid theme.$dk-001;
+
+    cursor: pointer;
+    color: theme.$dk-004;
+    background-color: theme.$lt-001;
+
+
+    transition-property: background-color, color;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+}
+.form-btn:hover,
+.form-btn:focus,
+.form-btn:target{
+    background-color:   theme.$white-001;
+    color: theme.$red-002;
 }
 
 

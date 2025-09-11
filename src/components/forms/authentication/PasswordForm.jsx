@@ -1,15 +1,15 @@
 
-import {useState} from "react";
-import FormError from "@forms/FormError"
+import {useState}    from "react";
+import {useProfile}  from "@providers/ProfileContext";
+import {checkCookie} from "@modules/manageApi";
+import FormError from "@forms/FormError";
 
 export default function PasswordForm({
+  server,
   setUserData,
   setActiveSection,
-  csrfToken,
-  server
 }){
-	console.log(`React.Password setUserData: ${setUserData}`)
-
+  const {profileData, setProfileData} = useProfile();
   const [formError, setFormError] = useState("");
   const [formInputs, setFormInputs] = useState({
     password: "",
@@ -33,8 +33,9 @@ export default function PasswordForm({
     verifyForm.append("confirm",formInputs["confirm"]);
 
     // Fetch: Send FormData to Django for Validation
-    const set_new_password = server+"set_new_password/";
     try{
+      const csrfToken = checkCookie(server) 
+      const set_new_password = server+"set_new_password/";
       const response = await fetch(set_new_password, {
           method: "POST",
           credentials: "include", // Include cookies (sessionid)
@@ -52,12 +53,32 @@ export default function PasswordForm({
       if (!response.ok){
         setFormError(`API: ${data.error}`);
       }else{
+        console.log("response ok")
         // Sucesss Password changed
-        setUserData((prev)=>({...prev, ["is_authenticated"]: data.is_auth, ["username"]: data.username}))
+
+        console.log("setUserData")
+        // set userData
+        setUserData((prev)=>({
+          ...prev, 
+          ["is_authenticated"]: data.is_authenticated, 
+          ["username"]: data.username
+        }))
+
+        console.log("setProfileData")
+       // set profileData
+        setProfileData( (prev)=> ({
+          ...prev,
+          ["banner"] : data.banner,
+          ["avatar"] : data.avatar,
+          ["story"]  : data.story,
+          ["caption"]: data.caption,
+          ["website"]: data.website
+        }))
+        console.log("setActiveSection")
         setActiveSection("welcome-section");
       }
     }catch(err){
-      setFormError("React : Catch ");
+      setFormError(`React : Catch ${err}`);
     }
   }
 
@@ -71,7 +92,7 @@ export default function PasswordForm({
             <input onChange={handleInput} className="form-input" type="password" name="confirm"  placeholder="confirm"      required/>
 
             <div className="form-submit">
-                <input className = "form-submit-btn" type="submit" value="Confirm" />
+                <input className = "form-btn" type="submit" value="Confirm" />
             </div>
         </form>
 

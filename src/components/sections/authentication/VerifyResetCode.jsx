@@ -5,7 +5,6 @@ export default function VerifyResetCode({
 	userData,
 	setUserData,
 	setActiveSection,
-	server
 }){
 
 	return(
@@ -21,7 +20,7 @@ export default function VerifyResetCode({
 						userData={userData} 
 						setUserData={setUserData}
 						setActiveSection={setActiveSection}
-						server={server}/>
+					/>
 
 					<div className="form-message">
 							An email with a secret code was sent to the email you provided.

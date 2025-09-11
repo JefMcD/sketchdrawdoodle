@@ -1,7 +1,7 @@
 
 /*
   The AppWrapper component 
-    fetches the initial data 
+    fetches the initial data (Composite of userData, profileData and apiData)
     sets the server
     gets the csrfToken
 */
@@ -13,9 +13,11 @@ import SketchDrawDoodle from '@components/SketchDrawDoodle';
 import LoadingPage      from "@components/LoadingPage";
 
 // Initialise App
-//import getInitialData   from "@modules/getInitialData.js";   // Production: load from Django json payload in the browser
 import fetchInitialData from "@modules/fetchInitialData.js"; // Dev: Fetch directly from API after page served
-import checkSession     from "@modules/checkSession.js"; // log session details
+import {rebootCsrf}     from "@modules/manageApi.js";
+import getServer        from "@modules/getServer.js";
+//import getInitialData   from "@modules/getInitialData.js";   // Production: load from Django json payload in the browser
+//import checkSession     from "@modules/checkSession.js"; // log session details
 
 // Scss
 import '@scss/sketchDrawDoodle.scss'; // relative path to Daddy stylesheet
@@ -24,43 +26,44 @@ import '@scss/sketchDrawDoodle.scss'; // relative path to Daddy stylesheet
 
 export default function AppWrapper(){
   
-  const localhost  = "http://localhost:8000/";           // Dev must on same host as react
-  const production = "https://www.sketchdrawdoodle.com/";// Production
-
+  const [server, setServer] = useState("");
+  const [csrfToken, setCsrfToken] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const [initialData, setInitialData] = useState({
-    is_authenticated : false,
-    initial_username : null,
-    initial_section  : null,
-    initial_avatar   : null,
-  });
-
-
+  const [initialData, setInitialData] = useState({});
   
-  // Synchronize with Django API
+  // In dev get initial data by fetch. Synchronize with Django API
   useEffect( () => {
-    console.log(`useEffect mounted`)
-
+    console.log(`useEffect mounted after rendr`)
+    
     async function asyncDoodleTap(){
-      const data = await fetchInitialData(); // async functions need to WAIT!
+      
+      const serverUrl = getServer();
+      setServer(serverUrl);
+
+      const token = await rebootCsrf(serverUrl)
+      setCsrfToken(token)
+
+      const data = await fetchInitialData(serverUrl, token); // This is used to fetch initial data in dev. In production it loaded into the browser by Django. async functions need to WAIT!
       setIsLoaded(true)
       setInitialData({...data}) // This sets the state variable to reference a different object, its the change in reference that triggers the React rerender. It doenst mutate the values of the objects attributes inside
       //await checkSession()
+      
     }
     asyncDoodleTap()
     
   }, []); // Empty dependency array to Run once when the component mounts
   
+  console.log("############ AppWrapper ################")
   return(
   <>
-    {isLoaded ?
+    {isLoaded ? (
       <SketchDrawDoodle 
-        initialData     = {initialData}
-        server          = {localhost}
+        initialData = {initialData}
+        server = {server}
       />
-    :
+    ):(
       <LoadingPage />  
-    }
+    )}
   </>
   )
 }
