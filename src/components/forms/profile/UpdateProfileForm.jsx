@@ -1,15 +1,18 @@
 
 import {useState, useEffect} from "react";
 import {useProfile} from "@providers/ProfileContext";
+import {checkCookie} from "@modules/manageApi.js";
 
-import {checkCookie} from "@modules/manageApi.js"
-import FormError from "@forms/FormError"
-import UploadSvg from "@svgIcons/UploadSvg"
+import EditProfileHeader  from "@forms/profile/EditProfileHeader";
+import FormInputs  from "@forms/profile/FormInputs";
+import FormButtons from "@forms/profile/FormButtons";
+import FormError   from "@forms/profile/FormError";
+
 
 export default function updateFormData({
   userData,
-  setShowForm,
-  showForm,
+  setIsShowForm,
+  isShowForm,
 }){
   console.log("######## updateForm ########");
 
@@ -40,7 +43,7 @@ export default function updateFormData({
 
   function toggleShowForm(e){
     e.stopPropagation();
-    setShowForm(!showForm);
+    setIsShowForm(!isShowForm);
   };
 
   function handleInputChange(e){
@@ -50,17 +53,33 @@ export default function updateFormData({
   };
   
 
+  function handleImageChangeT(e){
+    e.stopPropagation();
+    console.log("handleImageChage Test Triggered")
+  }
 
   function handleImageChange(e){
     e.stopPropagation();
+    console.log("handleImageChange Triggered")
     const {name, files: selectedFiles} = e.target;
     
     const file = selectedFiles[0];
     if (file){
+      console.log("DEBUG: FILE Exists")
       // create temporary URL for preview
-      const previewUrl = URL.createObjectURL(file);
-      setImagePreview((prev)=>({...prev, [name]: previewUrl}));
-      setFormImage((prev)=>({...prev, [name]: selectedFiles[0] }));
+      try{
+        console.log("DEBUG:setting imagePreview")
+        const previewUrl = URL.createObjectURL(file);
+        setImagePreview((prev)=>({...prev, [name]: previewUrl}));
+        console.log("DEBUG: setting formImage")
+        setFormImage((prev)=>({...prev, [name]: selectedFiles[0] }));
+
+
+      }catch(err){
+        console.log(`DEBUG: ERROR${err}`)
+      }
+    }else{
+      console.log("DEBUG: No File")
     }
   }
 
@@ -72,9 +91,6 @@ export default function updateFormData({
       if (imagePreview.banner) URL.revokeObjectURL(imagePreview.banner);
     }
   }, [imagePreview.avatar, imagePreview.banner]);
-
-
-
 
 
 
@@ -122,32 +138,15 @@ export default function updateFormData({
             ["website"]: data.profile_data.website,
         }
       ))
-      setShowForm(false) // Close form on success
+      setIsShowForm(false) // Close form on success
 
     }catch (err){
       setFormError(err.message)
     }
   }
 
-  function ImageUpload({
-    name,
-    handleImageChange,
-    }){
+  console.log(`UpdateProfileForm.imagePreview.avatar = ${imagePreview.avatar}`)
 
-    const inputId = `${name}-file-id`;
-
-    return(
-    <>
-        <div className={"file-selector-icon"}>
-          <label htmlFor={inputId}>
-            <UploadSvg svgStyles="grey-svg" />
-          </label>
-          <input id={inputId} name={name} type="file" accept="image/*" onChange={handleImageChange} className="choose-file-btn" />
-        </div>
-    </>
-    )
-  }
-  
   return(
   <div className="edit-profile-wrapper">
 		<div className="edit-profile-box">
@@ -155,16 +154,42 @@ export default function updateFormData({
       <div className='form-title'>Update Profile </div>    
       <div className = "form-wrapper">
         <form onSubmit={handleSubmit} encType="multipart/form-data" className="standard-form  profile-form">
+          <EditProfileHeader 
+            banner={imagePreview.banner}
+            avatar={imagePreview.avatar}
+            username={userData.username} 
+            handleImageChange={handleImageChange}
+          />
+          <FormInputs 
+            updateForm={updateForm}
+            handleInputChange={handleInputChange}
+             />
+          <FormError formError={formError} />
+          <FormButtons toggleShowForm={toggleShowForm}/>
+        </form>
+      </div> {/* form-wrapper */}
+    </div> {/* edit-profile-box */}
+  </div> // edit-profile-wrapper
+  )
+}
 
+
+
+
+/*
           <div className="profile-header">
 
             <div className="profile-banner">
               <img className="banner-img" src={imagePreview.banner} />
             </div>
+
             <div className="banner-overlay">
               <div className="upload-component-wrapper">
                 <div className="upload-component">
-                  <ImageUpload name={"banner"} handleImageChange={handleImageChange}/>
+                  <ImageUpload 
+                    name={"banner"} 
+                    handleImageChange={handleImageChange} 
+                    />
                 </div>
               </div>
             </div>
@@ -177,48 +202,13 @@ export default function updateFormData({
             <div className="avatar-overlay">
               <div className="upload-component-wrapper">
                 <div className="upload-component">
-                  <ImageUpload name={"avatar"} handleImageChange={handleImageChange}/>
+                  <ImageUpload 
+                    name={"avatar"} 
+                    handleImageChange={handleImageChange}
+                 />
                 </div>
               </div>
             </div>
-          </div>
+          </div> 
 
-          <div className="profile-form-inputs">
-            <input    onChange={handleInputChange}
-                      name="caption" 
-                      type="text"  
-                      className="form-input" 
-                      placeholder={profileData.caption ? profileData.caption : "caption"}  
-                      maxLength="25" />
-            <textarea onChange={handleInputChange} 
-                      name="story"   
-                      type="text"
-                      className="form-text"  
-                      placeholder= {profileData.story ? profileData.story : "story"}
-                      maxLength="320" 
-                      rows="7"/>
-            <input    onChange={handleInputChange}  
-                      name="website" 
-                      type="url" 
-                      className="form-input" 
-                      placeholder={profileData.website ? profileData.website : "website"}  
-                      maxLength="30"/> 
-          </div>
-
-          <div className="profile-form-buttons-box">
-            <div className="form-btn-wrapper">
-                <div onClick={toggleShowForm} className = "form-btn" >Cancel</div>
-            </div>
-            <div className="form-btn-wrapper">
-                <input className="form-btn" type="submit" value="Save" />
-            </div>
-          </div>
-        
-          <FormError formError={formError} />
-
-        </form>
-      </div> {/* form-wrapper */}
-    </div> {/* edit-profile-box */}
-  </div> // edit-profile-wrapper
-  )
-}
+*/

@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import {useProfile} from "@providers/ProfileContext";
 import HelpLink     from "@navLinks/HelpLink.jsx";
 import SignoutLink  from "@navLinks/SignoutLink";
+import ResetLink    from "@navLinks/ResetLink";
 
 function Avatar({username, avatar}){
     return(
@@ -94,6 +95,12 @@ export default function NavPanelAvatar({
         setActiveSection("help-section");
     }
 
+    function resetPassword(e){
+        e.stopPropagation();
+        setIsShowModal(false);
+        setActiveSection("reset-section")
+    }
+
     return(
     <>
     {/* User Avatar section */}
@@ -109,6 +116,7 @@ export default function NavPanelAvatar({
             <div className="avatar-modal-box" ref={modalRef}>
                 <div className="modal-links-box">
                     <div onClick={loadHelpSection}><HelpLink /></div>
+                    <div onClick={resetPassword}><ResetLink/></div>
                     <div onClick={signout}><SignoutLink/></div>
                 </div>
             </div>

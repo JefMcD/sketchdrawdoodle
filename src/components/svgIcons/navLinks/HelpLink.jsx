@@ -6,7 +6,7 @@ export default function HelpLink({setActiveSection}){
     return(
     <div className="modal-item" id="help-link" >
         <div className="modal-label"> 
-            Help
+            Help & FAQ
         </div>
 
         <svg className="modal-svg" id="help-svg" viewBox="0 0 13.10825 13.240977">
