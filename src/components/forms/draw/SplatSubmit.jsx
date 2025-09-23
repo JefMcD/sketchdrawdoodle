@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export default function DrawFormSplatSubmit(){
+export default function SplatSubmit(){
   const [isPulsing, setIsPulsing] = useState(false);
 
   useEffect(() => {

@@ -2,7 +2,7 @@
 
 import AlfieTime from "@images/draw/time.webp"
 
-export default function DrawTimeTab(setActiveTab){
+export default function TimeTab(setActiveTab){
   return(<>
 
     <div  className="htab" id="time-tab" onClick={()=>setActiveTab("time-tab")}>

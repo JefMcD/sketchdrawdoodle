@@ -3,15 +3,14 @@
 import {useState} from "react";
 import {useProfile} from "@providers/ProfileContext";
 import {checkCookie} from "@modules/manageApi";
-import FormError from "@forms/FormError";
+import SignInError from "@forms/authentication/SignInError";
 
 export default function SignInForm({
     userData,
     setUserData,
     setActiveSection,
-  
 }){
-  console.log("bootstrap")
+  console.log("bootstrap");
 
   const {profileData, setProfileData} = useProfile();
   const [formError, setFormError] = useState("");
@@ -20,8 +19,9 @@ export default function SignInForm({
     "password": ""
   });
 
-  const server = userData.server
-  const csrfToken = checkCookie(server) 
+  const server = userData.server;
+  const csrfToken = checkCookie(server);
+  console.log(`SignINForm: csrfToken=${csrfToken}`);
 
 
   function handleInputChange(e){
@@ -76,9 +76,9 @@ export default function SignInForm({
           ["website"]: data.website
       }))
   
-      setActiveSection("draw-section");
+      setActiveSection("welcome-section");
     }else{
-      setFormError(`React: ${data.error}`);
+      setFormError(`${data.error}`);
     }
   }
 
@@ -97,7 +97,9 @@ export default function SignInForm({
                 <button className = "form-btn" type="submit">Sign In!"</button>
             </div>
         </form>
-        <FormError formError={formError} />
+        {formError &&
+          <SignInError formError={formError} />
+        }
     </div>  
   )
 }

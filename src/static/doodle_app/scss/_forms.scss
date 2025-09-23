@@ -46,7 +46,7 @@
     padding: 0;
 
     color:theme.$black-001;
-    //border: 2px solid red;
+    //border: 2px solid theme.$green-002;
     //background-color: yellow;
 
 }
@@ -65,10 +65,11 @@
     //background-color: blue;
 }
 
-.session-config-form{
+.practice-setup-form{
     width: 100%;
     height: 100%;
     max-height: calc(100vh - 21vh);
+    //border: 2px solid theme.$turq-003;
     overflow: auto;
 
 }
@@ -130,6 +131,7 @@
 .form-submit{
     position: relative;
     display: block;
+    margin-top: 0.2rem;
     margin-left:auto;
     margin-right:auto;
     width: 100%;
@@ -290,6 +292,13 @@
     //background-color:  theme.$lt-002;
     //border: 2px solid green
 }
+.signin-error{
+    height: auto;
+    width: 100%;
+    padding: 0.2rem;
+    border: 1px solid theme.$red-003;
+    border-radius: 0.2rem;
+}
 
 .form-message{
     position: relative;
@@ -308,7 +317,8 @@
     height: 20vh;
 }
 .signin-form{
-    height: 30vh;
+    //border: 1px solid theme.$green-002;
+    height: 20vh;
 }
 .profile-form{
     height: 60vh;

@@ -20,7 +20,7 @@ export default function About({setActiveSection}){
 				
 					<div className="text-container">
 						<div className="header center fs8">
-							SketchDrawDoodle story!
+							The story so far ...
 						</div>
 					</div>
 
@@ -57,11 +57,14 @@ export default function About({setActiveSection}){
 														
 							</p>
 							<p className="writing fs4">
-								If you're into techy stuff you can nerd out on Jeferz Rumble channel where he goes onto the details of the development process: 
+								If you're into techy stuff you can nerd out on Jeferz Rumble channel where he waffles on about the details of the development process: 
+							</p>
+							<div>
 								<a href="https://rumble.com/c/c-7781876" target="_blank">
 									<span className="emphasis fs5">SketchDrawDoodle DevBlog</span>						
 								</a>
-							</p>
+								
+							</div>
 					</div>
 					<div className="picture">
 						<img src={jeferzCoffee} />

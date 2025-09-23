@@ -21,7 +21,7 @@ import AboutLink    from "@navLinks/AboutLink3";
 // import SummaryLink  from "@navLinks/SummaryLink.jsx";
 // import SketchbookLink from "@navLinks/SketchbookLink.jsx";
 
-import VerticalTab1 from "@components/tabs/VerticalTab1.jsx";
+//import VerticalTab1 from "@draw/tabs/VerticalTab1.jsx";
 import NavPanelAvatar  from "@panels/NavPanelAvatar.jsx";
 
 export default function NavPanel({

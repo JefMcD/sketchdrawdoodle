@@ -1,7 +1,7 @@
 
 import {useEffect} from "react";
 
-import {tapDjangoCsrf} from "@modules/manageApi";
+import {tapDjangoCsrf, checkCookie} from "@modules/manageApi";
 
 import SignInForm from "@authForms/SignInForm";
 import sketchDrawDoodleLogo from "@images/logo1_w500.png";
@@ -12,15 +12,7 @@ export default function SignIn({
     setActiveSection,
 }){
 
-  console.log("SIGNIN")
-  // When a user signs out the session is flushed and the csrftoken becomes invalid
-  // When they sign in they need a new token
-  useEffect( ()=> {
-    async function ensureCsrf(){
-      await tapDjangoCsrf(userData.server) // Shake out a new csrftoken
-    };
-    ensureCsrf();
-  }, []) // Empty dependencies], run once when component mounts
+  console.log("SIGNIN");
 
   return(
     <>
@@ -43,15 +35,15 @@ export default function SignIn({
                     setActiveSection={setActiveSection}
                 />
 
-                <div className="authenticate-redirect fs5">
+                <div className="authenticate-redirect fs3">
                     Not a member? 
                     <span className="auth-link" id="auth-join-link" onClick={()=>setActiveSection("join-section")}> Join!</span>
                 </div>
-                <div className="authenticate-redirect fs5">
+                <div className="authenticate-redirect fs3">
                     Forgot Password?
                     <span className="auth-link" id="reset-pass-link" onClick={()=>setActiveSection("reset-section")}> Reset</span>
                 </div>
-                <div className="authenticate-redirect fs5">
+                <div className="authenticate-redirect fs3">
                     <span className="auth-link" id="reset-pass-link" onClick={()=>setActiveSection("help-section")}> Help!</span>
                 </div>
 

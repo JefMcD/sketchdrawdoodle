@@ -26,13 +26,14 @@ export default defineConfig({
   plugins: [react()],
 
   server: {
-    port: 5734, // The port number to serve Vue
-    host: true, // Listen on all addresses
+    host: "127.0.0.1", // Change in Production. matches Django so that Browser sees Origin for Client and Server are the same (SAMESITE)
+    port: 5734, // The port number to serve React
+    //host: true, // Listen on all addresses
     open: true, // Auto-open browser
     cors: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000', // Django
+        target: 'http://127.0.0.1:8000', // Django
         changeOrigin: true,
         secure: false
       }
@@ -80,8 +81,6 @@ export default defineConfig({
       "@authForms"  : resolve(__dirname, "./src/components/forms/authentication"),
       "@drawForms"  : resolve(__dirname, "./src/components/forms/draw"),
       "@profForms"  : resolve(__dirname, "./src/components/forms/profile"),
-      
-      "@tabs"       : resolve(__dirname, "./src/components/tabs"),
 
       // Context Providers
       "@providers"   : resolve(__dirname, "./src/providers"),

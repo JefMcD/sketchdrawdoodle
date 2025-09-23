@@ -3,7 +3,7 @@
 
 import AlfieMusic from "@images/draw/music.webp"
 
-export default function DrawMusicTab(){
+export default function MusicTab(){
   return(<>
 
     <div className="htab" id="music-tab" onClick={()=>setActiveTab("music-tab")}>
@@ -18,3 +18,5 @@ export default function DrawMusicTab(){
     </div>
   </>)
 }
+
+

@@ -3,7 +3,7 @@
 
 import AlfieCamera from "@images/draw/camera.webp"
 
-export default function DrawPicsTab(setActiveTab){
+export default function PicsTab(setActiveTab){
   return(
   <>
     <div  className="htab" id="pic-tab" onClick={()=>setActiveTab("pic-tab")}>

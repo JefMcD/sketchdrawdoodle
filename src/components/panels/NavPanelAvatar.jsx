@@ -8,6 +8,7 @@ import {useProfile} from "@providers/ProfileContext";
 import HelpLink     from "@navLinks/HelpLink.jsx";
 import SignoutLink  from "@navLinks/SignoutLink";
 import ResetLink    from "@navLinks/ResetLink";
+import {tapDjangoCsrf} from "@modules/manageApi.js";
 
 function Avatar({username, avatar}){
     return(
@@ -84,6 +85,8 @@ export default function NavPanelAvatar({
                 ["website"]: null
             }))
             setActiveSection("welcome-section");
+            tapDjangoCsrf(server);
+           
         }else{
             setSignoutError(data.error);        
         }
@@ -113,7 +116,7 @@ export default function NavPanelAvatar({
         </div>
 
         {isShowModal &&
-            <div className="avatar-modal-box" ref={modalRef}>
+            <div className="avatar-modal-box" ref={modalRef}> {/* ref used for handling clicks outside box toggling modal */}
                 <div className="modal-links-box">
                     <div onClick={loadHelpSection}><HelpLink /></div>
                     <div onClick={resetPassword}><ResetLink/></div>

@@ -1,6 +1,6 @@
 
 
-export default function DrawFormTimeSection(){
+export default function TimeSection(){
   return(
   <>
     

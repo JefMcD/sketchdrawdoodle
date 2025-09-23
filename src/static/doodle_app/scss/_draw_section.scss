@@ -2,7 +2,7 @@
 @use '@scss/_fonts' as fonts;
 
 
-.session-box{
+.practice-setup-box{
     position: relative;
     display: block;
 
@@ -18,33 +18,12 @@
     border-radius: 0.5rem;
 }
 
-.drawing-session-config{
-  display: none;
-  //display: block;
+.pics-setup-section{
+  display: block;
   //border: 2px solid green;
 }
-.active-config-section{
-  display:block;
-}
 
-// A short note explaining the category or subcategory
-.notes-box{
-    position: relative;
-    display: block;
 
-    width: 100%;
-    height: auto;
-
-    border: 2px solid theme.$purple-001;
-    border-radius: 0.3rem;
-
-}
-
-// used to hide elemnt for testing
-.hide{
-  display:none;
-  //border: 2px solid black;
-}
 
 
 

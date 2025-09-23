@@ -1,5 +1,5 @@
 
-// Unused
+
 export default function ProfileLink({setActiveSection}){
 
     return(
