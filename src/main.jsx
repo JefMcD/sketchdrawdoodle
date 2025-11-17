@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+//import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import AppWrapper from "@components/AppWrapper";
 import 'react-tooltip/dist/react-tooltip.css';

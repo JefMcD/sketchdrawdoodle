@@ -22,7 +22,8 @@ export default async function fetchInitialData(server, csrfToken){
   try{
     
     if (!response.ok){
-      throw new Error (`React: !response.ok `) 
+      console.log(`${data.error}`)
+      throw new Error (`React: !response.ok `);
     }
 
     // create initial data object

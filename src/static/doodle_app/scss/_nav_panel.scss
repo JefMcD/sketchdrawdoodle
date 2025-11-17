@@ -81,7 +81,7 @@
       
       .nav-icon-svg{
         aspect-ratio: 1/1;
-        width: 2rem;
+        width: 1.7rem;
         path{
           fill: theme.$dk-004;
           stroke: theme.$turq-002;
@@ -105,7 +105,7 @@
         font-family: fonts.$writing;
         color: theme.$dk-002;
         // line-height: 2.5rem; // desktop // since the nav-item container is 3rem, 2.5 align the text roughly center vertically
-        font-size: 2rem;
+        font-size: 1.2rem;
         font-weight: 400;
 
         transition-property: color;
@@ -260,13 +260,12 @@
   width: 13rem;
   height: 12vh;
   padding: 0.5rem;
-
+  
   border: 2px solid theme.$purple-002;
   border-radius: 0.4rem;
-  background-color: theme.$lt-002;
-  color: theme.$dk-002;
+  background-color: theme.$dk-003;
 
-  z-index:20;
+  z-index:2;
 
   transition-duration: 250ms;
   transition-property: color;
@@ -321,7 +320,7 @@
         display: block;
 
         font-family: fonts.$writing;
-        color: theme.$dk-002;
+        color: theme.$lt-001;
         line-height: 1.2em; // desktop // since the nav-item container is 3rem, 2.5 align the text roughly center vertically
         font-size: 1.2rem;
         font-weight: 400;

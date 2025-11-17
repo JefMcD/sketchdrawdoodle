@@ -75,6 +75,8 @@ export default defineConfig({
       "@svgIcons"   : resolve(__dirname, "./src/components/svgIcons"),
       "@navLinks"   : resolve(__dirname, "./src/components/svgIcons/navLinks"),
       "@socialIcons": resolve(__dirname, "./src/components/svgIcons/socialMedia"),
+      "@playerIcons": resolve(__dirname, "./src/components/svgIcons/player"),
+
 
       // Forms
       "@forms"      : resolve(__dirname, "./src/components/forms"),

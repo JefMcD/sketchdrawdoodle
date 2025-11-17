@@ -6,7 +6,7 @@ import {checkCookie} from "@modules/manageApi.js";
 import EditProfileHeader  from "@forms/profile/EditProfileHeader";
 import FormInputs  from "@forms/profile/FormInputs";
 import FormButtons from "@forms/profile/FormButtons";
-import FormError   from "@forms/profile/FormError";
+import FormError   from "@forms/FormError";
 
 
 export default function updateFormData({
@@ -164,7 +164,7 @@ export default function updateFormData({
             updateForm={updateForm}
             handleInputChange={handleInputChange}
              />
-          <FormError formError={formError} />
+          {formError && <FormError message={formError} setFormError={setFormError}/>}
           <FormButtons toggleShowForm={toggleShowForm}/>
         </form>
       </div> {/* form-wrapper */}

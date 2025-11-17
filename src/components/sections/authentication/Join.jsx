@@ -47,10 +47,9 @@ export default function Join({
 						setIsJoinOk={setIsJoinOk}
 					/>
 				}
-				<div className="authenticate-redirect">     
-						Already a Member? <span className="auth-link" onClick={()=>setActiveSection("signin-section")}> Sign-In</span>
-				</div>
-
+			</div>
+			<div className="authenticate-redirect">     
+					Already a Member? <span className="auth-link" onClick={()=>setActiveSection("signin-section")}> Sign-In</span>
 			</div>
 		</div>
 	</div>

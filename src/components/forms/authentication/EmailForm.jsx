@@ -65,7 +65,7 @@ export default function EmailForm({
             </div>
         </form>
 
-        <FormError formError = {formError} />
+        {formError && <FormError message = {formError}  setFormError={setFormError}/>}
 
     </div>
     )

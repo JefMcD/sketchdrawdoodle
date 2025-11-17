@@ -9,7 +9,7 @@
     display: block;
     margin: 0.5rem;
     border-radius: 0.3rem;
-    background-color: theme.$lt-002;
+    background-color: theme.$dk-002;
     border: 2px solid theme.$purple-003;
 
     .authenticate-inner-wrapper{
@@ -34,12 +34,12 @@
         display:block;
         text-align: center;
         padding: 0.5rem;
-        color: theme.$dk-003;
+        margin-bottom:0.5rem;
+        color: theme.$lt-002;
         font-family: fonts.$writing;
-        //border: 2px solid green
+        //border: 2px solid theme.$green-001;
 
     }
-
 }
 
 .auth-link{
@@ -55,7 +55,7 @@
     color: theme.$turq_001;
 }
 
-.error-message{
+.inline-error-message{
     position: relative;
     display: flex;
     justify-content: center;

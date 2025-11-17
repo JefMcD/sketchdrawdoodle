@@ -1,5 +1,7 @@
 
 
+// Make the tabs Buttons so that they can be tabbed through
+
 export default function HTab({
   tabId,
   label,
@@ -7,10 +9,11 @@ export default function HTab({
   activeTab,
   setActiveTab,
 }){
-
+  // set the active tab
+  let isActive = activeTab === tabId ? "active-tab" : "";
 
   return(
-  <div  className="htab" id="pic-tab" onClick={()=>setActiveTab(tabId)}>
+  <button  className={`htab ${isActive}`} id={tabId} onClick={()=>setActiveTab(tabId)}> {/* Overlay applied to this div */}
       <div  className="htab-img-container"> {/* Desktop Only */}
           <img  src={tabImage} />
       </div>
@@ -20,6 +23,6 @@ export default function HTab({
               {label}
           </div>
       </div>
-  </div>
+  </button>
   )
 }

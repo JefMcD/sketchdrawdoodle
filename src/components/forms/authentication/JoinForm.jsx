@@ -98,7 +98,7 @@ export default function JoinForm({
 
       </form>
 
-        <FormError formError={formError} />
+        {formError && <FormError message={formError}  setFormError={setFormError}/>}
     </div>
   </>
   )

@@ -1,10 +1,21 @@
 
+export default function FormError({
+  message,
+  setFormError
+}){
 
-
-export default function FormError({formError}){
+  function handleClose(e){
+    e.stopPropagation();
+    setFormError("")
+  }
   return(
-    <div className="form-error">
-      {formError && <div>{formError}</div>}
+    <div className="error-box">
+      <div className="form-message">
+        {message && <div>{message}</div>}
+      </div>
+      <div onClick={handleClose} className="form-message-close-box">
+        Ok
+      </div>
     </div>
   )
 }

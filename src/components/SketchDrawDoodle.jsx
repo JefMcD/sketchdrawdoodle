@@ -22,16 +22,24 @@ import Profile    from "@profile/Profile";
 
 // General sections
 import Welcome  from "@sections/Welcome";
-import About    from "@sections/About";
+import Journey  from "@sections/Journey";
 import Coffee   from "@sections/Coffee";
 import Help     from "@sections/Help";
 //import Frens    from "@sections/Frens";
+
+// Drawing Practice COponent
+import DoodlePlayer from "@components/sections/player/DoodlePlayer";
+//import DoodlePlayerGrok from "@components/sections/player/DoodlePlayerGrok";
+//import AIPractice   from "@components/sections/player/AIPlayer";
 
 export default function SketchDrawDoodle({
   initialData,
   server
 }) { 
   console.log(`********* SketchDrawDoodle *********`)
+
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [practicePayload, setPracticePayload] = useState({})
 
   const [activeSection, setActiveSection] = useState(initialData["initial_section"]);
 
@@ -56,52 +64,58 @@ export default function SketchDrawDoodle({
 
   // Note: No quotes around the component name. Its a function not a string!
   const sectionsArray = [
-		{id:"welcome-section",   component: Welcome},
-		{id:"signin-section",    component: SignIn},
-		{id:"join-section",      component: Join},
-		{id:"reset-section",     component: Reset},
+		{id:"welcome-section",   component: Welcome, props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"signin-section",    component: SignIn,  props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"join-section",      component: Join,    props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"reset-section",     component: Reset,   props: {userData, setUserData, activeSection, setActiveSection}},
     
-		{id:"draw-section",      component: Draw},
+		{id:"draw-section",      component: Draw,    props: {userData, setUserData, setIsDrawing, setPracticePayload, setActiveSection}},
 		//{id:"summary-section" ,  component: Summary},
 
 		//{id:"account-section",   component: Account},
-		{id:"profile-section",   component: Profile},
+		{id:"profile-section",   component: Profile, props: {userData, setUserData, activeSection, setActiveSection}},
 		//{id:"sketchbook-section",component: Sketchbook},
 
 		//{id:"frens-section",     component: Frens},
-		{id:"coffee-section",    component: Coffee},
-  	{id:"help-section",      component: Help},
-		{id:"about-section",     component: About},
+		{id:"coffee-section",    component: Coffee, props: {userData, setUserData, activeSection, setActiveSection}},
+  	{id:"help-section",      component: Help,   props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"journey-section",   component: Journey,props: {userData, setUserData, activeSection, setActiveSection}},
   ]
 
   // Find the active section
   // ActiveSection is a psudo component that dynamically created and used to render the chosen App section
   const activeObj = sectionsArray.find(section => section.id === activeSection);
   const ActiveSection = activeObj?.component; // Dynamically created component
+  const componentProps = activeObj.props;
+  //<DrawingPractice setIsDrawing={setIsDrawing} practicePayload={practicePaload}/>
   return (
-    <ProfileContext.Provider value={{profileData, setProfileData}}>
-    <div className="flex-container">
-      <div className = "app-container">
-        <NavPanel  
-          userData = {userData}
-          setUserData = {setUserData}
-          setActiveSection={setActiveSection}
-        />
 
-        {/* If ActiveSection is a real component - render it*/}
-        {/* Pass setActiveSection as a prop to allow nav links inside the section */}
-        {ActiveSection && 
-          <ActiveSection 
-            userData    = {userData}
-            setUserData = {setUserData}
-            activeSection    ={activeSection}
-            setActiveSection ={setActiveSection}
-          />}
+      <ProfileContext.Provider value={{profileData, setProfileData}}>
+        {isDrawing ? (
+          <DoodlePlayer setIsDrawing={setIsDrawing} practicePayload={practicePayload} />
 
-        <ExtrasPanel />
-      </div>
-    </div>
-    </ProfileContext.Provider>
+        ):(
+
+          <div className="flex-container">
+            <div className = "app-container">
+              <NavPanel  
+                userData = {userData}
+                setUserData = {setUserData}
+                setActiveSection={setActiveSection}
+                setIsDrawing = {setIsDrawing}
+              />
+      
+              {/* If ActiveSection is a real component - render it*/}
+              {/* Pass setActiveSection as a prop to allow nav links inside the section */}
+              {ActiveSection && <ActiveSection {...componentProps} />}
+      
+              <ExtrasPanel />
+            </div>
+          </div>
+        )}
+      </ProfileContext.Provider>
+      
+
   )
 }
 

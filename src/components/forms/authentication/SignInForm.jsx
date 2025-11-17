@@ -3,7 +3,7 @@
 import {useState} from "react";
 import {useProfile} from "@providers/ProfileContext";
 import {checkCookie} from "@modules/manageApi";
-import SignInError from "@forms/authentication/SignInError";
+import FormError from "@forms/FormError";
 
 export default function SignInForm({
     userData,
@@ -97,9 +97,7 @@ export default function SignInForm({
                 <button className = "form-btn" type="submit">Sign In!"</button>
             </div>
         </form>
-        {formError &&
-          <SignInError formError={formError} />
-        }
+        {formError && <FormError message={formError} setFormError={setFormError}/>}
     </div>  
   )
 }

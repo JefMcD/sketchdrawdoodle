@@ -8,6 +8,48 @@ import EditButton        from "@sections/profile/EditButton";
 
 import UpdateProfileForm from "@profForms/UpdateProfileForm";
 
+/*
+Getting form inputs to upload user data
+function MyForm() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+
+    const username = data.get('username');
+    const age = data.get('age');               // text
+    const gender = data.get('gender');         // radio
+    const hobbies = data.getAll('hobby');      // checkboxes
+    const country = data.get('country');       // select
+    const files = data.getAll('photos');       // files
+
+    console.log({ username, age, gender, hobbies, country, files });
+  };
+
+    <form onSubmit={handleSubmit}>
+      <input name="username" />
+      <input name="age" type="number" />
+
+      <label><input type="radio" name="gender" value="male" /> Male</label>
+      <label><input type="radio" name="gender" value="female" /> Female</label>
+
+      <label><input type="checkbox" name="hobby" value="code" /> Code</label>
+      <label><input type="checkbox" name="hobby" value="music" /> Music</label>
+
+      <select name="country">
+        <option value="us">USA</option>
+        <option value="uk">UK</option>
+      </select>
+
+      <input type="file" name="photos" multiple />
+
+      <button type="submit">Save</button>
+    </form>
+
+
+*/
+
+
+
 export default function Profile({
 	userData,
 }){

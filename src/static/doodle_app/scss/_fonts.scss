@@ -1,5 +1,8 @@
 
-$header: zallord, Arial, sans-serif;
+$header: drybrush, zallord, bangers, sans-serif;
+$zine-header: zallord, bangers, "sans-serif";
+$cta-button: bangers, "sans-serif";
+$section-header: "bangers", "sans-serif";
 
 $writing: architectsDoge, indieFlower, Arial, sans-serif;
 $writing-bold: indieFlower, Arial, sans-serif;
@@ -19,14 +22,14 @@ $logo: zallord, Arial, sans-serif;
 @font-face{
     font-family: drybrush;
     src: url('/static/doodle_app/fonts/woff2/drybrush.woff2');
-    font-weight: 400;
+    font-weight: 700;
     font-style: normal
 }
 
 @font-face{
     font-family: zallord;
     src: url('/static/doodle_app/fonts/woff2/Zallord.woff2');
-    font-weight: 400;
+    font-weight: 600;
     font-style: normal
 }
 
@@ -65,4 +68,16 @@ $logo: zallord, Arial, sans-serif;
 @font-face{
     font-family:amaticBold;
     src: url("/static/doodle_app/fonts/woff2/amatic-bold.woff2")
+}
+
+@font-face{
+    font-family: bangers;
+    src: url('/static/doodle_app/fonts/ttf/Bangers.ttf');
+    font-weight: 400;
+    font-style: normal
+}
+@font-face{
+    font-family: bangers2;
+    src: url('/static/doodle_app/fonts/ttf/Bangers.ttf');
+
 }

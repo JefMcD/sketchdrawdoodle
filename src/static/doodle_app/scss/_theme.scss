@@ -1,4 +1,10 @@
 
+// Category Scroller Variables
+$num_categories: 3;
+$num_subcategories: 100;
+$category_image_size: 32%;
+$scroller_height: 18vh;
+
 // Global Variables
 
 $white-001: #fff;
@@ -11,15 +17,15 @@ $grey-006: #272727;
 $black-001: #000;
 
 $lt-001: #fffcf5;
-$lt-002: #fff9e9;
-$lt-003: #e6dbbd;
-$lt-004: #e0c270;
+$lt-002: #ffe5b4;
+$lt-003: #fce084;
+$lt-004: #f7d25a;
 
-$dk-001: #cca845;
-$dk-002: #dba203;
-$dk-003: #966e00;
-$dk-004: #523c00;
-$dk-005: #382900;
+$dk-001: #ebc96b;
+$dk-002: #ecbd3d;
+$dk-003: #f8b539;
+$dk-004: #c98300;
+$dk-005: #642d00;
 
 $blue-001:  #cdc8f8;
 $blue-002:  #6b52fc;
@@ -31,14 +37,19 @@ $turq-003: rgb(1, 75, 94);
 $turq-004: rgb(0, 38, 48);
 
 
-$orange-001: #ffb62f;
-$orange-002: #e66700;
-$orange-003: #ffc400;
+$orange-001: #ffe8be;
+$orange-002: #ff9741;
+$orange-003: #ff5f20;
 
-$purple-001: #ee09e2;
-$purple-002: #b300aa;
-$purple-003: #52004e;
-$purple-004: #170018;
+$pink-001: #ffd2fc;
+$pink-002: #ffadfb;
+$pink-003: #ff91f9;
+
+$purple-001: #ff40f5;
+$purple-002: #d800cd;
+$purple-003: #ad00b3;
+$purple-004: #57005a;
+$purple-005: #210027;
 
 $red-001: #db0079;
 $red-002: #c70d00;

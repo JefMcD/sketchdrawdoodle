@@ -90,7 +90,7 @@ export default function JoinVerifyForm({
             </div>
         </form>
 
-        <FormError formError={formError} />  
+        {formError && <FormError message={formError} setFormError={setFormError} />  }
     </div>
 
   )

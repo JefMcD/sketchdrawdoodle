@@ -1,10 +1,15 @@
 
 
 
-export default function VerticalTab1(){
+export default function VerticalTab1({
+    setIsDrawing
+}){
+    function handleTabClick(){
+        setIsDrawing(true)
+    }
     return(
         <>
-        <div   className = "vertical-tabs-box">
+        <div onClick={handleTabClick}  className = "vertical-tabs-box">
             <div   className="vtab" id="unused-tab1"  data-section="unused-tab1">
                 <div   className="vtab-img-container">  {/* Desktop Only */}
                     {/* <img  src={camera} />  Absolute path */}
