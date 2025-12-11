@@ -26,7 +26,7 @@ export default function SplatSubmit(){
 
   return(
   <>
-    <div className="form-submit draw-form-submit">
+    <div className="draw-form-submit-container">
         <button className={`inksplat-submit ${isPulsing ? 'pulse' : ''}`} type="submit" value="Go">
             <svg className="ink-splat" id="inksplat3-svg" viewBox="0 0 25.986677 25.841496">
                 <path

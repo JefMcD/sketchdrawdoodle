@@ -13,7 +13,6 @@ export default function getDjangoPayload(id="initial-data"){
       //get element containing Json payload from Django
       const init_element = document.getElementById(id);
       if (!init_element){
-        console.log(`DEBUG: initial-data ${id} not found`);
         throw new Error(`Element #${id} not found`);
       }
       // Grab text and remove BOM if present
@@ -34,7 +33,7 @@ export default function getDjangoPayload(id="initial-data"){
         initial_caption   : initialData["caption"]  ?? "",
         initial_website   : initialData["website"]  ?? ""
       } // null-coalescing mofo
-        console.log(`DEBUG: returning initialization_data ${initializationData}`);
+
         return initializationData;
   }catch (err){
     // On error, initializationData may not exist. log error and then return default data

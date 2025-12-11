@@ -36,30 +36,65 @@ import {checkCookie} from "@modules/manageApi.js";
 
 export default function Draw({
 	userData,
-	setPracticePayload,
 	setIsDrawing,
-	setActiveSection
+	setPracticePayload,
+	formData,
+	setFormData,
 }){
 	const server = userData.server;
 	const csrfToken = checkCookie();
-	const getCategories = server+"get_category_options/";
 
 	// State Variables
-	const [isDrillActive, setIsDrillActive] = useState(false);
 	const [isLoading, setIsLoading]         = useState(true);
-	const [activeTab, setActiveTab]         = useState("pic-tab");
-	const [categories, setCategories]       = useState([]);
+	const [activeTab, setActiveTab]         = useState("pic-tab"); // PicTab, TimeTab, HelpTab, MusicTab
+	const [categories, setCategories]       = useState([]); // Available Categories list returned by Server
+	/*
+	categories === [
+		{id: 1, name="people", description:"hoomans doin stuff", icon: "/static/doodle_app/images/.../man.jpg"}
+		...
+	]
+	*/
 	const [subcategories, setSubcategories] = useState([]);
-	const [practiceTime, setPracticeTime]   = useState([]);
-	const [practiceMusic, setPracticeMusic] = useState([]);
-	const [formData, setFormData]           = useState({
-		categoryChoice:{id: null, name:""}, // eg 2, "animals"
-		subcategoryChoices:[], // array of {id, name}
-		practiceChoice:{},
-		musicChoice:{}
-	});
-	const [formError, setFormError] = useState("");
+	
+	const [drillList, setDrillList]         = useState([]);
+	/*
+		drillList === [
+			{
+				id: 104,
+				mode: "sketch",
+				description: "30 minute Warmup",
+				duration_secs: 1800,
+				is_pro: false,
+				steps: [
+					{
+						'num_pics': 8, 
+						'step_order': 0, 
+						'display_time': 30
+					}, 
+					{
+						'num_pics': 6, 
+						'step_order': 1, 
+						'display_time': 60
+					}, 
+					{
+						'num_pics': 5, 
+						'step_order': 2, 
+						'display_time': 120
+					}, 
+					{
+						'num_pics': 2, 
+						'step_order': 3, 
+						'display_time': 300
+					}
+				]
+			},
+			{... next drill ...}.
+			etc
+		]
+	*/
+	
 
+	const [formError, setFormError] = useState("");
 
 	async function handleFormSubmission(e){
 		e.stopPropagation();
@@ -69,7 +104,7 @@ export default function Draw({
 		const payload = {
 			category_id: formData.categoryChoice.id,
 			subcategory_ids: formData.subcategoryChoices.map((choice)=>(choice.id)),
-			practice_choice: null,
+			drill_choice: formData.drillChoice.id,
 			music_choice: null
 		};
 
@@ -82,10 +117,11 @@ export default function Draw({
 				"X-CSRFToken": csrfToken,
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify(payload)
+			body: JSON.stringify(payload),
+			cache: "no-store"
 		})
 		
-		const data = await response.json()
+		const data = await response.json();
 
 		if(!response.ok){
 			setFormError(data.error);
@@ -98,13 +134,20 @@ export default function Draw({
 		const image_list = data.image_list; // array of objects 
 
 		// load practice drill
-		const practice_settings = data.practice_settings; // Obj containing two objs and one array [{time_dicr}, {mode_dict}, [drill_list]]
+		//const practice_settings = data.practice_settings; // Obj containing two objs and one array [{time_dicr}, {mode_dict}, [drill_list]]
 
 		// bundle response data together and set state
 		const newPracticePayload = {
-			practiceSettings:practice_settings,
+			//practiceSettings:practice_settings,
 			image_list: image_list,
 		}
+		/*
+		practice_settings = {
+			drill_dict: {'duration': 1800, 'description': '30 minute Sketching'}
+			step_list: [{'num_pics': 8, 'step_order': 0, 'display_time': 30}, {'num_pics': 6, 'step_order': 1, 'display_time': 60}, {'num_pics': 5, 'step_order': 2, 'display_time': 120}, {'num_pics': 2, 'step_order': 3, 'display_time': 300}]
+		}
+
+		*/
 
 		setPracticePayload(newPracticePayload); // points to entirely new object so new reference = rerender in SketchDrawDoodle
 
@@ -117,7 +160,7 @@ export default function Draw({
 	}
 
 /*
-	fetch category data for default pictures part of the form
+	fetch category data for pictures part of the form
 
 	Note: The browser caches GET requests.
 	This is normally a good and useful thing in a live production env
@@ -125,10 +168,11 @@ export default function Draw({
 	in development I need to prevent automatica caching
 */
 	useEffect(()=>{
-		async function getCategoryData(){
-			const response = await fetch(`${getCategories}?t=${Date.now}`,{ // timestamp url to ensure always unique
+		const get_category_and_drill_data = server+"get_category_and_drill_data/";
+		async function getCategoryAndDrillData(){
+			const response = await fetch(`${get_category_and_drill_data}?t=${Date.now}`,{ // timestamp url to ensure always unique
 				method: "GET",
-				// cache: "no-store" // tells the browser not to store the result at all. Options include "default", "reload", "no-store", "force-cache"
+				cache: "no-store" // tells the browser not to store the result at all. Options include "default", "reload", "no-store", "force-cache"
 			});
 			const data = await response.json();
 			if (response.ok){
@@ -136,14 +180,14 @@ export default function Draw({
 				// process data
 				setIsLoading(false);
 				setCategories(data.category_payload); // No spread here. The entire state object now references a new object so no mutation and React is Happy
-
+				setDrillList(data.drill_payload)
 			}else{
 				//error
 				setError(data["error"]);
 			}
 		};
 		try{
-			getCategoryData();
+			getCategoryAndDrillData();
 		}catch (err){
 			setError(err);
 		};
@@ -157,13 +201,15 @@ export default function Draw({
 		//{tabId: "music-tab",tab: HTab, image: alfieMusic,  label: "Music", formSection: "music-section"}
 	];
 
+
 	// The form components and their props
 	const formSectionsArray = [
 		{	id: "pics-section",  component: PicsSection,  
-			props: {formData, setFormData, categories, subcategories, setSubcategories, setFormError}
+			props: {userData, formData, setFormData, categories, subcategories, setSubcategories, setFormError}
 		},
-		{id: "time-section",  component: TimeSection,  props: {formData, setFormData, practiceTime, setActiveSection}},
-		{id: "music-section", component: MusicSection, props: {formData, setFormData, practiceMusic}}
+		{id: "time-section",  component: TimeSection,  
+			props: {formData, setFormData, drillList, setFormError}},
+		{id: "music-section", component: MusicSection, props: {formData, setFormData}}
 	]
 
 	// Get the active tab
@@ -180,7 +226,7 @@ export default function Draw({
 
       {/* HEADER / TITLE */}
       <div className="zine-title">
-        <h1 className="fs7">Get Drawing</h1>
+        <h1 className="fs5">Get Drawing</h1>
       </div>
 
 			<div className = "horizontal-tabs-box">
@@ -198,26 +244,35 @@ export default function Draw({
 					))
 				}
 			</div>
-
+			
 			{/*the section to be rendered when a tab is active or unmounted when inactive */}
-			<div className="practice-setup-box">
-						<div className="form-wrapper">
-								<form onSubmit={handleFormSubmission} className="standard-form practice-setup-form">
-										{isLoading ? (
-											<Spinner />
-										) :(
-											<>
-											<ActiveFormComponent {...componentProps}/>
-											<SplatSubmit />
-											</>
-										)}
-								</form>
-								{formError && <FormError message={formError} setFormError={setFormError} />} 
-						</div> {/*form-wrapper */}
 
-		    </div> {/* end practice-setup-box */}
+			<div className="drill-form-flex-container">
+					<form onSubmit={handleFormSubmission} className="drill-setup-form">
+							{isLoading ? (
+								<Spinner />
+							) :(
+								<>
+								<ActiveFormComponent {...componentProps}/>{/*PicsSection(CategoryPicker and SubcategoryPicker) or TimeSection) */}
+								</>
+							)}
+							<div className="drill-summary-box">
+								{/* SECTION: DRILL SUMMARY */}
+								<div className="drill-footer">
+										<div className="drill-list fs3">
+											<p>Category: <span className="emphasis fs5">{formData.categoryChoice.id ? formData.categoryChoice.name : "Random"}</span></p>
+											<p>Subcategory: <span className="emphasis fs5">{formData.subcategoryChoices.length > 0 ? `${formData.subcategoryChoices.length} selected` : "Random"}</span> </p>
+											<p>Time:<span className="emphasis fs5"> {formData.drillChoice.description}</span></p>	
+										</div>
+										<div className="drill-inksplat-box"><SplatSubmit /></div>
+									
+									</div>
+							</div> {/* end drill-summary-box */}
+					</form>
+					{formError && <FormError formError={formError} setFormError={setFormError} />} 
+			</div> {/*end drill-form-flex-container */}
 
-				{/* <HorizontalAds /> */}
+				<HorizontalAds />
 
 		</div> {/* end man-panel */}
 		</>

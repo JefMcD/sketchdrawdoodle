@@ -2,25 +2,49 @@
 @use '@scss/_fonts' as fonts;
 
 
-.practice-setup-box{
+// .drill-setup-box{
+//     position: relative;
+//     display: block;
+
+//     margin-left: auto;
+//     margin-right: auto;
+
+//     width: calc(100% - 0.5rem);
+//     height: calc(100vh - 24vh);
+//     overflow: hidden;
+
+//     border: 4px solid theme.$turq-001;
+//     //background-color: yellow;
+//     border-radius: 0.5rem;
+// }
+.drill-form-flex-container{
+
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction:column;
 
     margin-left: auto;
     margin-right: auto;
 
-    width: calc(100% - 1rem);
-    height: calc(100vh - 25vh);
-    overflow: auto;
+    width: 100%;
+    height: calc(100vh - 24vh);
+    overflow: hidden;
 
-    border: 2px solid theme.$purple-002;
-    //background-color: yellow;
-    border-radius: 0.5rem;
+    border: 2px solid theme.$turq-001;
+    border-radius: 1rem;
+    //background-color: yell
+
+
+
 }
 
 .pics-setup-section{
-  display: block;
-  //border: 2px solid green;
+  position: relative;
+  display: flex;
+  flex-direction:column;
+  width: 100%;
+  height: 100%;
+  //border: 4px solid theme.$turq-002;
 }
 
 
@@ -64,12 +88,13 @@
   align-items:center;
 
   width: 100%;
-  height: 100%;
+  height: auto;
 
-  margin-top: 1rem;
-
+  padding: 0.5rem;
+  gap: 0.5rem;
   //border: 1px solid theme.$turq-002;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 
 }
 
@@ -82,12 +107,12 @@
   height: 100%;
   aspect-ratio: 1/1; // mobile
   border: 2px solid theme.$turq-002;
-  border-radius: 50%;
+  border-radius: 30%;
   overflow: hidden;
-  transition: transform 0.2s ease, border 0.2s ease, filter 0.2s ease;
+  transition: transform 0.2s ease, border 0.2s ease, filter 0.2s ease, border-radius 0.2s ease;
 
   img{
-    filter: grayscale(50%) brightness(0.8);
+    filter: grayscale(100%) brightness(0.7);
     transition: filter 0.2s ease;
     height: 100%;
     object-fit: cover;
@@ -100,41 +125,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  flex: 1 1 70px;        /* This is the magic line */
+  min-width: 70px;       /* Prevents items from getting too squished */
+  max-width: 140px;       /* Optional: prevents them from getting too wide */
+
+  //border: 2px solid theme.$dk-002;
 }
- 
-.subcategory-checkbox-image{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  aspect-ratio: 1/1;
-  width: 20vw;
-  max-width:5rem;
-  border: 1px solid theme.$purple-001;
-  border-radius: 50%;
-
-  input[type="checkbox"] {
-    display: none;
-  }
-
-  input[type="checkbox"]:checked + .subcategory-label img {
-    filter: grayscale(0%) brightness(1);
-  }
-  
-  // highlight when checked
-  &:has(input[type="checkbox"]:checked) .subcategory-label {
-    transform: scale(1.1);
-    border: 2px solid theme.$turq-001;
-  }
-
-}
-
-.subcategory-checkbox-image:hover .subcategory-label {
-  transform: scale(1.05);
-  border-color: theme.$purple-002;
-}
-
-
 /***********************************
 *
 * subcategory items coming in one after the other
@@ -150,6 +147,44 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+
+ 
+.subcategory-checkbox{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  width: 20vw;
+  max-width:5rem;
+  //border: 2px solid theme.$grey-003;
+  border-radius: 30%;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"]:checked + .subcategory-label img {
+    filter: grayscale(0%) brightness(1);
+  }
+  
+  // highlight when checked
+  &:has(input[type="checkbox"]:checked) .subcategory-label {
+    transform: scale(1.1);
+    border: 4px solid theme.$lt-003;
+    border-radius: 50%
+  }
+
+}
+
+.subcategory-checkbox:hover .subcategory-label {
+  transform: scale(1.2);
+  border-color: theme.$purple-002;
+}
+
+
+
 
 
 
@@ -185,7 +220,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.2rem;
 
 }
 
@@ -229,4 +264,93 @@
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
+}
+
+
+
+.drill-summary-box{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 4.5rem;
+  padding: 0 0.5rem;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid theme.$dk-003;
+  //border: 3px solid theme.$dk-003;
+}
+
+.drill-footer{
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 18rem;
+  height: 100%;
+
+  .drill-list{
+    flex-grow: 1;
+    padding-left: 0.5rem;
+    //border: 2px solid theme.$purple-001;
+    p{
+      //border: 1px solid black;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .drill-inksplat-box{
+    flex-grow: 0;
+    //border: 2px solid theme.$turq-001;
+  }
+}
+
+/***************************************
+/* 
+/* Time Tab Section
+/*
+/***************************************/
+
+.time-section-container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.5rem;
+  //width: 100%;
+  //height: calc(100% - 4rem);
+
+  border: 4px solid theme.$purple-001;
+}
+
+.time-section-options-box{
+  width: 100%;
+  max-width: 30rem;
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.2rem;
+  //border: solid 2px theme.$purple-002;
+  border-radius: 0.4rem;
+}
+
+
+.drill-grid{
+  display: grid;
+  grid-template-columns: 62% 1fr 1fr;
+
+  .row-label{
+    //border: 1px solid black;
+  }
+
+}
+
+
+.time-section-summary-box{
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  //border: 2px solid theme.$green-002;
 }

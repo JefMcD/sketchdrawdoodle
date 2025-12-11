@@ -1,12 +1,17 @@
 
 
 import getServer from "@modules/getServer.js";
+import isDEBUG from "@modules/isDebug.js";
 
 // In development the React client(5734) and Django server(8000) are on two different port of localhost.
 // In production the client is served as static data inside Django ie hotdog mode
 export function getMode(){
-  //const mode = "hotdog"; // hotdog when build is inside Django, dev when developing on separate ports
-  const mode = "dev"; //  dev when developing on separate ports
+  let mode = "";
+  if(isDEBUG){
+    mode = "dev";    //  dev when developing on separate ports
+  }else{
+    mode = "hotdog"; // hotdog when build is inside Django,
+  }
   return mode; 
 }
 

@@ -1,0 +1,255 @@
+
+
+@use '@scss/_theme.scss' as theme;
+@use '@scss/_fonts.scss' as fonts;
+
+// ================ zine.scss ===================//
+//                                             = //
+// Styles to give that comic/zine look         = //
+//                                             = //
+// Used by                                     = //
+// Coffee.jsx                                  = //
+// Journey.jsx                                 = //
+// Welcome.jsx                                 = //
+// ============================================= //
+
+
+
+
+/* ===== TITLE ===== */
+.zine-title {
+  text-align: center;
+  margin: 0 0 0.3rem 0;
+  padding: 1rem 0 0.2rem 0;
+  font-family: fonts.$zine-header;
+
+  //border: 2px solid theme.$turq-003;
+
+  //overflow:scroll;
+  h1 {
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-transform: uppercase;
+    //text-shadow: 1px 1px 0 #000;
+  }
+  h2 {
+    margin-top: 0.4rem;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+  }
+}
+
+
+
+/* ===== IMAGES ===== */
+.zine-splash-container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+
+  height: 25vh;
+  max-height: 35vh;
+  //border: 2px solid theme.$purple-001;
+}
+
+/* === Photos in the various sections ==*/
+.zine-image-wrap-box{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  //border: 2px solid theme.$purple-002;
+  
+  &.center{
+    justify-content: center;
+  }
+  &.left{
+    justify-content: flex-start;
+  }
+  &.right{
+    justify-content: flex-end;
+  }
+}
+
+/*== Main hero image of Alfie ==*/
+.zine-image-wrap {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  max-width: 40rem;
+  border: 3px solid theme.$black-001;
+  box-shadow: 6px 6px 0 black;
+  overflow: hidden;
+  transform-origin: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &.skew-left {
+    margin: 1rem;
+    transform: rotate(-3deg);
+  }
+  &.skew-right {
+    transform: rotate(3deg);
+  }
+}
+
+
+.zine-alfie-pop-out-wrapper{
+  
+}
+
+
+/* ===== SECTIONS ===== */
+
+.zine-section-wrapper{
+  position: relative;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+.zine-section {
+  position: relative;
+  display: block;
+  width: calc(100% - 0.5rem);
+  max-width: 40rem;
+  margin: 0.2rem 0rem;
+  padding: 0.5rem;
+  background: theme.$lt-003;
+  border: 3px solid theme.$black-001;
+  box-shadow: 4px 4px 0 theme.$dk-005;
+  transform: rotate(-1deg);
+
+  &.alt {
+    // width: 70%; // desktop
+    max-width: 30rem;
+    margin: 1rem 0;
+    background: theme.$lt-002;
+    transform: rotate(1.3deg);
+  }
+
+}
+
+
+/* ===== SECTIONS ===== */
+
+.zine-panel {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.zine-heading {
+  font-family:fonts.$section-header;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: theme.$grey-006;
+  letter-spacing: 1px;
+  text-shadow: 2px 1px 0 theme.$red-002;;
+}
+
+.zine-logo-footer {
+  font-family:fonts.$section-header;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  color: theme.$turq-001;
+  letter-spacing: 2px;
+  text-shadow: 2px 1px 0 theme.$red-003;
+}
+
+/* ===== TEXT ===== */
+.zine-panel p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+
+
+
+
+/* ===== LINK BLOCK ===== */
+.zine-link-block {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  color: theme.$turq-002;
+  border-bottom: 2px solid theme.$turq-002;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+/* ===== FOOTER ===== */
+.zine-footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+
+/* HALFTONE BACKGROUND UTILITY */
+.halftone-bg {
+  position: relative;
+  isolation: isolate;   /* ensures proper stacking */
+}
+
+.halftone-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* dot pattern */
+  background-image:
+    radial-gradient(circle, rgba(0, 0, 0, 0.25) 1px, transparent 1px);
+
+  background-size: 6px 6px;   /* dot size & spacing */
+  opacity: 0.25;              /* overall darkness of pattern */
+
+  /* fade the dots toward the center */
+  mask-image: radial-gradient(circle, transparent 15%, black 70%);
+  
+  z-index: -1;
+}
+
+
+
+
+/* ===== CTA BUTTONS ===== */
+.zine-cta {
+  display: inline-block;
+  background: theme.$lt-003;
+  border: 3px solid black;
+  padding: .8rem 1.2rem;
+  margin-top: 1rem;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 black;
+  z-index: 5;
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 black;
+  }
+
+  &.big {
+    font-size: 1.2rem;
+    padding: 1rem 1.5rem;
+  }
+}
+

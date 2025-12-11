@@ -36,12 +36,49 @@ export default function SketchDrawDoodle({
   initialData,
   server
 }) { 
-  console.log(`********* SketchDrawDoodle *********`)
+  console.log(`********* SketchDrawDoodle *********`);
 
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [practicePayload, setPracticePayload] = useState({})
+	const [formData, setFormData]           = useState({
+		categoryChoice:{id: null, name:""}, // eg 2, "animals"
+		subcategoryChoices:[], // array of {id, name}
+		drillChoice: // Default Practice Drill
+			{
+				id: 104,
+				mode: "sketch",
+				description: "30 minute Warmup",
+				duration_secs: 1800,
+				is_pro: false,
+				steps: [
+					{
+						'num_pics': 8, 
+						'step_order': 0, 
+						'display_time': 30
+					}, 
+					{
+						'num_pics': 6, 
+						'step_order': 1, 
+						'display_time': 60
+					}, 
+					{
+						'num_pics': 5, 
+						'step_order': 2, 
+						'display_time': 120
+					}, 
+					{
+						'num_pics': 2, 
+						'step_order': 3, 
+						'display_time': 300
+					}
+				]
+			},
 
-  const [activeSection, setActiveSection] = useState(initialData["initial_section"]);
+		musicChoice:{}
+	});
+
+  const [isDrawing, setIsDrawing] = useState(false); // Set to true when the user starts the DoodlePlayer and is drawing
+  const [practicePayload, setPracticePayload] = useState({}) // The list of image objects returned by the fetch and passed to the DoodlePlayer component 
+
+  const [activeSection, setActiveSection] = useState(initialData["initial_section"]); // PicSection or TimeSection
 
   // User data is mainly for authorisation (Signin, Join, Reset Password, Nav Panel)
   const [userData, setUserData] = useState({
@@ -69,7 +106,7 @@ export default function SketchDrawDoodle({
 		{id:"join-section",      component: Join,    props: {userData, setUserData, activeSection, setActiveSection}},
 		{id:"reset-section",     component: Reset,   props: {userData, setUserData, activeSection, setActiveSection}},
     
-		{id:"draw-section",      component: Draw,    props: {userData, setUserData, setIsDrawing, setPracticePayload, setActiveSection}},
+		{id:"draw-section",      component: Draw,    props: {userData, setIsDrawing, setPracticePayload, setActiveSection, formData, setFormData}},
 		//{id:"summary-section" ,  component: Summary},
 
 		//{id:"account-section",   component: Account},
@@ -92,17 +129,20 @@ export default function SketchDrawDoodle({
 
       <ProfileContext.Provider value={{profileData, setProfileData}}>
         {isDrawing ? (
-          <DoodlePlayer setIsDrawing={setIsDrawing} practicePayload={practicePayload} />
+          <DoodlePlayer 
+            isDrawing={isDrawing}
+            setIsDrawing={setIsDrawing} 
+            practicePayload={practicePayload} 
+            formData={formData} 
+            setActiveSection={setActiveSection}/>
 
         ):(
 
-          <div className="flex-container">
-            <div className = "app-container">
+          <div className="flex-container"> {/* sketchDrawDoodle.scss */}
+            <div className = "app-container"> {/* sketchDrawDoodle.scss */}
               <NavPanel  
                 userData = {userData}
-                setUserData = {setUserData}
                 setActiveSection={setActiveSection}
-                setIsDrawing = {setIsDrawing}
               />
       
               {/* If ActiveSection is a real component - render it*/}

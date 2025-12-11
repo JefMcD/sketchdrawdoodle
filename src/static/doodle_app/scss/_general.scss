@@ -4,6 +4,51 @@
 @use "@scss/_fonts.scss" as fonts;
 
 
+// src/index.scss  (or wherever your global styles live)
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+#root > div,
+.app,
+.App {
+  height: 100dvh;     /* ← this one line fixes your mobile problem */
+  height: 100vh;      /* ← fallback */
+  min-height: 100dvh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+// If you have any other full-screen containers, add them here too
+.full-screen,
+.page,
+.main-panel,
+.flex-container,
+.app-container,
+.pic-player-main-window {
+  min-height: 100dvh;
+}
+
+.bottom-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  // Makes sure it's above iOS home indicator & Android gesture bar
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom); // old iOS Safari
+}
+
 /*********************************************************
 ***
 ***  General Styles and default settings for App
@@ -14,6 +59,7 @@
 
   // border: 2px solid    theme.$grey-002;
 }
+
 
 *,
 *::after,
@@ -53,20 +99,31 @@ div {
   width: auto;
 }
 
-h1,
-h2,
-h3{
-  font-family: fonts.$header;
+h1{
+  font-family: fonts.$zine-header;
   font-weight: 900;
   line-height: 1;
 
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-h2,
-h3
+h2{
+  font-family: fonts.$zine-subheader;
+  font-weight: 600;
+  line-height: 1;
+
+  margin-bottom: 0.5rem;
+}
+h3{
+  font-family: fonts.$zine-header;
+  font-weight: 400;
+  line-height: 1;
+
+  margin-bottom: 0.2rem;
+}
+
 p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 img{

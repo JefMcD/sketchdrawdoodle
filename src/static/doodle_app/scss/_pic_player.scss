@@ -1,0 +1,514 @@
+@use "@scss/_theme.scss" as theme;
+@use "@scss/_fonts.scss" as fonts;
+
+
+.pic-player-main-window{
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  //border: 2px solid theme.$orange-001;
+  background-color: theme.$black-001;
+}
+
+.pic-player-flex-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  
+  //border: 2px solid theme.$lt-003;
+}
+
+.pic-player-logo-container{
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  height:5rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  color: theme.$lt-003;
+
+  //border: 2px solid theme.$lt-001;
+}
+
+
+.player-icons-wrapper{
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4rem;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+// Box for all the players icons
+.player-icons-box{
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left:auto;
+    margin-right: auto;
+    padding: 0.5rem;
+    width: auto;
+    max-width: 30rem;
+    height: 4rem;
+
+    border: 2px solid theme.$grey-005;
+    border-radius: 0.5rem;
+    //background-color: darkgreen;
+
+    .player-item{
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      //justify-content: flex-start; // desktop
+      justify-content: center;
+      align-items:center;
+
+      width: 100%;
+      height: 4.5vh;
+
+      //background-color: white;
+      //border: 1px solid theme.$green-003;
+      
+      .player-icon-svg{
+        aspect-ratio: 1/1;
+        width: 1.7rem;
+        path{
+          fill: theme.$dk-004;
+          stroke: theme.$turq-002;
+          stroke-width:0.03; // icon outline (near invisible)
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          transition-property: fill;
+          transition-duration: 300ms;
+          transition-timing-function: ease-in-out;
+        }
+        //background-color: white;
+        //border: 2px solid purple;
+      }
+ 
+      .player-icon-label{
+        display: none;
+        //display: block; desktop
+        //flex-grow: 1; desktop
+        // padding-left: 1rem; desktop
+
+        font-family: fonts.$writing;
+        color: theme.$dk-002;
+        // line-height: 2.5rem; // desktop // since the player-item container is 3rem, 2.5 align the text roughly center vertically
+        font-size: 1.2rem;
+        font-weight: 400;
+
+        transition-property: color;
+        transition-duration: 150ms;
+        transition-timing-function: ease-in-out;
+      }
+
+
+      // Hover effect for player-item
+      &:hover { // target container element (parent) ie player-item:hover
+        .player-icon-svg path {
+          fill: theme.$purple-001; // Neon turquoise on hover
+          // filter: drop-shadow(0 0 3px   theme.$turq-002); // Optional neon glow
+        }
+        .player-icon-label {
+          color: theme.$purple-001; // Match label color to SVG fill
+        }
+      }
+
+    }
+
+} // end player-icons-container
+
+
+
+
+
+/**************************************************************************
+*
+* Stop Confirmation Box
+*
+***************************************************************************/
+
+// .quit-confirmation-box{
+//   position: absolute;
+//   display: block;
+//   top: 0;
+//   left: 0;
+//   width: 20rem;
+//   height:20rem;
+//   color: theme.$red-003;
+//   background-color:theme.$lt-002;
+//   border: 2px solid theme.$purple-001;
+//   border-radius: 0.2rem;
+// }
+
+// ConfirmQuit.scss
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: theme.$semi-opaque-004;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.25s ease-out;
+
+  .confirm-box {
+    background: theme.$lt-002;
+    border: 2px solid theme.$purple-002;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px theme.$semi-opaque-005;
+    padding: 32px;
+    width: 90%;
+    max-width: 420px;
+    position: relative;
+    animation: slideUp 0.35s ease-out;
+
+    .confirm-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #f1f1f1;
+      border-radius: 50%;
+      font-size: 24px;
+      color: #888;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #e0e0e0;
+        color: #555;
+      }
+    }
+
+    .confirm-title {
+      margin: 0 0 12px 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      text-align: center;
+    }
+
+    .confirm-message {
+      margin: 0 0 28px 0;
+      color: #555;
+      line-height: 1.6;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .confirm-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .confirm-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      color: #333;
+      cursor: pointer;
+      padding: 8px 0;
+      user-select: none;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .custom-radio {
+        width: 22px;
+        height: 22px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+
+        &::after {
+          content: '';
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #dc3545;
+          opacity: 0;
+          transition: all 0.2s;
+        }
+      }
+
+      input:checked + .custom-radio {
+        border-color: #dc3545;
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      &:hover .custom-radio {
+        border-color: #aaa;
+      }
+    }
+
+    .confirm-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+
+    .confirm-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+
+      &.cancel {
+        background: #f8f9fa;
+        color: #555;
+
+        &:hover {
+          background: #e9ecef;
+        }
+      }
+
+      &.confirm {
+        background: #dc3545;
+        color: white;
+
+        &:hover {
+          background: #c82333;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/******************** End ConformQuit **************************************/
+
+
+.reward-box{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: 5rem;
+  left: 0;
+  width: calc(100% - 2rem);
+  height: auto;
+  margin: 1rem;
+  //border: 2px solid theme.$turq-002;
+  //border-radius: 0.5rem;
+  z-index: 2;
+
+
+  .reward-pop-up{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+    height: 80%;
+    padding: 0.5rem;
+    border: 2px solid theme.$purple-002;
+    border-radius: 0.5rem;
+    background-color: theme.$lt-002;
+  }
+  
+}
+
+.active-pic-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;     // full viewport width
+  height: 100vh;    // full viewport height
+
+  overflow: hidden; // prevent accidental overflow
+
+  .active-pic {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+  }
+
+  &.rotate-90 {
+    .active-pic {
+      /* Rotate the image itself */
+      transform: rotate(90deg);
+
+      /* Swap max-width and max-height */
+      max-width: 100vh;
+      max-height: 100vw;
+    }
+  }
+}
+
+
+
+
+/****************** AI **************/
+// src/styles/PictureViewer.scss
+// .picture-viewer {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: 2;
+  
+//   min-height: 100vh;
+//   background: #000;
+//   color: white;
+//   display: flex;
+//   flex-direction: column;
+//   font-family: 'Segoe UI', sans-serif;
+
+//   .viewer {
+//     flex: 1;
+//     position: relative;
+//     overflow: hidden;
+//     background: #000;
+
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       object-fit: contain;
+//       transition: opacity 0.6s ease;
+//     }
+//   }
+
+//   .overlay {
+//     position: absolute;
+//     top: 20px;
+//     left: 20px;
+//     background: rgba(0, 0, 0, 0.75);
+//     padding: 16px 20px;
+//     border-radius: 12px;
+//     font-size: 14px;
+//     line-height: 1.5;
+//     backdrop-filter: blur(4px);
+//   }
+
+//   .progress-bar {
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 6px;
+//     background: #333;
+
+//     .fill {
+//       height: 100%;
+//       background: #4ade80;
+//       transition: width 0.3s ease;
+//     }
+//   }
+
+//   .controls {
+//     background: #111;
+//     padding: 20px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     gap: 16px;
+
+//     button {
+//       background: #1d4ed8;
+//       color: white;
+//       border: none;
+//       padding: 12px 24px;
+//       border-radius: 8px;
+//       font-weight: 600;
+//       cursor: pointer;
+//       transition: all 0.2s;
+
+//       &:hover { background: #1e40af; }
+//       &:disabled {
+//         background: #374151;
+//         cursor: not-allowed;
+//         opacity: 0.5;
+//       }
+//     }
+
+//     .nav-btn {
+//       background: #374151;
+//       padding: 12px;
+//       border-radius: 50%;
+
+//       &:hover:not(:disabled) {
+//         background: #4b5563;
+//       }
+//     }
+
+//     .finish-btn {
+//       background: #dc2626;
+//       &:hover { background: #b91c1c; }
+//     }
+//   }
+
+//   .finished {
+//     min-height: 100vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     font-size: 80px;
+//     font-weight: bold;
+//     background: #000;
+//     animation: pulse 2s infinite;
+
+//     @keyframes pulse {
+//       0%, 100% { opacity: 0.8; }
+//       50% { opacity: 1; }
+//     }
+//   }
+// }
+
+/******************** end AI **********************/

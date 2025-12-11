@@ -2,7 +2,6 @@
 
 
 export default async function fetchInitialData(server, csrfToken){
-  console.log(`fetchInitialData started ${csrfToken}`)
   
   // Send POST with csrfToken and session cookies with header to get initialization data
   const initial_data = `${server}initial_data/`
@@ -22,7 +21,6 @@ export default async function fetchInitialData(server, csrfToken){
   try{
     
     if (!response.ok){
-      console.log(`${data.error}`)
       throw new Error (`React: !response.ok `);
     }
 

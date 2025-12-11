@@ -1,0 +1,89 @@
+
+{/* <PlayerNav 
+  setIsDrawing={setIsDrawing}
+  isPaused={isPaused}
+  setIsPaused={setIsPaused}
+  isPortrait={isPortrait}
+  setIsPortrait={setIsPortrait}
+  isFullScreen={isFullScreen}
+  setIsFullScreen={setIsFullScreen}
+  isStopped={isStopped}
+  setIsStopped={setIsStopped}
+  /> 
+
+
+
+
+<div className="picture-viewer">
+<div className="viewer">
+        {currentImage && (
+          <img
+            src={currentImage.webformatURL}
+            alt={currentImage.tags}
+            />
+        )}
+
+        <div className="overlay">
+          <div>Step: {stepOrder + 1} / {drillArr.length}</div>
+          <div>Showing: {shownPics} / {currentStep?.num_pics}</div>
+          <div>Image: {liveImageIndex + 1} / {imageArr.length}</div>
+          <div>Time per image: {currentStep?.display_time}s</div>
+        </div>
+
+        <div className="progress-bar">
+          <div className="fill" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+
+      <div className="controls">
+        <button onClick={() => setIsPaused(!isPaused)}>
+          {isPaused ? '▶ Resume' : '⏸ Pause'}
+        </button>
+
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <button onClick={handlePrev} disabled={liveImageIndex === 0} className="nav-btn">
+            ←
+          </button>
+          <button onClick={handleNext} disabled={liveImageIndex === imageArr.length - 1} className="nav-btn">
+            →
+          </button>
+        </div>
+
+        <button onClick={() => setIsFinished(true)} className="finish-btn">
+          Finish Early
+        </button>
+      </div>
+    </div>
+
+*/
+
+
+
+// function ConfirmQuit({ */}
+//   setIsDrawing,
+//   setIsStopped
+// }){
+
+//   function handleQuitConfirmation(e){
+//     e.preventDefault()
+//     console.log("handleQuitConfirmation")
+//     // Get the selected radio value
+//     const formData = new FormData(e.target);
+//     const value = formData.get("confirm-quit"); // name of the radio group
+//     console.log(`value = ${value}`)
+//     if(value==="yes"){
+//       setIsDrawing(false)
+//     }else{
+//       setIsStopped(false)
+//     }
+//   }
+//   return(
+
+//     <form className="quit-confirmation-box" onSubmit={handleQuitConfirmation}>
+//       <div className="quit-confirmation-question">Are you sure you want to stop? You cant resume after quitting</div>
+//       Yes<input type="radio" id="confirm-yes" name="confirm-quit" value="yes" />
+//       No<input type="radio"  id="confirm-no"   name="confirm-quit" value="no" />
+//       <button type="submit">Confirm</button>
+//     </form>
+//   )
+// }

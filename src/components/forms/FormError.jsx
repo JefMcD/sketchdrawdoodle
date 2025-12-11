@@ -1,6 +1,6 @@
 
 export default function FormError({
-  message,
+  formError,
   setFormError
 }){
 
@@ -11,7 +11,7 @@ export default function FormError({
   return(
     <div className="error-box">
       <div className="form-message">
-        {message && <div>{message}</div>}
+        {formError && <div>{formError}</div>}
       </div>
       <div onClick={handleClose} className="form-message-close-box">
         Ok

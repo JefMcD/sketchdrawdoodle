@@ -61,15 +61,24 @@
     //background-color: blue;
 }
 
-.practice-setup-form{
+.drill-setup-form{
     width: 100%;
-    height: 100%;
-    max-height: calc(100vh - 21vh);
-    //border: 2px solid theme.$turq-003;
-    overflow: auto;
+    height: calc(100vh - 16rem);
+    //max-height: calc(100vh - 21vh);
+    //border: 4px solid theme.$turq-003;
+    overflow: hidden;
+
+    &.pics{
+
+    }
+    &.time{
+
+    }
 
 }
-
+.time-section{
+    overflow: scroll;
+}
 
 .form-inputs-box{
     position: relative;
@@ -183,24 +192,22 @@
 
 // submit button for drawing session config
 // fixed position relative to the viewport
-.draw-form-submit{
-    position: fixed;
+.draw-form-submit-container{
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
-    top: 0.5rem; // adjust positon for desktop
-    right: 0.5rem;
-    z-index:5;
-
-    width: 5rem;
-    height: 5rem;
-
-    //border: 2px solid red;
-    //background-color: purple;
+    margin-top: 0.2rem;
+    margin-right: 0.2rem;
+    width: 3.5rem;
+    aspect-ratio: 1/1;
+    
     // Optional: Remove border/background if SVG provides it
-    //border: none; // Remove border to let SVG shine
     background-color: transparent; // Transparent to show SVG
     
+    border: none; // Remove border to let SVG shine
+    //border: 2px solid red;
+    
+    z-index:5;
 }
 
 .inksplat-submit{

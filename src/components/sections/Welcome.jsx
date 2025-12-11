@@ -18,34 +18,14 @@ export default function Welcome({
 
 		<div className="main-panel">
 
-
-
-			{/* 
-			<div className='main-logo'>
-					<img className="logo-img" src = {sketchDrawDoodleLogo} />
-			</div>
-
-			<div className='text-container center'>
-					<div className="writing fs2">
-							"Doodle your way to Drawsomeness!
-					</div>
-			</div>
-
-			<div className='text-container center'>
-					<div className="subtext fs3">
-							Doodle Master Alfie
-					</div>
-			</div>
-
-
-			<div className="welcome-hero">
-					<img className="hero-img" src = {alfieReg} title="Doodle Master Alfie" />
-			</div> */}
-
-
       {/* HEADER / TITLE */}
       <div className="zine-title">
-        <h1 className="fs8">Sketch•Draw•Doodle</h1>
+        <h1 className="fs6">
+					<div>Sketch</div>
+					<div>Draw</div>
+					<div>Doodle</div>
+					
+				</h1>
 				<div className='text-container center'>
 						<div className="writing fs2">
 								"Sketch your way to Drawsomeness!
@@ -79,7 +59,7 @@ export default function Welcome({
 					<div className="zine-panel">
 						<h3 className="zine-heading">WHAT?</h3>
 
-						<p className="writing fs4">
+						<p className="writing fs3">
 							Guided drawing practice drills that let you pick from millions of inspiring subjects and epic picture references. Sci-fi, Horror, fantasy and more!
 
 						</p>
@@ -90,7 +70,7 @@ export default function Welcome({
 						</div>
 
 						<div onClick={handleLinkClick} className="zine-cta text-container center" id="get-drawing">
-								<div className="cta-button fs5 text-link" >
+								<div className="cta-button fs4 text-link" >
 										Get Drawing!
 								</div>
 						</div>

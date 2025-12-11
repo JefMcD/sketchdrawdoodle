@@ -33,12 +33,10 @@ export default function AppWrapper(){
   
   // In dev fetch initial data from API after the index.html returned. Synchronize with Django API
   useEffect( () => {
-    console.log(`useEffect mounted after rendr`)
     const apiData = getApiData(); // returns an object {mode, server, csrfToken }
     setServer(apiData.server);
     if (apiData.mode==="hotdog"){
-      // Django Server renders index.html,including a payload of Initialization data in the browser (including csrf cookie) when it is first rendered on the server
-      console.log("Hotdog. getting DjangoPayload")     
+      // Django Server renders index.html,including a payload of Initialization data in the browser (including csrf cookie) when it is first rendered on the server  
       const data = getDjangoPayload(); // Retrieve initial data from the Django Payload includeing csrfToken
       setInitialData({...data}); // This sets the state variable to reference a different object, its the change in reference that triggers the React rerender. It doenst mutate the values of the objects attributes inside
       setIsLoaded(true);
@@ -54,10 +52,8 @@ export default function AppWrapper(){
       initialize_dev_mode();
     }
 
-    
   }, []); // Empty dependency array to Run once when the component mounts
   
-  console.log("############ AppWrapper ################");
   return(
   <>
     {isLoaded ? (

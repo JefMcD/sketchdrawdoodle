@@ -1,0 +1,316 @@
+
+
+
+
+@use '@scss/_theme.scss' as theme;
+@use '@scss/_fonts.scss' as fonts;
+
+
+// ================ Coffee-lo-fi.jsx =============================== //
+
+
+// ====================== Coffee-Zine.jsx =========================== //
+/* -----------------------------------------
+   Page Wrapper
+------------------------------------------*/
+
+.coffee-zine {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  width: 100%;
+  padding: 1.5rem;
+
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  background: theme.$lt-002;
+  font-family: fonts.$writing;
+  overflow-x: scroll;
+
+  // subtle paper texture
+  background-image: url("/static/doodle_app/textures/paper-grain.png");
+  background-size: cover;
+  background-blend-mode: multiply;
+
+  //border: solid 2px theme.$turq-002;
+}
+
+
+/* -----------------------------------------
+   Tip Card Box (comic version)
+------------------------------------------*/
+.tip-card-box {
+  // display: grid;
+  // width: 100%;
+  // grid-template-columns: 1fr 1fr;
+  // gap: 1.2rem;
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width: 100%;
+  height: auto;
+  //border: solid 2px theme.$purple-001;
+
+}
+
+.tip-card {
+  width: 100%;
+  border: 2px solid black;
+  background: theme.$white-001;
+  padding: 1rem;
+  text-decoration: none;
+  color: theme.$black-001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02) rotate(1deg);
+  }
+
+  &.skew-tipcard-left {
+    margin: 1rem;
+    transform: rotate(-3deg);
+  }
+  &.skew-tipcard-right {
+    transform: rotate(3deg);
+  }
+}
+.tip-card.skew-tipcard-left:hover {
+  transform: scale(1.02) rotate(-2deg); // hover still skews left but less
+}
+
+.tip-card.skew-tipcard-right:hover {
+  transform: scale(1.02) rotate(4deg);
+}
+
+
+.tip-logo-wrap {
+  width: 100%;
+  max-width: 20rem;
+}
+
+
+
+
+// /* ---------------------------------------
+//    Zine Title
+// ----------------------------------------*/
+// .coffee-title {
+//   text-align: center;
+//   padding: 2rem 1rem;
+//   position: relative;
+
+//   h1 {
+//     font-size: 2.5rem;
+//     font-family: var(--header-font, 'Bangers', sans-serif);
+//     letter-spacing: 1px;
+//     margin: 0;
+//   }
+
+//   h2 {
+//     font-size: 1.2rem;
+//     opacity: 0.8;
+//     margin-top: 0.5rem;
+//   }
+// }
+
+// /* ---------------------------------------
+//    Section layout
+// ----------------------------------------*/
+// .coffee-section {
+//   padding: 1.5rem;
+//   background: white;
+//   border: 2px solid black;
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 1rem;
+// }
+
+// /* Torn paper edges */
+// .torn-paper {
+//   clip-path: polygon(
+//     0 5%, 5% 0, 95% 2%, 100% 0,
+//     100% 95%, 98% 100%, 5% 98%, 0 100%
+//   );
+//   background: #fffef7;
+// }
+
+// .torn-paper.alt {
+//   background: #fdfdfd;
+// }
+
+// /* ---------------------------------------
+//    Typography
+// ----------------------------------------*/
+// .coffee-text {
+//   line-height: 1.5;
+// }
+
+// .tip-caption {
+//   font-weight: bold;
+//   margin-top: 0.75rem;
+//   text-align: center;
+// }
+
+// /* ---------------------------------------
+//    Tip Cards
+// ----------------------------------------*/
+// .tip-grid {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: 1.2rem;
+//   padding: 1.5rem;
+// }
+
+// .tip-card {
+//   background: white;
+//   border: 2px solid black;
+//   padding: 1rem;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   text-decoration: none;
+//   color: black;
+//   transition: transform 0.2s ease;
+
+//   &:hover {
+//     transform: scale(1.03) rotate(1deg);
+//   }
+// }
+
+// .tip-logo-wrap {
+//   width: 80%;
+//   max-width: 180px;
+// }
+
+// .skew-left {
+//   transform: rotate(-2deg);
+// }
+
+// .skew-right {
+//   transform: rotate(2deg);
+// }
+
+// /* ---------------------------------------
+//    Halftone BG (shared from Journey page)
+// ----------------------------------------*/
+// .halftone-bg {
+//   position: relative;
+//   isolation: isolate;
+// }
+// .halftone-bg::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   background-image: radial-gradient(circle, rgba(0, 0, 0, 0.25) 1px, transparent 1px);
+//   background-size: 6px 6px;
+//   opacity: 0.22;
+//   mask-image: radial-gradient(circle, transparent 15%, black 70%);
+//   z-index: -1;
+// }
+
+// /* ---------------------------------------
+//    Footer
+// ----------------------------------------*/
+// .coffee-footer {
+//   margin-top: 1rem;
+// }
+
+
+
+
+
+
+
+
+// /* -----------------------------------------
+//    Section Panels (MATCH Journey)
+// ------------------------------------------*/
+// .zine-section {
+//   padding: 1rem 0;
+// }
+
+// .zine-section.alt {
+//   background: #fffdf7;
+//   border: 2px solid black;
+//   clip-path: polygon(
+//     0 3%,
+//     4% 0,
+//     96% 1%,
+//     100% 0,
+//     100% 97%,
+//     98% 100%,
+//     6% 99%,
+//     0 100%
+//   );
+// }
+
+// .zine-panel {
+//   border: 3px solid black;
+//   padding: 1.2rem;
+//   background: white;
+//   transform: rotate(-1deg);
+// }
+
+// .zine-heading {
+//   font-family: var(--header-font);
+//   letter-spacing: 1px;
+//   margin-bottom: 1rem;
+//   font-size: 1.8rem;
+// }
+
+// /* CTA button (shared style) */
+// .zine-cta {
+//   margin-top: 1rem;
+//   border: 2px solid black;
+//   padding: 0.7rem 1rem;
+//   background: yellow;
+//   font-weight: bold;
+//   cursor: pointer;
+//   display: inline-block;
+//   transition: 0.2s ease;
+
+//   &:hover {
+//     transform: scale(1.05) rotate(1.5deg);
+//   }
+// }
+
+
+
+// .skew-left {
+//   transform: rotate(-2deg);
+// }
+
+// .skew-right {
+//   transform: rotate(2deg);
+// }
+
+// /* -----------------------------------------
+//    Halftone Background (same as Journey)
+// ------------------------------------------*/
+// .halftone-bg {
+//   position: relative;
+//   isolation: isolate;
+// }
+
+// .halftone-bg::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   background-image: radial-gradient(circle, rgba(0, 0, 0, 0.25) 1px, transparent 1px);
+//   background-size: 6px 6px;
+//   opacity: 0.2;
+//   mask-image: radial-gradient(circle, transparent 10%, black 75%);
+//   z-index: -1;
+// }
+
+// /* -----------------------------------------
+//    Footer
+// ------------------------------------------*/
+// .zine-footer {
+//   margin-top: 1rem;
+// }

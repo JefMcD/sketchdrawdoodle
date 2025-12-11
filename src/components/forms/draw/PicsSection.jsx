@@ -7,7 +7,6 @@ import SubCategoryPicker from "@forms/draw/SubcategoryPicker";
 import Spinner from "@components/Spinner";
 
 function Loading(){
-    console.log("waiting")
     return(
         <div className="waiting-box writing fs5"> 
             <Spinner />
@@ -16,15 +15,20 @@ function Loading(){
 }
 
 export default function PicsSection({
+    userData,
     formData,
     setFormData,
     categories,
     subcategories,
     setSubcategories,
-    setFormError
+    setFormError,
 }
 ){
+
+    
+    // When a category is selected disolays the loading spinner in the subcategories section
     const [isLoadingSubcategories, setIsLoadingSubcategories] = useState(false);
+    
     return(
     <section className="pics-setup-section">
         <div className="pictures-selection-title writing fs4"> Categories</div>
@@ -41,8 +45,10 @@ export default function PicsSection({
                 <Loading />
             ) : (
                 <SubCategoryPicker 
+                    userData={userData}
                     formData={formData} 
                     setFormData={setFormData} 
+                    setFormError={setFormError}
                     subcategories={subcategories} 
                 />
             )
