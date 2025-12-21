@@ -47,6 +47,9 @@ const initialState = {
   error             : null,   // Error occurred
   timeStart         : 0,      // Time when a picture started in viewer          
   timeRemaining     : 0,      // The time the picture has remaining in the setTimeout(). Can be full or partial if it is paused/stopped and resumed
+  picNum            : 0,      // sequence number of the picture within the step
+  tagList           : "",     // The tags the image has on pixabay
+  pageURL           : "",     // The URL of the pixabay page 
 };
 
 // == Player Reducer. State Machine ==>
@@ -96,10 +99,12 @@ function playerReducer(state, action){
     switch (action.type) {
       // ====================== IDLE → LOADING ======================
       case ACTIONS.START:{
-        const firstStep = action.stepList[0].step_order;
-        const firstPicURL = action.imageList[0].webformatURL; 
-        const displayTimeMs = action.stepList[0].display_time * 1000;
+        // initialise first step
+        const firstStep = action.stepList[0].step_order; // ie 0
+        const firstPicURL = action.imageList[0].webformatURL;  // https://url.jpg
+        const displayTimeMs = action.stepList[0].display_time * 1000; // eg 30000
         const startTimer = new Date().getTime(); //the time in milliseconds(since 1/1/1970) 
+        const picNum = 1;
 
         return {
           ...state,
@@ -115,20 +120,25 @@ function playerReducer(state, action){
           error         : false,       // Error occurred
           timeStart     : startTimer,  // The time in Ms when the pic is loaded into the viewer 
           timeRemaining : displayTimeMs, // The full display time in milliseconds
+          picNum        : picNum,       // sequence number of the pin within the step
+          tagList       : action.imageList[0].tag_list,
+          picURL        : action.imageList[0].page_url
         };
       }
       case ACTIONS.TIME_ELAPSED:{
         // check if step is complete
-
-        const now = new Date().getTime()
         const newPicsShownCount = state.picsShown+1; 
         const num_pics = action.stepList[state.activeStep].num_pics;
-        const displayTimeMs = action.stepList[0].display_time * 1000;
         if(newPicsShownCount === num_pics){
           // update state and get new step
           return playerReducer(state, { type: ACTIONS.STEP_COMPLETE, stepList: action.stepList, imageList: action.imageList });
         }
+        
+        // else move to next picture
+        const now = new Date().getTime()
+        const displayTimeMs = action.stepList[state.activeStep].display_time * 1000;
         const {newIndex, newURL} = getNextImage();
+        const picNum = state.picNum+1;
         return{
           ...state,
           status: "Playing",
@@ -136,27 +146,38 @@ function playerReducer(state, action){
           activeImgURL : newURL,
           picsShown : newPicsShownCount,
           timeStart: now, 
-          timeRemaining: displayTimeMs
+          timeRemaining: displayTimeMs,
+          picNum: picNum,
+          tagList       : action.imageList[newIndex].tag_list,
+          picURL        : action.imageList[newIndex].page_url
         }
       }
 
       case ACTIONS.STEP_COMPLETE:{
         // check if last step
-        let lastStep = action.stepList.length;
+        let lastStep = action.stepList.length; // The array index number of the last step
         const newStep = state.activeStep+1;
-        const newPicsShownCount = 0;
-        const {newIndex, newURL} = getNextImage();
         if (newStep === lastStep){
           return playerReducer(state, { type: ACTIONS.ALL_STEPS_COMPLETE});
         };
-
+        
+        const newPicsShownCount = 0;
+        const now = new Date().getTime()
+        const displayTimeMs = action.stepList[newStep].display_time * 1000;
+        const {newIndex, newURL} = getNextImage();
+        const picNum = 1;
         return{
           ...state,
           status: "Playing",
           activeStep: newStep,
           activeImgIndex: newIndex,
           activeImgURL : newURL,
-          picsShown : newPicsShownCount
+          picsShown : newPicsShownCount,
+          timeStart: now, 
+          timeRemaining: displayTimeMs,
+          picNum: picNum,
+          tagList       : action.imageList[newIndex].tag_list,
+          picURL        : action.imageList[newIndex].page_url
         }
       }
 
@@ -173,7 +194,9 @@ function playerReducer(state, action){
         ...state,
         status: "Playing",
         activeImgIndex: newIndex,
-        activeImgURL : newURL
+        activeImgURL : newURL,
+        tagList       : action.imageList[newIndex].tag_list,
+        picURL        : action.imageList[newIndex].page_url
       }
     }
     case ACTIONS.PREV_PIC:{
@@ -182,7 +205,9 @@ function playerReducer(state, action){
         ...state,
         status: "Playing",
         activeImgIndex: newIndex,
-        activeImgURL : newURL
+        activeImgURL : newURL,
+        tagList       : action.imageList[newIndex].tag_list,
+        picURL        : action.imageList[newIndex].page_url
       }
     }
 
@@ -277,6 +302,7 @@ export default function DoodlePlayer({
   const imageList = practicePayload.image_list;
   const stepList  = formData.drillChoice.steps;
 
+
   const [state, dispatch] = useReducer(playerReducer, initialState);
   const timerRef = useRef(null);
 
@@ -333,9 +359,15 @@ export default function DoodlePlayer({
   return(
     <div className="pic-player-main-window">
 
-      <div className="pic-player-logo-container fs5">
-        www.sketchdrawdoodle.com
+      <div className="pic-player-logo-container fs3">
+        {/* www.sketchdrawdoodle.com step:{state.activeStep} picture: {state.picNum} time: {state.timeRemaining} */}
+         www.sketchdrawdoodle.com
+        {/*Tags; {state.tagList} */}
       </div>
+      {/* <div className="pic-player-logo-container fs3">
+
+        URL; {state.picURL}
+      </div> */}
 
       {/* 
         // Pro feature Color Picker and Kelvin Scale
@@ -351,6 +383,10 @@ export default function DoodlePlayer({
   
         <div className={`active-pic-container ${state.rotationClass}`}>
           <img className="active-pic" src={state.activeImgURL} alt="image description" />
+        </div>
+
+        <div className="pic-player-tags-container fs3">
+          Tags; {state.tagList} 
         </div>
 
         <div className="player-icons-wrapper">

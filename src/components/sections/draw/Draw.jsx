@@ -108,9 +108,10 @@ export default function Draw({
 			music_choice: null
 		};
 
-		const startDrawing = `${server}start_drawing/`
-		//const startDrawing = `${server}get_fake_api/`
-		const response = await fetch(startDrawing,{
+		setIsLoading(true)
+		const startQueryEngine = `${server}start_query_engine/`
+		//const startQueryEngine = `${server}get_fake_api/`
+		const response = await fetch(startQueryEngine,{
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -132,6 +133,9 @@ export default function Draw({
 		const message = data.message;
 		const total_hits = data.total_hits;
 		const image_list = data.image_list; // array of objects 
+		for (let i of image_list){
+			console.log(`webFormatURL = ${i.webFormatURL}`)
+		}
 
 		// load practice drill
 		//const practice_settings = data.practice_settings; // Obj containing two objs and one array [{time_dicr}, {mode_dict}, [drill_list]]
@@ -155,6 +159,7 @@ export default function Draw({
 		// const modeObj  = practiceSettings.mode_dict;    // Obj {"name":"warmup", "description":"warmup sketching"}
 		// const drillArr = practiceSettings.drill_list;   // Array of Objs order_by("step_order") [{"num_pics":8, "step_order":1, "display_time":30}, {"num_pics": 5, "step_order": 2, "display_time": 60}, ...]
 
+		setIsLoading(false)
 		setIsDrawing(true)
 
 	}

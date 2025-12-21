@@ -1,6 +1,47 @@
 
+import { useState, useEffect, useRef } from "react";
+
+const messageList = [
+  "Loading...",
+  "Searching the collections...",
+  "Checking the basement",
+  "This might take a moment – fetching millions of records",
+  "Yes these look cool!",
+  "Still working on it...",
+  "Unearthing some weird stuff in the crypt",
+  "Hang tight, nearly there",
+  "So dusty down here",
+  "Need some air",
+  "looking in the attic",
+  "Down to the Archives",
+  "Just a little longer...",
+  "The Librarian is getting suspicous",
+  "This looks interesting ...",
+  "Was .. that .. a ..",
+  "Nah.. its just my mind playing tricks ...",
+  "Almost done!"
+];
 
 export default function Spinner(){
+  const [messageIndex, setMessageIndex] = useState(0);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    // Start cycling messages every 4 seconds (slightly longer than 3 to feel natural)
+    intervalRef.current = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % messageList.length);
+    }, 4000);
+
+    // Cleanup interval on unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []); // Empty dependency array: only run once on mount
+
+  const message = messageList[messageIndex];
+
   return(
   <>
     <div className='spinner'>
@@ -24,7 +65,7 @@ export default function Spinner(){
             </svg>
         </div>
         <div className = "loading-message">
-            Loading..
+            {message}
         </div>
     </div>
   

@@ -23,11 +23,12 @@ export default async function fetchInitialData(server, csrfToken){
     if (!response.ok){
       throw new Error (`React: !response.ok `);
     }
-
+    
     // create initial data object
     const appInitData ={
       is_authenticated  : data.initial_data["is_authenticated"] ?? false,
       initial_section   : data.initial_data["initial_section"]  ?? "welcome-section",
+      initial_subcategories: data.initial_data["max_subcategories"],
       initial_username  : data.initial_data["username"] ?? "Doodler",
       initial_banner    : data.initial_data["banner"],
       initial_avatar    : data.initial_data["avatar"],
@@ -36,7 +37,7 @@ export default async function fetchInitialData(server, csrfToken){
       initial_website   : data.initial_data["website"]
     } // null-coalescing mofo
     
-
+    console.log(`fetchInitialData: appInitData.initial_subcategories = ${appInitData['initial_subcategories']}`)
     return appInitData
 
   } catch (err){

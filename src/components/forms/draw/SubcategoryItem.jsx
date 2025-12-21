@@ -12,10 +12,8 @@ export default function SubcategoryItem({
   // if a user is Pro they can have up to three subcategory choices
   // if a user is Guest they can have one
   const isPro = userData.is_authenticated
-  let max_subcategories =1;
-  if (isPro){
-    max_subcategories = 3;
-  };
+  const max_subcategories = userData.max_subcategories
+  console.log(`max_subcategories = ${max_subcategories}`)
 
   let isChecked = false;
   // Determine if the subcategory is checked
@@ -61,14 +59,11 @@ export default function SubcategoryItem({
               name:subcategory.name
             });
           }  
-
-
         }
       }else{ // subcategory went from checked to unchecked
         // remove it if unchecked
         updatedChoices = updatedChoices.filter((choice)=>choice.id!==subcategory.id);
       };
-
 
 
     setFormData( (prev)=> ({

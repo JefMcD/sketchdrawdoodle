@@ -83,6 +83,7 @@ export default function SketchDrawDoodle({
   // User data is mainly for authorisation (Signin, Join, Reset Password, Nav Panel)
   const [userData, setUserData] = useState({
     is_authenticated: initialData["is_authenticated"],
+    max_subcategories: initialData["initial_subcategories"],
     username : initialData["initial_username"],
     server : server
   });

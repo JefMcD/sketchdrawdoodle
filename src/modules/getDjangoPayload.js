@@ -27,6 +27,7 @@ export default function getDjangoPayload(id="initial-data"){
         is_authenticated  : initialData["is_authenticated"],
         initial_username  : initialData["username"] ?? "Doodler",
         initial_section   : initialData["initial_section"]  ?? "welcome-section",
+        initial_subcategories: initialData["max_subcategories"],
         initial_banner    : initialData["banner"]   ?? "",
         initial_avatar    : initialData["avatar"]   ?? "",
         initial_story     : initialData["story"]    ?? "",
@@ -36,12 +37,13 @@ export default function getDjangoPayload(id="initial-data"){
 
         return initializationData;
   }catch (err){
-    // On error, initializationData may not exist. log error and then return default data
+    // On error, initializationData may not exist. log error and then return default data. Summinks better than Nuffink
     console.error(`Failed to parse initial JSON from #${id}: Using defaults. Error: ${err}, Json: ${raw}`);
     const defaultData ={
         is_authenticated  : false,
         initial_username  : "Doodler",
         initial_section   : "welcome-section",
+        initial_subcategories: initialData["max_subcategories"],
         initial_banner    : "",
         initial_avatar    : "",
         initial_story     : "",
