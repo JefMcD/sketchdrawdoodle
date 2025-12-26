@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useReducer } from "react";
 import {useScreenWakeLock} from "@modules/useScreenWakeLock.js";
+import {formatTime, numToText} from "@modules/timeUtils.js"
 
 import PlayBtn       from "@components/sections/player/buttons/PlayBtn";
 import PauseBtn      from "@components/sections/player/buttons/PauseBtn";
@@ -47,10 +48,13 @@ const initialState = {
   error             : null,   // Error occurred
   timeStart         : 0,      // Time when a picture started in viewer          
   timeRemaining     : 0,      // The time the picture has remaining in the setTimeout(). Can be full or partial if it is paused/stopped and resumed
+  picTime           : 0,      // The length of time the picture is to be displayed
   picNum            : 0,      // sequence number of the picture within the step
   tagList           : "",     // The tags the image has on pixabay
   pageURL           : "",     // The URL of the pixabay page 
 };
+
+
 
 // == Player Reducer. State Machine ==>
 function playerReducer(state, action){
@@ -120,9 +124,10 @@ function playerReducer(state, action){
           error         : false,       // Error occurred
           timeStart     : startTimer,  // The time in Ms when the pic is loaded into the viewer 
           timeRemaining : displayTimeMs, // The full display time in milliseconds
+          picTime       : action.stepList[0].display_time, // The time a picture is displayed in seconds
           picNum        : picNum,       // sequence number of the pin within the step
-          tagList       : action.imageList[0].tag_list,
-          picURL        : action.imageList[0].page_url
+          tagList       : action.imageList[0].tag_list, // The list of tags returned by Pixabay for an image
+          picURL        : action.imageList[0].page_url  // The url of an image 
         };
       }
       case ACTIONS.TIME_ELAPSED:{
@@ -141,13 +146,13 @@ function playerReducer(state, action){
         const picNum = state.picNum+1;
         return{
           ...state,
-          status: "Playing",
+          status        : "Playing",
           activeImgIndex: newIndex,
-          activeImgURL : newURL,
-          picsShown : newPicsShownCount,
-          timeStart: now, 
-          timeRemaining: displayTimeMs,
-          picNum: picNum,
+          activeImgURL  : newURL,
+          picsShown     : newPicsShownCount,
+          timeStart     : now, 
+          timeRemaining : displayTimeMs,
+          picNum        : picNum,
           tagList       : action.imageList[newIndex].tag_list,
           picURL        : action.imageList[newIndex].page_url
         }
@@ -175,6 +180,7 @@ function playerReducer(state, action){
           picsShown : newPicsShownCount,
           timeStart: now, 
           timeRemaining: displayTimeMs,
+          picTime       : action.stepList[newStep].display_time, // The time a picture is displayed in seconds
           picNum: picNum,
           tagList       : action.imageList[newIndex].tag_list,
           picURL        : action.imageList[newIndex].page_url
@@ -295,30 +301,25 @@ export default function DoodlePlayer({
   formData
 }){
 
-  // Keep the screen on while drawing
-  useScreenWakeLock(isDrawing);
   
   //== Unpack practicePayload
   const imageList = practicePayload.image_list;
   const stepList  = formData.drillChoice.steps;
-
+  
+  // Keep the screen on while drawing
+  useScreenWakeLock(isDrawing);
 
   const [state, dispatch] = useReducer(playerReducer, initialState);
   const timerRef = useRef(null);
 
   // Initialising step. Run on component first mount
   useEffect(()=>{
-
-    // Run only on initialization
-
     // set state to Initializing
     dispatch({
         type: ACTIONS.START,
         stepList: stepList,
         imageList: imageList
     });
-
-
 
   },[]); // no dependencies in array. run on mount only not on re-render
 
@@ -338,20 +339,41 @@ export default function DoodlePlayer({
     const num_pics = step.num_pics;
     const displayTimeMs = state.timeRemaining;
 
-    // step time_delay
+    // step time_delay. setTimeout is async so dispatch callback executed when delay is completed
     // === get step number and display time for picture (seconds * 1000 = milliseconds)
     timerRef.current = setTimeout(() => {
       dispatch({ type: ACTIONS.TIME_ELAPSED, stepList:stepList, imageList: imageList});
     }, state.timeRemaining);
 
-    // == reset timer when component unmounts and re-renders for next image or paused
-    return () => clearTimeout(timerRef.current);
+    // setTimeout is async so the rest og the log carries on
+
+    // make tiny movement to the image to prevent screen dimming (or sleep)
+    let lastX = 0;
+    const interval = setInterval(() => {
+      // Tiny movement – usually enough to trick Android into thinking user is active
+      window.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: lastX + 0.1,  // almost invisible
+        clientY: 0,
+        bubbles: true
+      }));
+      lastX = lastX === 0 ? 1 : 0;
+      console.log("touch")
+    }, 15000); // every 15s – adjust (10-25s usually works)
+
+    return () => {
+      // == reset timer and interval swhen component unmounts and re-renders for next image or paused
+      clearInterval(interval);
+      clearTimeout(timerRef.current);
+    
+    }
 
   })
 
   useEffect(()=>{
     if(state.status==="Finished"){
+      useScreenWakeLock(false)
       setIsDrawing(false)
+
     }
   },[state.status])
 
@@ -364,10 +386,16 @@ export default function DoodlePlayer({
          www.sketchdrawdoodle.com
         {/*Tags; {state.tagList} */}
       </div>
-      {/* <div className="pic-player-logo-container fs3">
 
+      <div className = "pic-time-box">
+        {formatTime(state.picTime)}
+      </div>
+      
+
+      {/* <div className="pic-player-logo-container fs3">
         URL; {state.picURL}
-      </div> */}
+      </div> 
+      */}
 
       {/* 
         // Pro feature Color Picker and Kelvin Scale

@@ -410,6 +410,25 @@
   //border: 2px solid theme.$lt-001; 
 }
 
+.pic-time-box{
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 0,5rem;
+  height:2rem;
+  width: 6rem;
+
+  top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  color: theme.$lt-003;
+
+  border: 1px solid theme.$lt-003;
+  border-radius: 0.5rem; 
+}
+
 
 /****************** AI **************/
 // src/styles/PictureViewer.scss

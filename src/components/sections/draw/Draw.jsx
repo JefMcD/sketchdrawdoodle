@@ -125,6 +125,7 @@ export default function Draw({
 		const data = await response.json();
 
 		if(!response.ok){
+			setIsLoading(false)
 			setFormError(data.error);
 			return;
 		}

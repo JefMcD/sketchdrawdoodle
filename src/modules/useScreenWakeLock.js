@@ -5,6 +5,7 @@ let wakeLock = null;
 
 // Request the wake lock
 async function requestWakeLock() {
+  console.log(`requestWakeLock started`)
   if ("wakeLock" in navigator) {
     try {
       wakeLock = await navigator.wakeLock.request("screen");
