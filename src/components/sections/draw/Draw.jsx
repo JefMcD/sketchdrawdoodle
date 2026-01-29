@@ -232,29 +232,33 @@ export default function Draw({
 
       {/* HEADER / TITLE */}
       <div className="zine-title">
-        <h1 className="fs5">Get Drawing</h1>
+        <h1>Get Drawing</h1>
       </div>
+			<div className="draw-tabs-container">
+				<div className = "horizontal-tabs-box">
+					{
+						// render all the tab components listed in tabsArray
+						tabsArray.map((tabObj)=>(
+							<tabObj.tab 
+									key={tabObj.tabId}
+									tabId={tabObj.tabId}
+									label={tabObj.label}
+									tabImage={tabObj.image}
+									activeTab={activeTab}
+									setActiveTab={setActiveTab}
+							/>
+						))
+					}
+				</div>
 
-			<div className = "horizontal-tabs-box">
-				{
-					// render all the tab components listed in tabsArray
-					tabsArray.map((tabObj)=>(
-						<tabObj.tab 
-							  key={tabObj.tabId}
-							  tabId={tabObj.tabId}
-  							label={tabObj.label}
-  							tabImage={tabObj.image}
-  							activeTab={activeTab}
-  							setActiveTab={setActiveTab}
-						/>
-					))
-				}
+				<div><SplatSubmit /></div>
+
 			</div>
 			
 			{/*the section to be rendered when a tab is active or unmounted when inactive */}
 
 			<div className="drill-form-flex-container">
-					<form onSubmit={handleFormSubmission} className="drill-setup-form">
+					<form onSubmit={handleFormSubmission} id="practice-drill-form" className="drill-setup-form">
 							{isLoading ? (
 								<Spinner />
 							) :(
@@ -270,7 +274,6 @@ export default function Draw({
 											<p>Subcategory: <span className="emphasis fs5">{formData.subcategoryChoices.length > 0 ? `${formData.subcategoryChoices.length} selected` : "Random"}</span> </p>
 											<p>Time:<span className="emphasis fs5"> {formData.drillChoice.description}</span></p>	
 										</div>
-										<div className="drill-inksplat-box"><SplatSubmit /></div>
 									
 									</div>
 							</div> {/* end drill-summary-box */}

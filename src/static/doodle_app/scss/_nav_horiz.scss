@@ -1,0 +1,312 @@
+
+/******************************************************************
+*
+*   Desktop Nav Menu.
+*   The mobile menu is defined in mobile_nav.scss
+*
+*******************************************************************/
+@use "@scss/_fonts.scss" as fonts;
+@use "@scss/_theme.scss" as theme;
+
+
+// .menu-block{
+//     // fixed position takes the element out of flow and fixes it to the top level browser window
+//     position: fixed;
+//     display: block;
+
+//     top: 0;
+//     left: 0;
+
+//     height: 4rem;
+//     width:100%;
+//     max-width: 80rem; // same as .main-window-wrapper;
+
+//     // margin: auto; doesnt work to center
+
+//     // center fixed element within the body window
+//     left: 50%;
+//     top: 0%;
+//     transform: translateX(-50%);
+
+//     //border: 2px solid blue;
+//     background-color: rgb(167, 218, 167);
+//     border: 2px solid yellow;
+
+//     z-index: 10;
+// }
+
+.horizontal-nav-flex{
+    position: sticky;
+    display: flex;
+    justify-content: flex-start;
+
+    top: 0;
+    margin-bottom: 1rem;
+    background-color: theme.$dk-004;
+    //border: 2px solid yellow;
+    z-index: 1;
+}
+
+
+
+
+.horizontal-nav-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 4rem;
+
+    font-family: fonts.$header;
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    //margin-inline: 1rem;
+    //margin-block: 0rem;
+
+    //background-color: green;
+    //border: 2px solid black;
+
+}
+
+.horizontal-nav-logo img {
+    width: 100%;
+    display: block;
+}
+
+
+
+
+/************************************************************/
+/* Main Desktop Nav Menu 
+/*
+/************************************************************/
+.horizontal-nav-items-flex {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 1rem;
+    padding: 0.2rem;
+
+    background-color: theme.$semi-opaque-010;
+    border: 1px solid theme.$purple-004;
+    border-radius: 0.5rem;
+
+}
+
+
+
+
+/* The Main Drop Menu */
+
+.education-main-menu {
+    position: relative;
+    display: flex;
+    list-style: none;
+    height: 3rem;
+    padding-top: 1rem;
+    //border: 2px solid theme.$purple-002;
+
+    /********** Nav Items ***************/
+    .menu-item {
+        position: relative;
+        display: inline-block;
+        margin-right: 1rem;
+        padding-bottom: 2px;
+        height: 3rem;
+        align-self: center;
+    }
+}
+/* End Main Drop menu */
+
+/*
+The navbar animation on hover 
+The fade is defined in general.scss 
+The bottom bar is created using a pseudo element as below
+
+The psuedo element is usually created as an absolute element.
+with no need to define display type. (unless its flex or grid)
+
+By default the inline element will not display while it is empty.
+So if you positon it relative it will not display since inline 
+position does not allow defining the size.
+
+If you change it to block or inline-block and give it some size
+the psuedo element will disolay as a relative position.
+
+The absolute position removes the psuedo element from the 
+normal flow and converts it to an inline-block and its size can be 
+defined and its placement within the parent element. 
+*/
+.nav-link{
+    font-size: 1.2rem;
+    color: theme.$dk-005;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:target{
+    color: theme.$lt-001;
+}
+
+// This creates the little animated underscore for the link
+.nav-link::after{
+    content: '';
+    display: block;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+
+    background: theme.$green-001;
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition-timing-function: cubic-bezier(.71, .21, 1, 1);
+    transition-duration: 250ms;
+    transition-property: background, transform;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    background: theme.$green-002;
+    transform-origin: left;
+}
+
+
+
+
+
+
+
+
+
+.navbar-icon {
+    position:relative;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+}
+
+
+
+/*********************** Horizontal dropmenu **************************** /
+/***********************************************************************/
+.horizontal-dropmenu {
+    position: absolute;
+    display: none;
+
+    top: 3rem;
+
+    cursor: none;
+
+    padding: 0.5rem;
+
+    border: solid;
+    border-radius: 0.3rem;
+    border-width: 1px;
+    border-color:  theme.$lt-002;
+
+    background-color:  theme.$dk-002;
+    white-space: nowrap;
+
+    transition-property: opacity, visibility;
+    transition-duration: .4s, 0s;
+    transition-delay: 0s, .4s;
+}
+
+/*
+// On menu-item Hover toggle the display of horizontal-dropmenu to flex
+
+.menu-item:hover .horizontal-dropmenu{
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-item:hover #inspire-menu{
+    left: -7.5rem;
+}
+
+.menu-item:hover #design-menu{
+    left: -10rem;
+}
+
+.menu-item:hover #development-menu{
+    left: -23.7rem;
+}
+
+.menu-item:hover #visibility-menu{
+    left: -16rem;
+}
+
+.menu-item:hover #packages-menu{
+    left: -22rem;
+}
+
+
+.horizontal-dropmenu-link {
+    display: block;
+    padding: 4px;
+    text-decoration: none;
+    color: theme.$lt-002;
+    font: 14pt  theme.$lt-002, Arial, Helvetica;
+}
+
+.horizontal-dropmenu-link a{
+    display: block;
+    padding: 4px;
+    text-decoration: none;
+    color: theme.$lt-002;
+    font: 14pt  theme.$lt-002, Arial, Helvetica;
+}
+
+.horizontal-dropmenu-link a:hover {
+    display:block;
+    padding: 4px;
+    border-radius: 2px;
+    width:auto;
+    color:  theme.$lt-002;
+    background-color:  theme.$dk-002;
+}
+
+
+*/
+
+
+.disabled a{
+    pointer-events:none; /***This makes it not clickable */
+    color:  theme.$grey-002;        /*This grays it out to look disabled */
+}
+
+
+
+@keyframes smoothDrop {
+    0% {
+        transform: translateY(-60px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

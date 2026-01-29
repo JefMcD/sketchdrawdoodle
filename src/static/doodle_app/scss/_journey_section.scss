@@ -68,13 +68,10 @@
   width: 100%;
   padding: 0.5rem 0.5rem;
   background: theme.$lt-002;
+  background-image: url("/static/doodle_app/images/backgrounds/main_panel.webp");
   font-family: fonts.$writing;
   overflow-x: hidden;
 
-  // subtle paper texture
-  background-image: url("/static/doodle_app/textures/paper-grain.png");
-  background-size: cover;
-  background-blend-mode: multiply;
 
   //border: solid 2px theme.$turq-002;
 }

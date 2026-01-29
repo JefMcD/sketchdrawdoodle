@@ -5,7 +5,7 @@ export default function SupportLink({setActiveSection}){
     return(
     <div className="nav-item" id="coffee-link" onClick={()=>setActiveSection("coffee-section")}>
         <div className="nav-icon-label"> {/* default mobile display:none*/}
-            Suport!
+            Coffee
         </div>
 
         <svg className="nav-icon-svg" id="coffee-svg" viewBox="0 0 13.229166 13.229167">

@@ -1,5 +1,5 @@
 import SocialMediaLinks from "@components/SocialMediaLinks";
-import jeferzCoffee from "/static/doodle_app/images/pics/will-code-for-coffee.jpg";
+
 import jeferzForest from "/static/doodle_app/images/pics/jeferzforest1_500.jpg";
 import HorizontalAds from "@components/HorizontalAds";
 
@@ -14,11 +14,10 @@ export default function Journey({ setActiveSection }) {
 
       {/* HEADER / TITLE */}
       <div className="zine-title">
-        <h1 className="large-fonyt">
-          <div>Sketch</div>
-          <div>Draw</div>
-          <div>Doodle</div>
-        </h1>
+        <h1>Journey </h1>
+      </div>
+      <div className="zine-subtitle">
+
         <h2>The Travellers Tale</h2>
       </div>
 
@@ -33,8 +32,6 @@ export default function Journey({ setActiveSection }) {
               with finding the perfect reference pictures and helping other artists
               grow their craft.
             </p>
-
-
 
             <p className="writing fs4">
               Jef has exhibited across the UK and contributes to a rag-tag band of
@@ -74,15 +71,7 @@ export default function Journey({ setActiveSection }) {
         </section>
 
 
-        {/* DESK PIC */}
-        <section className="zine-section alt  halftone-bg">
-           <div className="zine-image-wrap-box center">
-              <div className="zine-image-wrap skew-right">
-                <img src={jeferzCoffee} alt="coffee" />
-              </div>
 
-            </div>
-        </section>
 
         {/* SECTION: WHY */}
         <section className="zine-section  halftone-bg">
@@ -96,7 +85,7 @@ export default function Journey({ setActiveSection }) {
 
 
             <button onClick={handleClick} className="zine-cta big">
-              SUPPORT THE APP →
+              Buy Me a Brew →
             </button>
           </div>
         </section>

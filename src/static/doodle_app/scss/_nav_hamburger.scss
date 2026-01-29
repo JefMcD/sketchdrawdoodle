@@ -1,0 +1,274 @@
+
+/**************************************
+*
+*   Hamburger Menu
+*   Desktop Nav Menu defined in nav.scss.
+*
+*******************************************************************/
+@use "@scss/_fonts.scss" as fonts;
+@use "@scss/_theme.scss" as theme;
+
+.hamburger-flex {
+    display: flex;
+    justify-content: flex-end;
+    height: 4rem;
+    width: 4rem;
+
+    //background-color:purple;
+    //border: 2px solid green;
+}
+
+
+#menuBtn{
+    /* targetted by javascript */
+}
+
+.hamburger {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    top: 0.5rem;
+    right: 01rem;
+    background-color:transparent;
+    z-index: 10;
+    cursor: pointer;
+
+    //border: 2px solid green;
+
+}
+
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+    position: absolute;
+    width: 2rem;
+    height: 0.2rem;
+    top: 0rem;
+    left: 0rem;
+    background-color: theme.$lt-002;
+    border-radius: 25%;
+    z-index: 10;
+    transition: all 500ms;
+}
+.hamburger-middle {
+    top: 0.7rem;
+    height: 0.3rem;
+}
+.hamburger-bottom {
+    background-color: theme.$lt-002;
+    top: 1.5rem;
+}
+
+.ham-toggle{
+    /* used to target Hamburger elements for toggle */
+}
+
+/* open class is set by Javascript and toggles the hamburger state
+/* Rotate hamburger and change to an X when clicked */
+
+.open .hamburger-top {
+    // move bar up a little
+    transform: translateY(50px);
+
+    width: 2rem;
+    // rorate down from the left edge
+    transform-origin: center left;
+    transform: rotate(45deg);
+
+}
+.open .hamburger-middle {
+    opacity: 0;
+    // When this is removed, the space between the top and bottom will be decreased
+}
+.open .hamburger-bottom {
+    // move bar down a little
+    transform: translateY(-1.5rem);
+    width: 2rem;
+    // rotate up from the left edge
+    transform-origin: center left;
+    transform: rotate(-45deg);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***********************************************************
+/*
+/*  Mobile Menu Panel
+/*
+/***********************************************************/
+.mobile-menu-panel{
+    position: absolute;
+    display: none;
+
+    visibility: hidden;
+    opacity: 0;
+
+    top: 0rem;
+    right: 0rem;
+    width: 0rem;
+    height: 0rem;
+    padding: 0rem;
+
+    color: white;
+    background-color:  theme.$dk-002;
+
+    border: 0px solid  theme.$lt-002;
+    border-radius: 0.5rem;
+
+    z-index:-1;
+
+    transform: translateX(120%);
+
+    transition-property: opacity transform;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+
+    
+    // background-image: url("../images/helloFrens/shells.jpg");
+}
+
+
+/* This class is toggled on by javascript to display the menu panel */
+.open-mobile-nav-panel{
+    visibility: visible;
+    opacity: 1;
+    display: block;
+
+    top: 0.2rem;
+    right: 0.2rem;
+    width: 20rem;
+    height: 100vh;
+    z-index: 1;
+
+    border: 2px solid  theme.$lt-002;
+
+    transform: translateX(0%);
+
+    transition-property: opacity transform;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+}
+
+
+/* The mobile menu ul */
+.mobile-menu {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    list-style:none;
+
+    height:2rem;
+    margin-top: 2.5rem;
+    margin-right: 1rem;
+    padding-top: 0.5rem;
+    //border: 2px solid red;
+}
+
+
+.mobile-nav-item {
+    position:relative;
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+
+    font-size: 14pt;
+
+}
+
+
+/* The background shadow element */
+.grey-out-viewport{
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    
+    height: 100vh;
+    width: 100%;
+
+    opacity: 0.5;
+    background-color: theme.$black-001;
+
+    z-index: 9;
+}
+#mobile-menu-bg{
+    // Selector for javascript
+}
+
+.disable-scrolling{
+    overflow: hidden;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

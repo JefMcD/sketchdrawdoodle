@@ -193,21 +193,26 @@
 // submit button for drawing session config
 // fixed position relative to the viewport
 .draw-form-submit-container{
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-    margin-top: 0.2rem;
-    margin-right: 0.2rem;
-    width: 3.5rem;
+    margin-top: 0rem;
+    margin-right: 0rem;
+    padding: 0.3rem;
+    width: 4rem;
     aspect-ratio: 1/1;
-    
+
+    top: 0;
+    right: 0;
+
+
     // Optional: Remove border/background if SVG provides it
     background-color: transparent; // Transparent to show SVG
     
     border: none; // Remove border to let SVG shine
-    //border: 2px solid red;
+    // border: 2px solid red;
     
-    z-index:5;
+    z-index:3;
 }
 
 .inksplat-submit{

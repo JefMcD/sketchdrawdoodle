@@ -8,11 +8,12 @@ import navPanelBackground from "@images/backgrounds/side_panel.jpg";
 //import SignInLink   from "@navLinks/SignInLink.jsx";
 //import JoinLink     from "@navLinks/JoinLink.jsx";
 
-import WelcomeLink  from "@navLinks/WelcomeLink";
-import CoffeeLink   from "@navLinks/CoffeeLink";
-import DrawLink     from "@navLinks/DrawLink";
-import CompassLink  from "@navLinks/CompassLink";
-
+import WelcomeLink   from "@navLinks/WelcomeLink";
+import CoffeeLink    from "@navLinks/CoffeeLink";
+import DrawLink      from "@navLinks/DrawLink";
+import CompassLink   from "@navLinks/CompassLink";
+import EducationLink from "@navLinks/EducationLink";
+import UserGuideLink from "@navLinks/UserGuideLink";
 
 // import FrensLink    from "@navLinks/FrensLink.jsx";
 // import ProfileLink  from "@navLinks/ProfileLink.jsx";
@@ -40,6 +41,8 @@ export default function NavPanel({
     {id:"draw-link",     component: DrawLink,     linkType: "open"},
     {id:"coffee-link",   component: CoffeeLink,   linkType: "open"},
     {id:"journey-link",  component: CompassLink,  linkType: "open"},
+    {id:"education-link",component: EducationLink,linkType: "open"},
+    {id:"userguide-link",component: UserGuideLink,linkType: "open"},
     
     
     // Possible Later Additions
@@ -51,7 +54,6 @@ export default function NavPanel({
     //{id:"summary-link",  component: SummaryLink,  linkType: "fren"},
     //{id:"account-link",  component: AccountLink,  linkType: "fren"}, 
     //{id:"support-link",  component: SupportLink,  linkType: "open"},
-    //{id:"help-link",     component: HelpLink,     linkType: "open"},
     
   ]
 

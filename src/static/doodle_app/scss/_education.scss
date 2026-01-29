@@ -1,0 +1,50 @@
+@use "@scss/_theme.scss" as theme;
+@use "@scss/_fonts.scss" as fonts;
+
+
+.education-zine {
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  background: theme.$lt-002;
+  background-image: url("/static/doodle_app/images/backgrounds/main_panel.webp");
+  font-family: fonts.$writing;
+  overflow-x: hidden;
+
+  //border: solid 2px theme.$turq-002;
+}
+
+.bullet-list{
+  position:relative;
+  display:block;
+
+  list-style-type: circle;
+  list-style-position: inside;
+  color: theme.$dk-005;
+
+  &.light-list{
+    color: theme.$lt-002;
+  }
+  &.dark-list{
+    color: theme.$dk-005;
+  }
+
+  //border: 2px solid theme.$red-001;
+  li.alt{
+      color: theme.$dk-004;
+  }
+
+}
+
+.faq-list{
+  padding: 0.5rem;
+  background-color: theme.$dk-001;
+  //border: 2px solid theme.$red-001;
+  
+}
+.fag_term{
+  color: theme.$dk-004;
+}
+.faq-defn{
+  margin-bottom: 0.5rem;
+  color: theme.$turq-002;
+}

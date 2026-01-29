@@ -6,7 +6,12 @@
 @use "@scss/_theme.scss" as theme;
 @use "@scss/_general.scss"; 
 @use "@scss/_spinner.scss";
+
 @use "@scss/_nav_panel.scss";
+@use "@scss/_nav_horiz.scss";
+@use "@scss/_nav_hamburger.scss";
+
+
 @use "@scss/_tabs.scss";
 @use "@scss/_main_panel.scss";
 @use "@scss/_extras_panel.scss";
@@ -22,6 +27,7 @@
 @use "@scss/_text.scss";
 @use "@scss/_adverts.scss";
 @use "@scss/_pic_player.scss";
+@use "@scss/_education.scss";
 
 
 @use "@scss/breakpoints.scss";

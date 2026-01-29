@@ -31,12 +31,70 @@ Standard Breakpoints for Devices List
 @media (max-width: 480px) {
     /* Styles for phones */
     /* Default Mobile First */ 
+    .horizontal-nav-items-flex{
+      display: none;
+    }
+
+    /* ===== TITLE ===== */
+    .zine-title {
+
+      margin: 0 0 0.3rem 0;
+      padding: 0.3rem 0 0.2rem 0;
+      font-family: fonts.$zine-header;
+
+      //border: 2px solid theme.$turq-003;
+
+      //overflow:scroll;
+      h1 {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        font-weight: 900;
+        text-transform: uppercase;
+        //text-shadow: 1px 1px 0 #000;
+      }
+      
+    }
+
+    .zine-feature{
+      &.tldr{
+        bottom: 3dvh;
+        right: 3dvw;
+      }
+      &.education-faq{
+        bottom: 1dvh;
+        right: 3dvw;
+      }
+    }
   }
+
+
+
   
 /* Small devices (landscape phones and tablets, 481px and up) */
 @media (min-width: 481px) and (max-width: 767px) {
     /* Styles for landscape phones and small tablets */
         /* Default Mobile First */ 
+
+
+          /* ===== TITLE ===== */
+    .zine-title {
+
+      margin: 0 0 0.3rem 0;
+      padding: 0.3rem 0 0.2rem 0;
+      font-family: fonts.$zine-header;
+
+      //border: 2px solid theme.$turq-003;
+
+      //overflow:scroll;
+      h1 {
+        font-size: 2.3rem;
+        letter-spacing: 2px;
+        font-weight: 900;
+        text-transform: uppercase;
+        //text-shadow: 1px 1px 0 #000;
+      }
+      
+    }
 
   .subcategory-item{
     flex: 1 1 140px;        /* This is the magic line */

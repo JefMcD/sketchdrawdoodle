@@ -27,7 +27,7 @@ body,
   overflow-x: hidden;
 }
 
-// If you have any other full-screen containers, add them here too
+// If you have any other full-screen containers, add them here
 .full-screen,
 .page,
 .main-panel,
@@ -35,6 +35,8 @@ body,
 .app-container,
 .pic-player-main-window {
   min-height: 100dvh;
+  overflow-x: hidden;
+
 }
 
 .bottom-fixed {
@@ -89,8 +91,6 @@ body {
   //background-color:   theme.$turq-002;
   //border: 20px solid    theme.$purple-002;
 
-  //background-repeat: repeat-x;
-  //background-position: left bottom;
 }
 div {
   padding: 0;
@@ -100,8 +100,8 @@ div {
 }
 
 h1{
-  font-family: fonts.$zine-header;
-  font-weight: 900;
+  font-family: fonts.$header;
+  font-weight: 600;
   line-height: 1;
 
   margin-bottom: 0.5rem;
@@ -115,7 +115,7 @@ h2{
   margin-bottom: 0.5rem;
 }
 h3{
-  font-family: fonts.$zine-header;
+  font-family: fonts.$zine-subheader;
   font-weight: 400;
   line-height: 1;
 

@@ -103,7 +103,7 @@
         // padding-left: 1rem; desktop
 
         font-family: fonts.$writing;
-        color: theme.$dk-002;
+        color: theme.$dk-005;
         // line-height: 2.5rem; // desktop // since the nav-item container is 3rem, 2.5 align the text roughly center vertically
         font-size: 1.2rem;
         font-weight: 400;
@@ -117,17 +117,38 @@
       // Hover effect for nav-item
       &:hover { // target container element (parent) ie nav-item:hover
         .nav-icon-svg path {
-          fill: theme.$purple-001; // Neon turquoise on hover
+          fill: theme.$turq-002; // Neon turquoise on hover
           // filter: drop-shadow(0 0 3px   theme.$turq-002); // Optional neon glow
         }
         .nav-icon-label {
-          color: theme.$purple-001; // Match label color to SVG fill
+          color: theme.$turq-002; // Match label color to SVG fill
         }
       }
 
     }
 
 } // end nav-icons-container
+
+.nav-icon-svg.draw-svg{
+  path{
+    fill: theme.$turq-002 !important;
+    transition-property: fill;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+  }
+  //border: 1px solid theme.$dk-004;
+  //border-radius: 0.3rem;
+}
+.nav-item:hover {
+  .nav-icon-svg.draw-svg path {
+    fill: theme.$purple-003 !important;
+  }
+}
+
+
+
+
+
 .main-nav{
   height: 50vh;
 }

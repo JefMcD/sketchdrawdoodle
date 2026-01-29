@@ -18,64 +18,78 @@ export default function Welcome({
 
 		<div className="main-panel">
 
-      {/* HEADER / TITLE */}
-      <div className="zine-title">
-        <h1 className="fs6">
-					<div>Sketch</div>
-					<div>Draw</div>
-					<div>Doodle</div>
-					
-				</h1>
-				<div className='text-container center'>
-						<div className="writing fs2">
-								"Sketch your way to Drawsomeness!
+					{/* HEADER / TITLE */}
+					<div className="zine-title">
+						<h1>Sketch Draw Doodle</h1>
+					</div>
+
+					<div className='text-container center'>
+							<div className="writing fs2">
+									"Sketch your way to Drawsomeness!
+							</div>
+					</div>
+
+					<div className='text-container center'>
+							<div className="subtext fs3">
+									Doodle Master Alfie
+							</div>
+					</div>
+      
+
+
+					<div className="zine-splash-container">
+						<div className="zine-image-wrap skew-left">
+							<img src={alfieReg} alt="Alfie Ink Splash" />
 						</div>
-				</div>
-
-				<div className='text-container center'>
-						<div className="subtext fs3">
-								Doodle Master Alfie
-						</div>
-				</div>
-      </div>
-
-      {/* INTRO */}
-
-
-			<div className="zine-splash-container">
-				<div className="zine-image-wrap skew-left">
-					<img src={alfieReg} alt="Alfie Ink Splash" />
-				</div>
-
-			</div>
-			<MainSplat setActiveSection={setActiveSection}/>
+					</div>
 
 
 
 
 			{/* SECTION: WHAT */}
 			<div className="zine-section-wrapper">
-				<section className="zine-section alt">
-					<div className="zine-panel">
-						<h3 className="zine-heading">WHAT?</h3>
+					<section className="zine-section alt">
+						<div className="zine-panel">
+							<h3 className="zine-heading">WHAT?</h3>
 
-						<p className="writing fs3">
-							Guided drawing practice drills that let you pick from millions of inspiring subjects and epic picture references. Sci-fi, Horror, fantasy and more!
+							<p className="writing fs3">
+								Guided drawing practice powered by millions of inspiring reference pictures.
+								Sketch creatures, people, machines, landscapes, sci-fi worlds, fantasy monsters, 
+								wherever your imagination can go SketchDrawDoodle is there for you — all in fast, focused sessions.
+							</p>
 
-						</p>
-						<div className="text-container center">
-								<div className="emphasis fs5">
-										Fun and Free for all!
-								</div>
+							<div className="text-container center">
+									<div className="emphasis fs5">
+											Free for everyone. Built for artists.
+									</div>
+							</div>
+
+							<div onClick={handleLinkClick} className="zine-cta text-container center" id="get-drawing">
+									<div className="cta-button fs4 text-link" >
+											Get Drawing!
+									</div>
+							</div>
 						</div>
+					</section>
 
-						<div onClick={handleLinkClick} className="zine-cta text-container center" id="get-drawing">
-								<div className="cta-button fs4 text-link" >
-										Get Drawing!
-								</div>
+					<MainSplat setActiveSection={setActiveSection}/>
+
+					<section className="zine-section">
+						<div className="zine-panel">
+							<h3 className="zine-heading">HOW???</h3>
+
+							<p className="writing fs3">
+								SketchDrawDoodle pulls reference images from public-domain archives and libraries, 
+								unlocking a massive range of inspiring subjects.
+
+								Choose from categories such as Animals, Places, People, Space, Technology, Engineering 
+								and let Sketchdrawdoodle scour the web for epic pictures, while you focus on drawing!
+							</p>
+
 						</div>
-					</div>
-				</section>
+					</section>
+
+
 			</div>
 
 		</div> // End main-panel

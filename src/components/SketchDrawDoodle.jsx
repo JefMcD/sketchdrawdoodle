@@ -24,13 +24,15 @@ import Profile    from "@profile/Profile";
 import Welcome  from "@sections/Welcome";
 import Journey  from "@sections/Journey";
 import Coffee   from "@sections/Coffee";
-import Help     from "@sections/Help";
+import UserGuide from "@sections/UserGuide";
+import Education from "@sections/Education";
 //import Frens    from "@sections/Frens";
 
 // Drawing Practice COponent
 import DoodlePlayer from "@components/sections/player/DoodlePlayer";
 //import DoodlePlayerGrok from "@components/sections/player/DoodlePlayerGrok";
 //import AIPractice   from "@components/sections/player/AIPlayer";
+
 
 export default function SketchDrawDoodle({
   initialData,
@@ -115,9 +117,11 @@ export default function SketchDrawDoodle({
 		//{id:"sketchbook-section",component: Sketchbook},
 
 		//{id:"frens-section",     component: Frens},
-		{id:"coffee-section",    component: Coffee, props: {userData, setUserData, activeSection, setActiveSection}},
-  	{id:"help-section",      component: Help,   props: {userData, setUserData, activeSection, setActiveSection}},
-		{id:"journey-section",   component: Journey,props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"coffee-section",    component: Coffee,    props: {}},
+  	{id:"userguide-section", component: UserGuide, props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"journey-section",   component: Journey,   props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"education-section", component: Education, props: {setActiveSection}}
+
   ]
 
   // Find the active section

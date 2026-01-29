@@ -104,8 +104,8 @@ function playerReducer(state, action){
       // ====================== IDLE → LOADING ======================
       case ACTIONS.START:{
         // initialise first step
-        const firstStep = action.stepList[0].step_order; // ie 0
         const firstPicURL = action.imageList[0].webformatURL;  // https://url.jpg
+        const firstStep = action.stepList[0].step_order; // ie 0
         const displayTimeMs = action.stepList[0].display_time * 1000; // eg 30000
         const startTimer = new Date().getTime(); //the time in milliseconds(since 1/1/1970) 
         const picNum = 1;
@@ -390,6 +390,8 @@ export default function DoodlePlayer({
       <div className = "pic-time-box">
         {formatTime(state.picTime)}
       </div>
+
+
       
 
       {/* <div className="pic-player-logo-container fs3">
