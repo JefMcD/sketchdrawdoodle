@@ -31,6 +31,11 @@ Standard Breakpoints for Devices List
 @media (max-width: 480px) {
     /* Styles for phones */
     /* Default Mobile First */ 
+    
+    /* General Use Top Horizontal Menu */
+    .horizontal-menu {
+        display: none;
+    }
     .horizontal-nav-items-flex{
       display: none;
     }
@@ -65,7 +70,35 @@ Standard Breakpoints for Devices List
         right: 3dvw;
       }
     }
+
+  // sketchdrawdoodle top nav logo
+  .nav-title-logo{
+      display: none;
   }
+
+  .nav-footer-logo{
+    .s-logo-bg-box{
+      width: 100%;
+      aspect-ratio: 1/1;
+      padding: 0;
+      padding-top: 0.3rem;
+    }
+  }
+  // S-Logo SVG
+  .s-logo-container{
+    width: 100;
+    // border: 2px solid theme.$dk-003;
+    padding: 0;
+  }
+  .s-logo-svg{
+    width:100%;
+    height: auto;
+  }
+  .s-logo-text {
+    font-size:18px;
+    line-height:1.1em;
+  }
+}
 
 
 
@@ -75,6 +108,13 @@ Standard Breakpoints for Devices List
     /* Styles for landscape phones and small tablets */
         /* Default Mobile First */ 
 
+    /* General Use Top Horizontal Menu */
+    .horizontal-menu {
+        display: none;
+    }
+    .horizontal-nav-items-flex{
+      display: none;
+    }
 
           /* ===== TITLE ===== */
     .zine-title {
@@ -102,6 +142,36 @@ Standard Breakpoints for Devices List
     max-width: 180px;       /* Optional: prevents them from getting too wide */
 
   }
+
+  // sketchdrawdoodle top nav logo
+  .nav-title-logo{
+      display: none;
+  }
+
+  .nav-footer-logo{
+    .s-logo-bg-box{
+      width: 100%;
+      aspect-ratio: 1/1;
+      padding: 0;
+      padding-top: 0.3rem;
+    }
+  }
+  // S-Logo SVG
+  .s-logo-container{
+    width: 100;
+    // border: 2px solid theme.$dk-003;
+    padding: 0;
+  }
+  .s-logo-svg{
+    width:100%;
+    height: auto;
+  }
+  .s-logo-text {
+    font-size:18px;
+    line-height:1.1em;
+  }
+
+
 }
   
 
@@ -140,9 +210,75 @@ Standard Breakpoints for Devices List
 
   }
 
+  // sketchdrawdoodle nav logo
+  .sketchdrawdoodle-logo-svg{
+    width: 7rem;
+    height: auto;
+    //border: 2px solid green;
+
+    .sketchdrawdoodle-logo-text{
+      fill:theme.$turq-001;
+      stroke:theme.$purple-005;
+      letter-spacing:1.4;
+      font-size:18px;
+    }
+  }
+
 }
 
 
+
+
+
+/* All devices (tablets, 780px and up) */
+@media (min-width: 780px) {
+  .sketchdrawdoodle-logo-svg{
+    width: 8.5rem;
+    height: auto;
+
+    .sketchdrawdoodle-logo-text{
+      fill:theme.$turq-001;
+      stroke:theme.$purple-005;
+      letter-spacing:1.4;
+      font-size:18px;
+    }
+  }
+
+}
+
+
+/* All devices (tablets, 800px and up) */
+@media (min-width: 800px) {
+  .sketchdrawdoodle-logo-svg{
+    width: 9rem;
+    height: auto;
+
+    .sketchdrawdoodle-logo-text{
+      fill:theme.$turq-001;
+      stroke:theme.$purple-005;
+      letter-spacing:1.4;
+      font-size:18px;
+    }
+  }
+
+}
+
+/* All devices (tablets, 850px and up) */
+@media (min-width: 850px) {
+  .sketchdrawdoodle-logo-svg{
+    width: 9.5rem;
+    height: auto;
+    //border: 2px solid green;
+
+    .sketchdrawdoodle-logo-text{
+      fill:theme.$turq-001;
+      stroke:theme.$purple-005;
+      letter-spacing:1.4;
+      font-size:18px;
+    }
+  }
+
+}
 
 
 /* All devices (tablets, 920px and up) */
@@ -174,9 +310,39 @@ Standard Breakpoints for Devices List
 
   }
 
+  .sketchdrawdoodle-logo-svg{
+      width: 10rem;
+      height: auto;
+      //border: 2px solid green;
+
+      .sketchdrawdoodle-logo-text{
+        fill:theme.$turq-001;
+        stroke:theme.$purple-005;
+        letter-spacing:1.4;
+        font-size:18px;
+      }
+  }
+
+
 }
 
 
+
+/* All devices (tablets, 960px and up) */
+@media (min-width: 960px) {
+  .sketchdrawdoodle-logo-svg{
+      width: 11rem;
+      height: auto;
+      //border: 2px solid green;
+
+      .sketchdrawdoodle-logo-text{
+        fill:theme.$turq-001;
+        stroke:theme.$purple-005;
+        letter-spacing:1.4;
+        font-size:18px;
+      }
+  }
+}
 
 
 

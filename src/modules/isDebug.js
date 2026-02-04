@@ -1,4 +1,4 @@
 
 
-const isDEBUG = true
+const isDEBUG = true;
 export default isDEBUG;

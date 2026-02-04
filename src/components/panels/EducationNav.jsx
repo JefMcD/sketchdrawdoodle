@@ -51,7 +51,7 @@ export default function EducationNav({
         </div>
 
         <nav className="horizontal-nav-items-flex">
-            <ul className="education-main-menu">
+            <ul className="horizontal-menu">
                 <li className="menu-item">
                     <a className='nav-link' href="#start-section">Start</a>
                 </li>   

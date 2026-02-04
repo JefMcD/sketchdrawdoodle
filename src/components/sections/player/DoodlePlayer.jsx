@@ -9,8 +9,13 @@ import NextBtn       from "@components/sections/player/buttons/NextBtn";
 import PrevBtn       from "@components/sections/player/buttons/PrevBtn";
 import LandscapeBtn  from "@components/sections/player/buttons/LandscapeBtn";
 import PortraitBtn   from "@components/sections/player/buttons/PortraitBtn";
+import TagsToggleBtn from "@components/sections/player/buttons/TagsToggleBtn";
+
 import ConfirmQuit   from "@components/sections/player/ConfirmQuit";
 import RewardPopUp   from "@components/sections/player/RewardPopUp";
+
+import SplatSpinner  from "@components/SplatSpinner";
+
 
 //import FullScreenBtn from "@components/sections/player/buttons/FullScreenBtn";
 //import NormScreenBtn from "@components/sections/player/buttons/NormScreenBtn";
@@ -25,6 +30,7 @@ const ACTIONS = {
   TIME_ELAPSED   : "TIME_ELAPSED",   // Active Pic's time has elapsed
   PAUSE          : "PAUSE",          // The viewer is paused 
   PLAY           : "PLAY",           // Resume playback 
+  TOGGLE_TAGS    : "TOGGLE_TAGS",    // Toggle the pictures tags on/off
   STEP_COMPLETE  : "STEP_COMPLETE",  // Individual step has displayed all pics
   ALL_STEPS_COMPLETE: "ALL_STEPS_COMPLETE", // Every step completed
   TOGGLE_ROTATION: "TOGGLE_ROTATION",
@@ -50,8 +56,10 @@ const initialState = {
   timeRemaining     : 0,      // The time the picture has remaining in the setTimeout(). Can be full or partial if it is paused/stopped and resumed
   picTime           : 0,      // The length of time the picture is to be displayed
   picNum            : 0,      // sequence number of the picture within the step
+  isTagsOn          : false,  // Tags are on or off, Boolean true or false
   tagList           : "",     // The tags the image has on pixabay
   pageURL           : "",     // The URL of the pixabay page 
+  isLoading         : false    // Something is waiting to finish
 };
 
 
@@ -127,7 +135,9 @@ function playerReducer(state, action){
           picTime       : action.stepList[0].display_time, // The time a picture is displayed in seconds
           picNum        : picNum,       // sequence number of the pin within the step
           tagList       : action.imageList[0].tag_list, // The list of tags returned by Pixabay for an image
-          picURL        : action.imageList[0].page_url  // The url of an image 
+          isTagsOn      : false,        // tags are not displayed by default
+          picURL        : action.imageList[0].page_url,  // The url of an image 
+          isLoading     : true          // The player is setting up and an image is loading
         };
       }
       case ACTIONS.TIME_ELAPSED:{
@@ -289,6 +299,14 @@ function playerReducer(state, action){
 
     }
 
+    case ACTIONS.TOGGLE_TAGS:{
+      const visibility = state.isTagsOn;
+      return{
+        ...state,
+        isTagsOn: !visibility
+      }
+    }
+
   }
 }
 
@@ -378,18 +396,28 @@ export default function DoodlePlayer({
   },[state.status])
 
   /* Color wheel and Kelvin scale modals with color picker. Super useful for color studies */
+
+
   return(
+
     <div className="pic-player-main-window">
 
       <div className="pic-player-logo-container fs3">
-        {/* www.sketchdrawdoodle.com step:{state.activeStep} picture: {state.picNum} time: {state.timeRemaining} */}
-         www.sketchdrawdoodle.com
-        {/*Tags; {state.tagList} */}
+          <div className="player-label-flex"> 
+                {/* www.sketchdrawdoodle.com step:{state.activeStep} picture: {state.picNum} time: {state.timeRemaining} */}
+                www.sketchdrawdoodle.com
+                {/*Tags; {state.tagList} */}
+          </div>
       </div>
 
+
+
       <div className = "pic-time-box">
-        {formatTime(state.picTime)}
+          <div className="player-label-flex alt">
+                {formatTime(state.picTime)}
+          </div>
       </div>
+
 
 
       
@@ -412,12 +440,17 @@ export default function DoodlePlayer({
         {state.status === "Congratulations" && <RewardPopUp setIsDrawing={setIsDrawing} setActiveSection={setActiveSection}/>}
   
         <div className={`active-pic-container ${state.rotationClass}`}>
-          <img className="active-pic" src={state.activeImgURL} alt="image description" />
+          <img 
+            key={state.activeImgURL} // key ensure image gets updated with re-render
+            className="active-pic" src={state.activeImgURL} alt="image description" />
         </div>
 
-        <div className="pic-player-tags-container fs3">
-          Tags; {state.tagList} 
-        </div>
+        {state.isTagsOn && 
+          <div className="pic-player-tags-container fs3">
+            {state.tagList} 
+          </div>
+        }
+
 
         <div className="player-icons-wrapper">
           <div className="player-icons-box">
@@ -434,12 +467,18 @@ export default function DoodlePlayer({
             ): (
               <PortraitBtn onClick={()=>dispatch({type:ACTIONS.TOGGLE_ROTATION})}/>
             )}
+            <TagsToggleBtn onClick={()=>dispatch({type:ACTIONS.TOGGLE_TAGS})} />
 
           </div>
         </div> {/* end player-icons-wrapper */}
 
 
       </div> {/* end pic-player-flex-container */}
+
+
+
+
+      
     </div> // end pic-player-main-window
   )
 }

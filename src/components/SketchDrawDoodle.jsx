@@ -26,6 +26,8 @@ import Journey  from "@sections/Journey";
 import Coffee   from "@sections/Coffee";
 import UserGuide from "@sections/UserGuide";
 import Education from "@sections/Education";
+import DevBlog  from "@sections/DevBlog";
+
 //import Frens    from "@sections/Frens";
 
 // Drawing Practice COponent
@@ -120,7 +122,8 @@ export default function SketchDrawDoodle({
 		{id:"coffee-section",    component: Coffee,    props: {}},
   	{id:"userguide-section", component: UserGuide, props: {userData, setUserData, activeSection, setActiveSection}},
 		{id:"journey-section",   component: Journey,   props: {userData, setUserData, activeSection, setActiveSection}},
-		{id:"education-section", component: Education, props: {setActiveSection}}
+		{id:"education-section", component: Education, props: {setActiveSection}},
+		{id:"devblog-section",   component: DevBlog,   props: {setActiveSection}}
 
   ]
 

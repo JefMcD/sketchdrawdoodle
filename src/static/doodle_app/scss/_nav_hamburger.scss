@@ -8,15 +8,119 @@
 @use "@scss/_fonts.scss" as fonts;
 @use "@scss/_theme.scss" as theme;
 
+
+
+
+.mobile-menu-panel{
+    position: absolute;
+    display: block;
+
+    //visibility: block;
+    opacity: 1;
+    background-color:  theme.$dk-002;
+    
+    border: 3px solid theme.$purple-003;
+    box-shadow: 4px 4px 0 theme.$purple-004;
+    transform: rotate(-1deg);
+    
+    z-index:2;
+    
+    //transform: translateX(120%);
+    
+    transition-property: opacity transform;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+    
+    
+    // background-image: url("../images/helloFrens/shells.jpg");
+    &.devblog{
+        // top: 0rem;
+        // right: 0rem;
+        // width: 0rem;
+        // height: 0rem;
+        // padding: 0rem;
+    
+        top: 1rem;
+        right: 2rem;
+        width: 12rem;
+        height: 21rem;
+        padding: 0rem;
+        
+    }
+}
+
+/* The mobile menu ul */
+.mobile-menu-list {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    list-style:none;
+
+    height:20rem;
+    margin-top: 0rem;
+    margin-right: 0.5rem;
+    //border: 2px solid red;
+}
+
+
+.mobile-nav-item {
+    position:relative;
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+
+    font-size: 14pt;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//===========================================================
+//
+// Below here is not knowingly used
+//
+//===========================================================
+
 .hamburger-flex {
     display: flex;
     justify-content: flex-end;
     height: 4rem;
     width: 4rem;
 
-    //background-color:purple;
-    //border: 2px solid green;
+    background-color:purple;
+    border: 2px solid green;
 }
+
+
 
 
 #menuBtn{
@@ -112,36 +216,7 @@
 /*  Mobile Menu Panel
 /*
 /***********************************************************/
-.mobile-menu-panel{
-    position: absolute;
-    display: none;
 
-    visibility: hidden;
-    opacity: 0;
-
-    top: 0rem;
-    right: 0rem;
-    width: 0rem;
-    height: 0rem;
-    padding: 0rem;
-
-    color: white;
-    background-color:  theme.$dk-002;
-
-    border: 0px solid  theme.$lt-002;
-    border-radius: 0.5rem;
-
-    z-index:-1;
-
-    transform: translateX(120%);
-
-    transition-property: opacity transform;
-    transition-duration: 350ms;
-    transition-timing-function: ease-in-out;
-
-    
-    // background-image: url("../images/helloFrens/shells.jpg");
-}
 
 
 /* This class is toggled on by javascript to display the menu panel */
@@ -166,31 +241,7 @@
 }
 
 
-/* The mobile menu ul */
-.mobile-menu {
-    position:relative;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    list-style:none;
 
-    height:2rem;
-    margin-top: 2.5rem;
-    margin-right: 1rem;
-    padding-top: 0.5rem;
-    //border: 2px solid red;
-}
-
-
-.mobile-nav-item {
-    position:relative;
-    display: block;
-    height: 2rem;
-    line-height: 2rem;
-
-    font-size: 14pt;
-
-}
 
 
 /* The background shadow element */

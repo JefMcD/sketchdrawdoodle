@@ -3,6 +3,9 @@ import {useProfile} from "@providers/ProfileContext"
 
 import inkBrushes from "@images/ink_brushes.png";
 import navPanelBackground from "@images/backgrounds/side_panel.jpg";
+import SLogo from "@svgIcons/SLogo";
+import SketchDrawDoodleLogo from "@svgIcons/SketchDrawDoodleLogo";
+
 
 // Authentication
 //import SignInLink   from "@navLinks/SignInLink.jsx";
@@ -42,7 +45,7 @@ export default function NavPanel({
     {id:"coffee-link",   component: CoffeeLink,   linkType: "open"},
     {id:"journey-link",  component: CompassLink,  linkType: "open"},
     {id:"education-link",component: EducationLink,linkType: "open"},
-    {id:"userguide-link",component: UserGuideLink,linkType: "open"},
+    //{id:"userguide-link",component: UserGuideLink,linkType: "open"},
     
     
     // Possible Later Additions
@@ -67,6 +70,13 @@ export default function NavPanel({
         <div className= "app-logo">
           <img src={inkBrushes} />
         </div>
+        <div className="nav-logo-container">
+          <div className="nav-title-logo">
+                    <SketchDrawDoodleLogo />
+          </div>
+
+        </div>
+
 
         {/*  Nav Links */}
         <div className= "nav-icons-container main-nav">
@@ -83,6 +93,13 @@ export default function NavPanel({
               />
             ))
           }
+        </div>
+
+        {/** Alternative Title Logo */}
+        <div className="nav-footer-logo">
+            <div className="s-logo-bg-box">
+                  <SLogo />
+            </div>
         </div>
 
         {/* Tabs */}

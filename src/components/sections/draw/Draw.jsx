@@ -226,6 +226,15 @@ export default function Draw({
 	const ActiveFormComponent = activeFormSectionData.component;
 	const componentProps = activeFormSectionData.props;
 
+	// compose a string to display the chosen subcategories. A Random subcategory is chosen in Django if none selected
+	let subcategoryPicks = "Random";
+	if(formData.subcategoryChoices.length > 0){
+		subcategoryPicks = "";
+		for (let sub of formData.subcategoryChoices){
+			subcategoryPicks = `${subcategoryPicks} ${sub.name}`;
+		};
+	};
+
 	return(
 		<>
 		<div className="main-panel">
@@ -271,7 +280,8 @@ export default function Draw({
 								<div className="drill-footer">
 										<div className="drill-list fs3">
 											<p>Category: <span className="emphasis fs5">{formData.categoryChoice.id ? formData.categoryChoice.name : "Random"}</span></p>
-											<p>Subcategory: <span className="emphasis fs5">{formData.subcategoryChoices.length > 0 ? `${formData.subcategoryChoices.length} selected` : "Random"}</span> </p>
+											{/* <p>Subcategory: <span className="emphasis fs5">{formData.subcategoryChoices.length > 0 ? `${formData.subcategoryChoices.length} selected` : "Random"}</span> </p> */}
+											<p>Subcategory: <span className="emphasis fs5">{subcategoryPicks}</span></p>
 											<p>Time:<span className="emphasis fs5"> {formData.drillChoice.description}</span></p>	
 										</div>
 									

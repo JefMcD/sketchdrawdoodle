@@ -46,6 +46,179 @@
   //background-color: darkgoldenrod;
   
 }
+.nav-logo-container{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+
+  //border: 5px solid red;
+}
+.nav-title-logo{
+  position: relative;
+  display: flex;
+  width: calc(100% - 0.8rem);
+  height: auto;
+  margin: 0 0.5rem 0 0.3rem;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.3rem;
+  padding-bottom: 0.1rem;
+
+  background: theme.$lt-003;
+  border: 3px solid theme.$purple-003;
+  box-shadow: 4px 4px 0 theme.$turq-002;
+  transform: rotate(-1deg);
+
+}
+
+
+// Actual SVG Container
+.sketchdrawdoodle-logo-container{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+
+  //border: 2px solid theme.$dk-005;
+  
+}
+
+.sketchdrawdoodle-logo-svg{
+  width: auto;
+  height: auto;
+  .sketchdrawdoodle-logo-path{
+    fill:#ff00ff;
+    fill-opacity:1;
+    stroke:#ff9f11;
+    stroke-width:1;
+    stroke-opacity:1;
+    transition: all 0.4s ease;
+  }
+  .sketchdrawdoodle-logo-text{
+    font-family:fonts.$zine-header;
+    fill:theme.$turq-001;
+    stroke:theme.$purple-005;
+    letter-spacing:1.4;
+    font-size:18px;
+    stroke-width:0.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:21;
+    paint-order: stroke fill; // better stroke rendering in most browsers
+    text-anchor:middle;
+    //dominant-baseline: middle; // helps vertical centering if you reposition
+    //text-align:center;
+    
+    //line-height:1.1em;
+    //word-spacing:0.0623924px;
+    //writing-mode:lr-tb;
+    //direction:ltr;
+    //fill-opacity:1;
+    //stroke-opacity:1;
+
+    .sketchdrawdoodle-logo-tspan{
+      // font-style:normal;
+      // font-variant:normal;
+      // font-weight:normal;
+      // font-stretch:normal;
+      // font-family:fonts.$zine-header;
+      // fill:#b5f2f2;
+      // fill-opacity:1;
+      // stroke:#5e0051;
+      // stroke-width:0.5;
+      // stroke-opacity:1;
+    }
+
+  }
+
+
+}
+
+
+.nav-footer-logo{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+
+  //border: 2px solid blue;
+
+  .s-logo-bg-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 45%;
+    height:auto;
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+    background: theme.$lt-004;
+    border: 3px solid theme.$purple-004;
+    box-shadow: 4px 4px 0 theme.$turq-002;
+    transform: rotate(2deg);    
+  }
+}
+
+// S-Logo SVG
+.s-logo-container{
+  position: relative;
+  display: block;
+  width: 75;
+  height: auto;
+
+  //border: 2px solid theme.$dk-005;
+}
+
+.s-logo-svg{
+  width:100%;
+  height: auto;
+
+  .s-logo-path{
+    fill:theme.$purple-002;
+    stroke:theme.$lt-002;
+    stroke-width:1;
+    fill-opacity:1;
+    stroke-opacity:1;
+
+  }
+
+}
+
+.s-logo-text {
+
+  font-size:18px;
+  line-height:1.1em;
+  font-family:fonts.$header;
+  text-align:center;
+  letter-spacing:1.72365px;
+  word-spacing:0.07584px;
+  text-anchor:middle;
+  fill:theme.$turq-001;
+  stroke:theme.$purple-004;
+  fill-opacity:1;
+  stroke-width:0.610487;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-miterlimit:20.8;
+  stroke-opacity:1;
+
+}
+
+.s-logo-tspan {
+  // font-size: 14.1111px;
+  // font-family: fonts.$zine-header;
+  // letter-spacing: 1.32292px;
+  // stroke: #68005a;
+  // stroke-width: 0.264583;
+  // stroke-opacity: 1;
+}
+// ENd S-Logo SVG
 
 
 
@@ -462,6 +635,16 @@
   background-color: theme.$lt-003;
   color: theme.$dk-002;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

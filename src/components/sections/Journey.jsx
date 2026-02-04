@@ -4,9 +4,9 @@ import jeferzForest from "/static/doodle_app/images/pics/jeferzforest1_500.jpg";
 import HorizontalAds from "@components/HorizontalAds";
 
 export default function Journey({ setActiveSection }) {
-  function handleClick(e) {
+  function handleClick(e, section) {
     e.stopPropagation();
-    setActiveSection("coffee-section");
+    setActiveSection(section);
   }
 
   return (
@@ -64,9 +64,11 @@ export default function Journey({ setActiveSection }) {
  
             <p className="writing fs4">
               From Traditional Life Drawing, to Landscapes, technology, Dragons, Devils Angels and with much much more to come. 
-              The aim is to make the best and funnest drawing app in the World!..Or at least on your phone.
+              The aim is to make the greatest drawing app in the Galaxy!..Or at least a lot of fun.
             </p>
-
+            <button  onClick={(e) => handleClick(e, "coffee-section")} className="zine-cta big">
+              Buy Me a Brew →
+            </button>
           </div>
         </section>
 
@@ -84,8 +86,22 @@ export default function Journey({ setActiveSection }) {
             </p>
 
 
-            <button onClick={handleClick} className="zine-cta big">
-              Buy Me a Brew →
+
+          </div>
+        </section>
+
+        {/* SECTION: Nerdzone */}
+        <section className="zine-section alt  halftone-bg">
+          <div className="zine-panel">
+            <h3 className="zine-heading">DevBlog</h3>
+            <p className="writing fs4">
+              If you like techy stuff, the devblog has a more in depth look at the process 
+              of building SketchDrawDoodle 
+            </p>
+
+
+            <button  onClick={(e) => handleClick(e, "devblog-section")} className="zine-cta big">
+              Danger NerdZone→
             </button>
           </div>
         </section>
@@ -96,6 +112,9 @@ export default function Journey({ setActiveSection }) {
       <div className="zine-footer">
         <SocialMediaLinks />
       </div>
+
+
+
 
     </div> // end Journey-zine 
   );

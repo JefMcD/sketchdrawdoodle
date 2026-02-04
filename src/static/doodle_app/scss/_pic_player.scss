@@ -25,10 +25,16 @@
   
   //border: 2px solid theme.$lt-003;
 }
-
+//===========================================
+//
+// Player labels and logos
+//
+//===========================================
 .pic-player-logo-container{
   position: absolute;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 1rem;
   height:5rem;
@@ -38,8 +44,83 @@
 
   color: theme.$lt-003;
 
-  //border: 2px solid theme.$lt-001;
+  //border: 2px solid theme.$dk-001;
 }
+
+.pic-time-box{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  padding: 0;
+  height:4rem;
+  top: 3rem;
+  margin-left: 1rem;
+  text-align: center;
+
+  //border: 1px solid theme.$lt-003;
+  //border-radius: 0.5rem; 
+}
+.player-label-flex{
+  position:relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  padding: 0.5rem;
+  max-width: 30rem;
+  height: 3rem;
+
+  //border-radius: 0.5rem;
+
+  font-family:fonts.$section-header;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: theme.$turq-001;
+  text-shadow: 2px 1px 0 theme.$red-003;
+  background: theme.$lt-003;
+  border: 3px solid theme.$purple-003;
+  box-shadow: 4px 4px 0 theme.$turq-002;
+  transform: rotate(-1deg);
+  
+  .player-label{
+    width: auto;
+    height: auto;
+    max-width: 40rem;
+    flex-grow: 0;
+  
+    //border: 2px solid green;
+  }
+  
+  &.alt {
+    // width: 70%; // desktop
+    font-family:fonts.$writing-bold;
+    font-size: 1rem;
+    max-width: 25rem;
+    margin: 1rem 1rem;
+    color: theme.$lt-002;
+    text-shadow: 2px 1px 0 theme.$turq-003;
+    background: theme.$grey-005;
+    border: 3px solid theme.$grey-003;
+    box-shadow: 4px 4px 0 theme.$grey-005;
+    transform: rotate(1.3deg);
+  }
+
+}
+
+
+
+
+
+//===========================================
+//
+// End Player labels and logos
+//
+//===========================================
+
+
 
 
 .player-icons-wrapper{
@@ -397,36 +478,19 @@
 .pic-player-tags-container{
   position: absolute;
   display: block;
-  width: 100%;
+  width: 90dvw;
   padding: 1rem;
-  height:5rem;
-  bottom: 3rem;
+  height:4rem;
+  bottom: 4.2rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 
   color: theme.$lt-003;
 
-  //border: 2px solid theme.$lt-001; 
-}
-
-.pic-time-box{
-  position: absolute;
-  display: block;
-  width: 100%;
-  padding: 0,5rem;
-  height:2rem;
-  width: 6rem;
-
-  top: 3rem;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-
-  color: theme.$lt-003;
-
-  border: 1px solid theme.$lt-003;
-  border-radius: 0.5rem; 
+  border: 1px solid theme.$grey-005;
+  border-radius: 0.4rem;
+  overflow-y:scroll; 
 }
 
 

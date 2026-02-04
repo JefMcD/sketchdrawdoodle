@@ -9,31 +9,6 @@
 @use "@scss/_theme.scss" as theme;
 
 
-// .menu-block{
-//     // fixed position takes the element out of flow and fixes it to the top level browser window
-//     position: fixed;
-//     display: block;
-
-//     top: 0;
-//     left: 0;
-
-//     height: 4rem;
-//     width:100%;
-//     max-width: 80rem; // same as .main-window-wrapper;
-
-//     // margin: auto; doesnt work to center
-
-//     // center fixed element within the body window
-//     left: 50%;
-//     top: 0%;
-//     transform: translateX(-50%);
-
-//     //border: 2px solid blue;
-//     background-color: rgb(167, 218, 167);
-//     border: 2px solid yellow;
-
-//     z-index: 10;
-// }
 
 .horizontal-nav-flex{
     position: sticky;
@@ -42,6 +17,7 @@
 
     top: 0;
     margin-bottom: 1rem;
+    padding-left: 0.5rem;
     background-color: theme.$dk-004;
     //border: 2px solid yellow;
     z-index: 1;
@@ -99,10 +75,9 @@
 
 
 /* The Main Drop Menu */
-
-.education-main-menu {
+.horizontal-menu {
     position: relative;
-    display: flex;
+    display: flex; // Display none on mobile and small devices
     list-style: none;
     height: 3rem;
     padding-top: 1rem;
