@@ -9,6 +9,7 @@
   background-image: url("/static/doodle_app/images/backgrounds/main_panel.webp");
   font-family: fonts.$writing;
   overflow-x: hidden;
-
+  z-index: 5;
   //border: solid 2px theme.$turq-002;
 }
+

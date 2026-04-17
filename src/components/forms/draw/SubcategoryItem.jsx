@@ -70,6 +70,45 @@ export default function SubcategoryItem({
       ...prev,
       subcategoryChoices:updatedChoices
     }))
+
+    newSubzones = getSubzoneOptions()
+    setSubzones(newSubzones)
+  }
+
+
+  async function getSubzoneOptions(){
+  e.stopPropagation()
+
+    const server = getServer();
+    const getSubzones = `${server}get_subzone_options/${subcategory.id}`
+
+    // fetch subcategories for selected category or get from cache
+    setIsLoadingSubcategories(true)
+    try{
+      const response = await fetch(getSubzones,{
+        method: "GET",
+        //cache: "no-store"
+      });
+      const data = await response.json();
+      if(!response.ok){
+        const error = data.error
+        return
+      }else{
+        // setFormData with new subzones, clear subzoneChoices and trigger render
+        setFormData( (prev)=> ({
+          ...prev, 
+          subzoneChoice: {id: category.id, name: category.name},
+          subcategoryChoices:[]
+        }));
+        setSubcategories(data.subcategory_payload);
+      }
+    }
+    catch (error){
+      setFormError(`Fetch Subcategories Failed: ${error}`)
+    }
+    finally{
+      setIsLoadingSubcategories(false)
+    }
   }
 
   return(

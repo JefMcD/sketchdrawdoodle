@@ -349,9 +349,13 @@
 
 
 .time-section-summary-box{
-  flex-grow: 1;
+  //flex-grow: 1;
+  padding: 1rem;
+  width: 100%;
+  height: 70%;
+  max-height: 20rem;
   overflow-y: auto;
   overflow-x: hidden;
 
-  //border: 2px solid theme.$green-002;
+  //border: 2px solid theme.$turq-002;
 }

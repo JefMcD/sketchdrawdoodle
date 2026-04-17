@@ -78,7 +78,7 @@ export default function JoinForm({
 
   return(
   <>
-    <div className="form-title">Application Form</div>
+    <div className="form-title fs7">Application Form</div>
 
     <div className="form-wrapper">
       <form className="standard-form join-form" onSubmit={handleSubmit}>
@@ -98,7 +98,7 @@ export default function JoinForm({
 
       </form>
 
-        {formError && <FormError message={formError}  setFormError={setFormError}/>}
+        {formError && <FormError formError={formError}  setFormError={setFormError}/>}
     </div>
   </>
   )

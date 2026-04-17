@@ -26,4 +26,12 @@ sandbox
 *.sln
 *.sw?
 
+# Dev Django Mirror Static Data and Media
+public/media/setup_category_pics
+public/media/setup_subcategory_pics
+public/media/setup_subzone_pics
+public/media/user_avatar
+public/media/user_banner
+
+
 

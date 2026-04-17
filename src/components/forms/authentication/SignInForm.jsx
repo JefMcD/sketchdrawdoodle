@@ -45,6 +45,7 @@ export default function SignInForm({
     };
 
     // Fetch: 
+    console.log(`fetch ${server}/signin/`)
     const signin = server+"signin/";
     const response = await fetch(signin, {
       method: "POST",
@@ -78,7 +79,8 @@ export default function SignInForm({
   
       setActiveSection("welcome-section");
     }else{
-      setFormError(`${data.error}`);
+      console.log(data.error)
+      setFormError(data.error);
     }
   }
 
@@ -97,7 +99,7 @@ export default function SignInForm({
                 <button className = "form-btn" type="submit">Sign In!"</button>
             </div>
         </form>
-        {formError && <FormError message={formError} setFormError={setFormError}/>}
+        {formError && <FormError formError={formError} setFormError={setFormError}/>}
     </div>  
   )
 }

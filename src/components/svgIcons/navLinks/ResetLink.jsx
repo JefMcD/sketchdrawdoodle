@@ -1,7 +1,7 @@
 
 
 export default function ResetLink({setActiveSection}){
-    console.log("resetLink")
+
     return(
     <div className="modal-item" id="reset-link" >
         <div className="modal-label"> 

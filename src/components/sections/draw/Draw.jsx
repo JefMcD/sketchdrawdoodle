@@ -54,7 +54,9 @@ export default function Draw({
 		...
 	]
 	*/
-	const [subcategories, setSubcategories] = useState([]);
+	const [subcategories, setSubcategories] = useState([]); // Subcategories returned by the server
+	const [subzones, setSubzones] = useState(""); // Subzones returned by the server
+
 	
 	const [drillList, setDrillList]         = useState([]);
 	/*
@@ -211,7 +213,7 @@ export default function Draw({
 	// The form components and their props
 	const formSectionsArray = [
 		{	id: "pics-section",  component: PicsSection,  
-			props: {userData, formData, setFormData, categories, subcategories, setSubcategories, setFormError}
+			props: {userData, formData, setFormData, categories, subcategories,subzones, setSubcategories, setSubzones ,setFormError}
 		},
 		{id: "time-section",  component: TimeSection,  
 			props: {formData, setFormData, drillList, setFormError}},
@@ -260,7 +262,7 @@ export default function Draw({
 					}
 				</div>
 
-				<div><SplatSubmit /></div>
+				<div><SplatSubmit /></div> {/** Contains the form submission for id='practice-drill-form' */}
 
 			</div>
 			
@@ -272,7 +274,7 @@ export default function Draw({
 								<Spinner />
 							) :(
 								<>
-								<ActiveFormComponent {...componentProps}/>{/*PicsSection(CategoryPicker and SubcategoryPicker) or TimeSection) */}
+								<ActiveFormComponent {...componentProps}/>{/*PicsSection(CategoryPicker, SubcategoryPicker, and Subzone Picker) or TimeSection) */}
 								</>
 							)}
 							<div className="drill-summary-box">

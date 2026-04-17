@@ -8,13 +8,22 @@ export default function DevBlogNav({
   setIsHamOpen
 
 }){
-  function handleHamburgerMenuClick(e, section){
-    setIsHamburger = false;
-    // load section (this get handled entirely in the client)
-    window.load(section)
-  }
+    function scrollToSection(sectionId) {
+    setIsHamOpen(false);
 
-  const [isHamburgerActive, setIsHamburger] = useState(true)
+    const el = document.getElementById(sectionId);
+    if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    }
+
+
+    function openHam(e){
+        e.stopPropagation(e);
+        setIsHamOpen(true);
+    }
+
+
 
   return(
   <>
@@ -22,76 +31,81 @@ export default function DevBlogNav({
     {/* <!-- **************************************************************** -->
     <!--                     Hidden Mobile Menu Panel                     -->
     <!-- **************************************************************** --> */}
-    {isHamburgerActive && (
-      <div className="mobile-menu-panel devblog">
+
+
+    {isHamOpen && (
+      <div className="mobile-menu-panel devblog" onClick={(e)=>e.stopPropagation()}>
 
           <ul className="mobile-menu-list"> 
               
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#backend-section">Backend</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("backend-section")} >
+                    Backend Config
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#database-section">Database</a>
+              <li className="mobile-nav-item ">
+                  <a
+                    className="nav-link"
+                    onClick={() => scrollToSection("database-section")}
+                    >
+                    Database Design
+                  </a>
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#database-section">Interfaces</a>
+{/** 
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("REST-API-section")}>
+                  REST API
               </li>
 
-              <li className="mobile-nav-item">
-                      <a className='nav-link' href="#client-section">Client</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("interfaces-section")}>
+                  External Interfaces
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#ui-section">UI</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("data-modelling-section")}>
+                  Data Modelling
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#design-section">Design</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("UI-design-section")}>
+                  UI Design
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#alfie-section">Alfie</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("icons-section")}>
+                  Icons & Logos
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#deployment-section">Deployment</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("graphics-section")}>
+                  Graphic Art
               </li>
 
-              <li className="mobile-nav-item">
-                  <a className='nav-link'     href="#performance-section">Performance</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("client-section")}>
+                  React CLient
               </li>
 
-
-              <li className="mobile-nav-item">
-                  <a className='nav-link'  href="#future-section">Future</a>
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("state-machine-section")}>
+                  State Machine
               </li>
+
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("deployment-section")}>
+                  Deployment
+              </li>
+
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("cache-section")}>
+                  Cache
+              </li>
+
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("seo-section")}>
+                  SEO
+              </li>
+
+              <li className="mobile-nav-item nav-link" onClick={() => scrollToSection("future-section")}>
+                  Future Extensions
+              </li>
+*/}
 
           </ul>
 
       </div>
 
     )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     {/* <!-- **************************************************************** -->
@@ -102,11 +116,26 @@ export default function DevBlogNav({
             Dev Blog
         </div>
 
+        {/** Small Devices only ?? */}
+        <div className="ham-flex-container" onClick={openHam}>
+            <div className="ham-flex">
+                <div className="ham-bar-topbun"></div>
+                <div className="ham-bar-filling"></div>
+                <div className="ham-bar-bottombun"></div>
+            </div>
+
+        </div>
+
+{/* 
         <nav className="horizontal-nav-items-flex">
             <ul className="education-main-menu">
 
                 <li className="menu-item">
                     <a className='nav-link'  href="#backend-section">Backend</a>
+                </li>
+
+               <li className="menu-item">
+                    <a className='nav-link'  href="#config-section">Config & Setup</a>
                 </li>
                 
                 <li className="menu-item">
@@ -123,7 +152,7 @@ export default function DevBlogNav({
 
 
             </ul>
-        </nav>
+        </nav> */}
 
         {/* <!-- Hamburger Menu Button --> */}
         {/* <div className = 'mobile'>

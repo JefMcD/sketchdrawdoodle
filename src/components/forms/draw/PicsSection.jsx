@@ -20,7 +20,9 @@ export default function PicsSection({
     setFormData,
     categories,
     subcategories,
+    subzones,
     setSubcategories,
+    setSubzones,
     setFormError,
 }
 ){
@@ -28,6 +30,9 @@ export default function PicsSection({
     
     // When a category is selected disolays the loading spinner in the subcategories section
     const [isLoadingSubcategories, setIsLoadingSubcategories] = useState(false);
+
+    const [isLoadingSubzones, setIsLoadingSubzones] = useState(false);
+
     
     return(
     <section className="pics-setup-section">

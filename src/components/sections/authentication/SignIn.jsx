@@ -19,7 +19,11 @@ export default function SignIn({
     <div className="main-panel">
 
         <div className='main-logo'>
-            <img   className="logo-img" src = {sketchDrawDoodleLogo} />
+            {/* <img   className="logo-img" src = {sketchDrawDoodleLogo} /> */}
+            {/* HEADER / TITLE */}
+            <div className="zine-title">
+                <h1>Sketch Draw Doodle</h1>
+            </div>
         </div>
 
         <div className="authenticate-container">
@@ -43,9 +47,9 @@ export default function SignIn({
                     Forgot Password?
                     <span className="auth-link" id="reset-pass-link" onClick={()=>setActiveSection("reset-section")}> Reset</span>
                 </div>
-                <div className="authenticate-redirect fs3">
+                {/* <div className="authenticate-redirect fs3">
                     <span className="auth-link" id="reset-pass-link" onClick={()=>setActiveSection("help-section")}> Help!</span>
-                </div>
+                </div> */}
 
             </div>
         </div>  

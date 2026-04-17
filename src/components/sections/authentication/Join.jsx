@@ -30,7 +30,11 @@ export default function Join({
 	<>
 	<div className="main-panel">
 		<div className='main-logo'>
-				<img   className="logo-img" src = {sketchDrawDoodleLogo} />
+				{/* <img   className="logo-img" src = {sketchDrawDoodleLogo} /> */}
+					{/* HEADER / TITLE */}
+					<div className="zine-title">
+						<h1>Sketch Draw Doodle</h1>
+					</div>
 		</div>
 
 		<div className="authenticate-container">

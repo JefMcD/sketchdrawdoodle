@@ -35,6 +35,10 @@
     font-family: fonts.$writing;
     color: theme.$dk-005;
     font-weight: 400;
+
+    &.alt{
+        color:theme.$lt-002;
+    }
 }
 
 .writing-bold{

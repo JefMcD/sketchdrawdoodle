@@ -32,16 +32,15 @@
     align-items: center;
 
     height: 4rem;
-
+    width: 12rem;
     font-family: fonts.$header;
     font-size: 2.5rem;
     font-weight: 400;
     text-transform: uppercase;
-    //margin-inline: 1rem;
-    //margin-block: 0rem;
+
 
     //background-color: green;
-    //border: 2px solid black;
+    //border: 2px solid theme.$lt-001;
 
 }
 
@@ -135,18 +134,18 @@ defined and its placement within the parent element.
     height: 1px;
     width: 100%;
 
-    background: theme.$green-001;
+    background: theme.$purple-001;
     transform: scaleX(0);
     transform-origin: right;
 
     transition-timing-function: cubic-bezier(.71, .21, 1, 1);
-    transition-duration: 250ms;
+    transition-duration: 396ms;
     transition-property: background, transform;
 }
 
 .nav-link:hover::after {
     transform: scaleX(1);
-    background: theme.$green-002;
+    background: theme.$purple-003;
     transform-origin: left;
 }
 

@@ -43,7 +43,7 @@
         top: 1rem;
         right: 2rem;
         width: 12rem;
-        height: 21rem;
+        height: 30rem;
         padding: 0rem;
         
     }
@@ -57,10 +57,10 @@
     align-items: end;
     list-style:none;
 
-    height:20rem;
+    height:29rem;
     margin-top: 0rem;
     margin-right: 0.5rem;
-    //border: 2px solid red;
+    //border: 2px solid theme.$dk-001;
 }
 
 
@@ -78,6 +78,83 @@
 
 
 
+/* The background shroud element 
+/* This element also uses halftone-bg from zine.scss for the dots*/
+.shroud-overlay{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+
+  inset: 0;
+
+    /* dot pattern */
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0.25) 6px, transparent 6px);
+
+    background-size: 18px 18px;   /* dot size & spacing */
+    opacity: 0.3;              /* overall darkness of pattern */
+
+    /* fade the dots toward the center */
+    mask-image: radial-gradient(circle, transparent 5%, theme.$semi-opaque-xxx 30%);
+    
+    overflow: hidden;
+    z-index: 1;
+}
+#mobile-menu-bg{
+    // Selector for javascript
+}
+
+.disable-scrolling{
+    overflow: hidden;
+
+}
+
+
+.ham-btn{
+    font-size: 1.2rem;
+    color: theme.$dk-005;
+    width: 100%;
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    opacity:1;
+    background-color: None;
+}
+
+.ham-btn:hover,
+.ham-btn:focus,
+.ham-btn:target{
+    color: theme.$lt-001;
+}
+
+// This creates the little animated underscore for the link
+.ham-btn::after{
+    content: '';
+    display: block;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+
+    background: theme.$purple-001;
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition-timing-function: cubic-bezier(.71, .21, 1, 1);
+    transition-duration: 396ms;
+    transition-property: background, transform;
+}
+
+.ham-btn:hover::after {
+    transform: scaleX(1);
+    background: theme.$purple-003;
+    transform-origin: left;
+}
 
 
 
@@ -95,6 +172,60 @@
 
 
 
+
+// The hamburger icon to toglle the menu off/
+.ham-flex-container{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    padding-right: 0.5rem;
+
+    background-color:purple;
+    border: 2px solid green;
+    z-index:10;
+}
+.ham-flex {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    //background-color:theme.$purple-003;
+    //border: 2px solid theme.$dk-003;
+
+    .ham-bar-topbun{
+        position:relative;
+        display: block;
+        width: 100%;
+        height: 0.5rem;
+        margin-bottom: 0.2rem;
+        background-color: theme.$lt-001;
+        border-radius:1rem 1rem 0.1rem 0.1rem;
+    }
+    .ham-bar-filling{
+        position:relative;
+        display: block;
+        width: 100%;
+        height: 0.3rem;
+        margin-bottom: 0.2rem;
+        background-color: theme.$lt-002;
+        border-radius: 0.1rem;
+    }
+    .ham-bar-bottombun{
+        position:relative;
+        display: block;
+        width: 100%;
+        height: 0.2rem;
+        margin-bottom: 0.2rem;
+        background-color: theme.$lt-001;
+        border-radius: 0.1rem;
+    }
+}
 
 
 
@@ -110,15 +241,6 @@
 //
 //===========================================================
 
-.hamburger-flex {
-    display: flex;
-    justify-content: flex-end;
-    height: 4rem;
-    width: 4rem;
-
-    background-color:purple;
-    border: 2px solid green;
-}
 
 
 
@@ -244,29 +366,6 @@
 
 
 
-/* The background shadow element */
-.grey-out-viewport{
-    position: fixed;
-    display: block;
-    top: 0;
-    left: 0;
-    
-    height: 100vh;
-    width: 100%;
-
-    opacity: 0.5;
-    background-color: theme.$black-001;
-
-    z-index: 9;
-}
-#mobile-menu-bg{
-    // Selector for javascript
-}
-
-.disable-scrolling{
-    overflow: hidden;
-
-}
 
 
 

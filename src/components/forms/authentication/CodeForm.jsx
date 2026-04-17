@@ -80,7 +80,7 @@ export default function CodeForm({
             </div>
         </form>
 
-        {formError && <FormError message={formError}  setFormError={setFormError}/>  }
+        {formError && <FormError formError={formError}  setFormError={setFormError}/>  }
 
     </div>
 

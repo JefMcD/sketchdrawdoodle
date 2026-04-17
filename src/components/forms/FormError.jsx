@@ -4,6 +4,11 @@ export default function FormError({
   setFormError
 }){
 
+  if (formError){
+    console.log(`form error = ${formError}`)
+  }else{
+    console.log(`No formError ${formError}`)
+  }
   function handleClose(e){
     e.stopPropagation();
     setFormError("")

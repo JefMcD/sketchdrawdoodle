@@ -8,28 +8,30 @@ import SketchDrawDoodleLogo from "@svgIcons/SketchDrawDoodleLogo";
 
 
 // Authentication
-//import SignInLink   from "@navLinks/SignInLink.jsx";
-//import JoinLink     from "@navLinks/JoinLink.jsx";
+import SignInLink   from "@navLinks/SignInLink.jsx";
+import JoinLink     from "@navLinks/JoinLink.jsx";
 
 import WelcomeLink   from "@navLinks/WelcomeLink";
 import CoffeeLink    from "@navLinks/CoffeeLink";
 import DrawLink      from "@navLinks/DrawLink";
 import CompassLink   from "@navLinks/CompassLink";
 import EducationLink from "@navLinks/EducationLink";
-import UserGuideLink from "@navLinks/UserGuideLink";
+import WFLink        from "@navLinks/WFLink.jsx"; // This is being used form the profilr link for now
+import ContactLink   from "@navLinks/ContactLink";
 
-// import FrensLink    from "@navLinks/FrensLink.jsx";
-// import ProfileLink  from "@navLinks/ProfileLink.jsx";
-// import WFLink       from "@navLinks/WFLink.jsx";
 // import AccountLink  from "@navLinks/AccountLink.jsx";
+// import ProfileLink  from "@navLinks/ProfileLink.jsx";
+// import FrensLink    from "@navLinks/FrensLink.jsx";
+// import UserGuideLink from "@navLinks/UserGuideLink";
 // import SummaryLink  from "@navLinks/SummaryLink.jsx";
 // import SketchbookLink from "@navLinks/SketchbookLink.jsx";
 
 // import VerticalTab1 from "@draw/tabs/VerticalTab1.jsx";
-// import NavPanelAvatar  from "@panels/NavPanelAvatar.jsx";
+import NavPanelAvatar  from "@panels/NavPanelAvatar.jsx";
 
 export default function NavPanel({
   userData,
+  setUserData,
   setActiveSection,
   // userData.isAuthenticated - Boolean, is the user logged in 
   // userData.username        - String
@@ -40,22 +42,24 @@ export default function NavPanel({
   // The order here is the order they're rendered in the nav
   // open - permanenty visible to all. guest - unsigned users only. fren - signed in users only
   const navLinkData = [
-    {id:"welcome-link",  component: WelcomeLink,  linkType: "open"},
-    {id:"draw-link",     component: DrawLink,     linkType: "open"},
-    {id:"coffee-link",   component: CoffeeLink,   linkType: "open"},
-    {id:"journey-link",  component: CompassLink,  linkType: "open"},
-    {id:"education-link",component: EducationLink,linkType: "open"},
+    {id:"welcome-link",  component: WelcomeLink,  linkType: "open"}, // racoon icon
+    {id:"draw-link",     component: DrawLink,     linkType: "open"}, // paintbrush icon
+    {id:"coffee-link",   component: CoffeeLink,   linkType: "open"}, // coffee cup
+    {id:"journey-link",  component: CompassLink,  linkType: "open"}, // compas
+    {id:"education-link",component: EducationLink,linkType: "open"}, // open book
+    {id:"contact-link",  component: ContactLink,  linkType: "open"}, // 
+
     //{id:"userguide-link",component: UserGuideLink,linkType: "open"},
     
     
     // Possible Later Additions
-    //{id:"profile-link",  component: ProfileLink,  linkType: "fren"}, 
-    //{id:"join-link",     component: JoinLink,     linkType: "guest"}, 
-    //{id:"signin-link",   component: SignInLink,   linkType: "guest"}, 
-    //{id:"wf-link",       component: WFLink,       linkType: "open"}, silly white feather
+    {id:"join-link",     component: JoinLink,     linkType: "guest"}, // Form Icon
+    {id:"signin-link",   component: SignInLink,   linkType: "guest"}, // Arrow
+    {id:"wf-link",       component: WFLink,       linkType: "fren"},  // white feather (Profile)
+    //{id:"profile-link",  component: ProfileLink,  linkType: "fren"},  // Racoon
+    //{id:"account-link",  component: AccountLink,  linkType: "fren"}, 
     //{id:"frens-link",    component: FrensLink,    linkType: "open"},
     //{id:"summary-link",  component: SummaryLink,  linkType: "fren"},
-    //{id:"account-link",  component: AccountLink,  linkType: "fren"}, 
     //{id:"support-link",  component: SupportLink,  linkType: "open"},
     
   ]
@@ -79,7 +83,7 @@ export default function NavPanel({
 
 
         {/*  Nav Links */}
-        <div className= "nav-icons-container main-nav">
+        <div className= "nav-icons-container">
           { // Get The Links
             navLinkData.filter(({linkType})=>(
               userData["is_authenticated"] ? 
@@ -95,6 +99,13 @@ export default function NavPanel({
           }
         </div>
 
+        {/* User Account Avatar */}
+        <NavPanelAvatar 
+          userData = {userData}
+          setUserData = {setUserData}
+          setActiveSection={setActiveSection}
+        />
+
         {/** Alternative Title Logo */}
         <div className="nav-footer-logo">
             <div className="s-logo-bg-box">
@@ -106,12 +117,7 @@ export default function NavPanel({
         {/* <VerticalTab1 setIsDrawing={setIsDrawing}/>  */}
 
 
-        {/* User Account Avatar */}
-        {/* <NavPanelAvatar 
-          userData = {userData}
-          setUserData = {setUserData}
-          setActiveSection={setActiveSection}
-        /> */}
+
       
       </div>
     </>

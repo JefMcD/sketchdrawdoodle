@@ -2,11 +2,11 @@
 
 
 export default function WFLink({setActiveSection}){
-    console.log("WFLINK");
+
     return(
-        <div className="nav-item" id="wf-link" onClick={()=>setActiveSection("help-section")}>
+        <div className="nav-item" id="wf-link" onClick={()=>setActiveSection("profile-section")}>
             <div className="nav-icon-label"> {/* default mobile display:none*/}
-                Wfeather
+                Profile
             </div>
 
             <svg className="nav-icon-svg" id="wfeath-svg" viewBox="0 0 36 36">

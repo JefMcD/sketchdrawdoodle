@@ -29,6 +29,8 @@
 @use "@scss/_pic_player.scss";
 @use "@scss/_education.scss";
 @use "@scss/_devblog.scss";
+@use "@scss/_contact_form.scss";
+
 
 
 @use "@scss/breakpoints.scss";
@@ -63,6 +65,6 @@
     //background-color: theme.$purple-001;
     //border: 5px solid red;
 
-    overflow: auto;
+    overflow: hidden;
 
 }

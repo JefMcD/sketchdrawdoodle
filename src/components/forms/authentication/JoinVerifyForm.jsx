@@ -57,7 +57,10 @@ export default function JoinVerifyForm({
         // Sucesss User has been created and logged in
         // Django login invalidates csrftoken. 
         // Django @ensure_csrf_token sends DOM a new csrftoken for new session
-        setUserData((prev)=>({...prev, ["is_authenticated"]:signedIn, ["username"]:username}))
+        setUserData((prev)=>({...prev, 
+            ["is_authenticated"]:signedIn, 
+            ["username"]:username})
+          )
         // set profileData
         setProfileData( (prev)=> ({
           ...prev,
@@ -70,6 +73,7 @@ export default function JoinVerifyForm({
         setActiveSection("profile-section");
 
       }else{
+        console.log(`verifyError = ${verifyError}`)
         setFormError(verifyError);
       }
     }catch(err){
@@ -82,6 +86,8 @@ export default function JoinVerifyForm({
     <div className="form-wrapper">
         <form onSubmit={handleSubmit} className="standard-form verify-form" >
            {/*CSKA Rooskis */}
+            <div className="form-instructions">We sent a Secret Code to your email</div>
+            <div className="form-instructions">Enter it below</div>
 
             <input onChange={handleInput} className="form-input" type="number" name="secret_code" placeholder="Secret Code" autoFocus required/>
 
@@ -90,7 +96,7 @@ export default function JoinVerifyForm({
             </div>
         </form>
 
-        {formError && <FormError message={formError} setFormError={setFormError} />  }
+        {formError && <FormError formError={formError} setFormError={setFormError} />  }
     </div>
 
   )

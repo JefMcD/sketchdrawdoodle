@@ -51,7 +51,11 @@ export default function Reset({
 	<>
 	<div className="main-panel">
 		<div className='main-logo'>
-				<img className="logo-img" src = {logo} />
+				{/* <img className="logo-img" src = {logo} /> */}
+					{/* HEADER / TITLE */}
+					<div className="zine-title">
+						<h1>Sketch Draw Doodle</h1>
+					</div>
 		</div>
 		<div className="authenticate-container">
     	<div className="authenticate-inner-wrapper">

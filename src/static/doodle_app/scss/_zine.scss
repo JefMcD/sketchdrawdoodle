@@ -72,6 +72,7 @@
   display: flex;
   width: 100%;
   height: 100%;
+  padding: 1rem;
   //border: 2px solid theme.$purple-002;
   
   &.center{
@@ -139,9 +140,11 @@
   align-items: center;
   width: calc(100% - 0.5rem);
   max-width: 40rem;
-  margin: 0.2rem 0rem;
+  //margin: 0.2rem 0rem;
   padding: 0.5rem;
   padding-top: 0;
+
+
   background: theme.$semi-opaque-012;
   border: 3px solid theme.$black-001;
   box-shadow: 4px 4px 0 theme.$dk-005;
@@ -154,9 +157,29 @@
     background: theme.$lt-002;
     transform: rotate(1.3deg);
   }
+  &.alt-turq{
+    color: theme.$lt-003;
+    background: theme.$turq-003;
+  }
 
+  &.skew-left{
+    transform: rotate(-1deg);
+    margin: 1rem 0;
+
+  }
+  &.skew-right{
+    transform: rotate(1deg);
+    margin: 1rem 0;
+
+  }
+
+  &.straight-up{
+    transform: rotate(0deg);
+    margin: 1rem 0;
+  }
 }
 
+// This turns a section into a who page
 .zine-anchor-section {
   display: flex;
   flex-direction:column;
@@ -181,6 +204,15 @@
     height: 100%;
     object-fit: fill;
   }
+}
+
+.zine-section-para{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.2rem 0 1rem 0;
+  //border: 2px solid theme.$dk-002;
 }
 
 
@@ -247,11 +279,20 @@
 }
 
 .zine-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 40rem;
-  margin: 0 auto;
+  
+  &.alt{
+    background-color: theme.$turq-003;
+  }
+  
+  //margin: 0 auto;
   //border: 2px solid black;
 }
+
 
 .zine-panel-with-image{
   position: relative;
@@ -306,6 +347,9 @@
 
   }
 }
+
+
+
 
 .zine-heading {
   margin-top: 0.5rem;
@@ -380,10 +424,10 @@
 
   /* dot pattern */
   background-image:
-    radial-gradient(circle, rgba(0, 0, 0, 0.25) 1px, transparent 1px);
+    radial-gradient(circle, rgba(0, 0, 0, 0.25) 6px, transparent 6px);
 
-  background-size: 6px 6px;   /* dot size & spacing */
-  opacity: 0.25;              /* overall darkness of pattern */
+  background-size: 18px 18px;   /* dot size & spacing */
+  opacity: 0.1;              /* overall darkness of pattern */
 
   /* fade the dots toward the center */
   mask-image: radial-gradient(circle, transparent 15%, black 70%);

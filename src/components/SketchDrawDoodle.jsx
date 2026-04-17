@@ -21,12 +21,13 @@ import Profile    from "@profile/Profile";
 //import Sketchbook from "@profile/Sketchbook";
 
 // General sections
-import Welcome  from "@sections/Welcome";
-import Journey  from "@sections/Journey";
-import Coffee   from "@sections/Coffee";
+import Welcome   from "@sections/Welcome";
+import Journey   from "@sections/Journey";
+import Coffee    from "@sections/Coffee";
 import UserGuide from "@sections/UserGuide";
 import Education from "@sections/Education";
-import DevBlog  from "@sections/DevBlog";
+import DevBlog   from "@sections/DevBlog";
+import Contact   from "@sections/Contact";
 
 //import Frens    from "@sections/Frens";
 
@@ -45,6 +46,7 @@ export default function SketchDrawDoodle({
 	const [formData, setFormData]           = useState({
 		categoryChoice:{id: null, name:""}, // eg 2, "animals"
 		subcategoryChoices:[], // array of {id, name}
+    subzoneChoice:{}, // eg {005, "LifeDrawing"}
 		drillChoice: // Default Practice Drill
 			{
 				id: 104,
@@ -106,24 +108,24 @@ export default function SketchDrawDoodle({
 
   // Note: No quotes around the component name. Its a function not a string!
   const sectionsArray = [
-		{id:"welcome-section",   component: Welcome, props: {userData, setUserData, activeSection, setActiveSection}},
-		{id:"signin-section",    component: SignIn,  props: {userData, setUserData, activeSection, setActiveSection}},
-		{id:"join-section",      component: Join,    props: {userData, setUserData, activeSection, setActiveSection}},
-		{id:"reset-section",     component: Reset,   props: {userData, setUserData, activeSection, setActiveSection}},
-    
-		{id:"draw-section",      component: Draw,    props: {userData, setIsDrawing, setPracticePayload, setActiveSection, formData, setFormData}},
-		//{id:"summary-section" ,  component: Summary},
-
-		//{id:"account-section",   component: Account},
-		{id:"profile-section",   component: Profile, props: {userData, setUserData, activeSection, setActiveSection}},
-		//{id:"sketchbook-section",component: Sketchbook},
-
-		//{id:"frens-section",     component: Frens},
+		{id:"welcome-section",   component: Welcome,   props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"signin-section",    component: SignIn,    props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"join-section",      component: Join,      props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"reset-section",     component: Reset,     props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"draw-section",      component: Draw,      props: {userData, setIsDrawing, setPracticePayload, setActiveSection, formData, setFormData}},
 		{id:"coffee-section",    component: Coffee,    props: {}},
-  	{id:"userguide-section", component: UserGuide, props: {userData, setUserData, activeSection, setActiveSection}},
 		{id:"journey-section",   component: Journey,   props: {userData, setUserData, activeSection, setActiveSection}},
 		{id:"education-section", component: Education, props: {setActiveSection}},
-		{id:"devblog-section",   component: DevBlog,   props: {setActiveSection}}
+		{id:"devblog-section",   component: DevBlog,   props: {setActiveSection}},
+		{id:"profile-section",   component: Profile,   props: {userData, setUserData, activeSection, setActiveSection}},
+		{id:"contact-section",   component: Contact,   props: {userData, setActiveSection}}
+    
+    
+		//{id:"summary-section" ,  component: Summary},
+		//{id:"account-section",   component: Account},
+		//{id:"sketchbook-section",component: Sketchbook},
+		//{id:"frens-section",     component: Frens},
+  	//{id:"userguide-section", component: UserGuide, props: {userData, setUserData, activeSection, setActiveSection}},
 
   ]
 
@@ -150,6 +152,7 @@ export default function SketchDrawDoodle({
             <div className = "app-container"> {/* sketchDrawDoodle.scss */}
               <NavPanel  
                 userData = {userData}
+                setUserData = {setUserData}
                 setActiveSection={setActiveSection}
               />
       

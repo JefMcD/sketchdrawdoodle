@@ -5,10 +5,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import {useProfile} from "@providers/ProfileContext";
-import HelpLink     from "@navLinks/HelpLink.jsx";
+import {tapDjangoCsrf} from "@modules/manageApi.js";
+
+// Components
+// import HelpLink     from "@navLinks/HelpLink"; abandoned
 import SignoutLink  from "@navLinks/SignoutLink";
 import ResetLink    from "@navLinks/ResetLink";
-import {tapDjangoCsrf} from "@modules/manageApi.js";
 
 function Avatar({username, avatar}){
     return(
@@ -107,7 +109,7 @@ export default function NavPanelAvatar({
     return(
     <>
     {/* User Avatar section */}
-    <div onClick={toggleModal} className="nav-modal-anchor"> {/* Modal attaches to this */}
+    <div onClick={toggleModal} className="nav-avatar-menu"> {/* Modal attaches to this */}
         <div  className="avatar-box">
             {userData["is_authenticated"] && 
                 <Avatar 
@@ -116,9 +118,9 @@ export default function NavPanelAvatar({
         </div>
 
         {isShowModal &&
-            <div className="avatar-modal-box" ref={modalRef}> {/* ref used for handling clicks outside box toggling modal */}
+            <div className="avatar-menu-box" ref={modalRef}> {/* ref used for handling clicks outside box toggling modal */}
                 <div className="modal-links-box">
-                    <div onClick={loadHelpSection}><HelpLink /></div>
+                    {/* <div onClick={loadHelpSection}><HelpLink /></div> */}
                     <div onClick={resetPassword}><ResetLink/></div>
                     <div onClick={signout}><SignoutLink/></div>
                 </div>

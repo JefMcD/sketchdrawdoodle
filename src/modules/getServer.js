@@ -15,4 +15,15 @@ export default function getServer(){
   }else{
     return sketchdrawdoodle
   }
+
+  // Somethimes you need isDEBUG === false but you also need to use localhost
+  // so that the initial data is loaded from the Django payload 
+  // host can be set directly below
+
+  // dev host
+  //return localhost_hotdog;
+
+  // live production host
+  //return sketchdrawdoodle;
+
 }
