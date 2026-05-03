@@ -18,27 +18,14 @@ categories = [
 export default function CategoryPicker({
   formData,
   setFormData,
+  categoryTree,
   categories,
   setSubcategories,
-  setIsLoadingSubcategories,
-  setFormError
+
 }){
-
-  const scrollRef = useRef(null);
-  const [chosenCategory, setChosenCategory]=useState({})
-
-  useEffect(()=>{
-    // Get the name of the chosen category
-    let categoryName = "";
-    for (const category of categories){
-        if (formData.categoryChoice.id === category.id){
-          categoryName = category.name;
-        }
-        // else chosenCategory.id === null
-    };
-    setChosenCategory(categoryName);
-  },[]) // Run only when component mounts
-
+    for (let category of categoryTree){
+        console.log(`CategoryPicket image = ${category.image_url}`)
+    }
 
   return(
   <div className="category-grid">
@@ -47,10 +34,9 @@ export default function CategoryPicker({
         key={category.id}
         formData={formData}
         setFormData={setFormData}
-        setSubcategories={setSubcategories}
+        categoryTree={categoryTree}
         category={category}
-        setIsLoadingSubcategories={setIsLoadingSubcategories}
-        setFormError={setFormError}
+        setSubcategories={setSubcategories}
       />
     ))}
   </div>
