@@ -4,11 +4,11 @@ import SubcategoryItem from "@forms/draw/SubcategoryItem";
 
 
 export default function SubcategoryPicker({
-  userData,
   formData,
   setFormData,
-  setFormError,
+  categoryTree,
   subcategories,
+  setSubzones,
 }){
 
   /*
@@ -18,19 +18,19 @@ export default function SubcategoryPicker({
   ]
   */
 
+
   return(
     <>
-    <div className="subcategory-header writing fs4">{formData.categoryChoice.name}</div>
     <div className="subcategory-picker-box">
           {subcategories.map( (subcategory, index)=> (
             <SubcategoryItem 
               key={subcategory.id}
-              userData={userData}
+              index={index}
               formData = {formData}
               setFormData = {setFormData}
-              setFormError={setFormError}
+              categoryTree={categoryTree}
               subcategory={subcategory}
-              index={index}
+              setSubzones={setSubzones}
             />
           ))}
       </div>

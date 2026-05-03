@@ -44,9 +44,9 @@ export default function SketchDrawDoodle({
   console.log(`********* SketchDrawDoodle *********`);
 
 	const [formData, setFormData]           = useState({
-		categoryChoice:{id: null, name:""}, // eg 2, "animals"
-		subcategoryChoices:[], // array of {id, name}
-    subzoneChoice:{}, // eg {005, "LifeDrawing"}
+		categoryChoice:{id: null, name:""}, // eg {id: 2, name: "animals"}
+		subcategoryChoice:{id: null, name:""}, // eg {id:12, name:"mammals"}
+    subzoneChoice:{id: null, name:""}, // eg {id:005, name:"nude"}
 		drillChoice: // Default Practice Drill
 			{
 				id: 104,

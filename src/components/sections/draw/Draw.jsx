@@ -55,9 +55,47 @@ export default function Draw({
 	]
 	*/
 	const [subcategories, setSubcategories] = useState([]); // Subcategories returned by the server
-	const [subzones, setSubzones] = useState(""); // Subzones returned by the server
+	const [subzones, setSubzones] = useState([]); // Subzones returned by the Djano backend
 
 	
+	const [categoryTree, setCategoryTree]   = useState([]); // Contains all Categories with tehir related subcategories and subzones
+		/*
+			data structure when set. 
+				"category_tree": [
+					{
+						"id": 1,
+						"name": "Animals",
+						"image_url": "...",
+						"description": "...",
+						"subcategories": [
+							{
+								"id": 10,
+								"name": "Mammals",
+								"image_url": "...",
+								"subzones": [
+									{ "id": 100, "name": "Land", "icon": "..." },
+									{ "id": 101, "name": "Ocean", "icon": "..." }
+								]
+							},
+							{
+								"id": 11,
+								"name": "Birds",
+								"image_url": "...",
+								"subzones": [ ... ]
+							}
+						]
+					},
+					{
+						"id": 2,
+						"name": "People",
+						"subcategories": [ ... ]
+					},
+
+					{ etc }
+			]
+		*/
+
+
 	const [drillList, setDrillList]         = useState([]);
 	/*
 		drillList === [
@@ -105,7 +143,8 @@ export default function Draw({
 		// prepare Json Payload for POST
 		const payload = {
 			category_id: formData.categoryChoice.id,
-			subcategory_ids: formData.subcategoryChoices.map((choice)=>(choice.id)),
+			subcategory_id: formData.subcategoryChoice.id,
+			subzone_id: formData.subzoneChoice.id,
 			drill_choice: formData.drillChoice.id,
 			music_choice: null
 		};
@@ -176,9 +215,10 @@ export default function Draw({
 	in development I need to prevent automatica caching
 */
 	useEffect(()=>{
-		const get_category_and_drill_data = server+"get_category_and_drill_data/";
-		async function getCategoryAndDrillData(){
-			const response = await fetch(`${get_category_and_drill_data}?t=${Date.now}`,{ // timestamp url to ensure always unique
+		const get_category_tree_and_drill_data = server+"get_category_tree_and_drill_data/";
+		
+		async function getCategoryTreeAndDrillData(){
+			const response = await fetch(`${get_category_tree_and_drill_data}?t=${Date.now}`,{ // timestamp url to ensure always unique
 				method: "GET",
 				cache: "no-store" // tells the browser not to store the result at all. Options include "default", "reload", "no-store", "force-cache"
 			});
@@ -187,7 +227,22 @@ export default function Draw({
 				
 				// process data
 				setIsLoading(false);
-				setCategories(data.category_payload); // No spread here. The entire state object now references a new object so no mutation and React is Happy
+				setCategoryTree(data.category_tree_payload); // No spread here. The entire state object now references a new object so no mutation and React is Happy
+
+				// Get the set of categories from the categoryTree. The top level categories dont change so can be set when Draw component mounts
+				const cat_list = data.category_tree_payload.map(
+					cat => (
+							{
+								id:cat.id,
+								name: cat.name,
+								description: cat.description,
+								image_url: cat.image_url
+							}
+						)
+					)
+				setCategories(cat_list)
+				// console.log(`cat_list = ${cat_list}`)
+
 				setDrillList(data.drill_payload)
 			}else{
 				//error
@@ -195,7 +250,7 @@ export default function Draw({
 			}
 		};
 		try{
-			getCategoryAndDrillData();
+			getCategoryTreeAndDrillData();
 		}catch (err){
 			setError(err);
 		};
@@ -213,7 +268,7 @@ export default function Draw({
 	// The form components and their props
 	const formSectionsArray = [
 		{	id: "pics-section",  component: PicsSection,  
-			props: {userData, formData, setFormData, categories, subcategories,subzones, setSubcategories, setSubzones ,setFormError}
+			props: {formData, setFormData, categoryTree, categories, subcategories, setSubcategories, subzones, setSubzones}
 		},
 		{id: "time-section",  component: TimeSection,  
 			props: {formData, setFormData, drillList, setFormError}},
@@ -228,13 +283,11 @@ export default function Draw({
 	const ActiveFormComponent = activeFormSectionData.component;
 	const componentProps = activeFormSectionData.props;
 
-	// compose a string to display the chosen subcategories. A Random subcategory is chosen in Django if none selected
+	// compose a string to display the chosen subcategories. 
+	// A Random subcategory is chosen in Django if none selected
 	let subcategoryPicks = "Random";
-	if(formData.subcategoryChoices.length > 0){
-		subcategoryPicks = "";
-		for (let sub of formData.subcategoryChoices){
-			subcategoryPicks = `${subcategoryPicks} ${sub.name}`;
-		};
+	if(formData.subcategoryChoice.id != null){
+		subcategoryPicks = formData.subcategoryChoice.name
 	};
 
 	return(

@@ -33,7 +33,7 @@
 .pic-player-logo-container{
   position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   padding: 1rem;
@@ -43,6 +43,7 @@
   text-align: center;
 
   color: theme.$lt-003;
+  z-index:5;
 
   //border: 2px solid theme.$dk-001;
 }
@@ -58,6 +59,7 @@
   top: 3rem;
   margin-left: 1rem;
   text-align: center;
+  z-index: 5;
 
   //border: 1px solid theme.$lt-003;
   //border-radius: 0.5rem; 

@@ -9,11 +9,17 @@ export default function getServer(){
   const localhost_hotdog = "http://127.0.0.1:8000/"; // React served inside Django on 127.0.0.1
   const sketchdrawdoodle = "https://www.sketchdrawdoodle.com/";
   const production_host  = "https://sketchdrawdoodle.pythonanywhere.com/";
+
+  const TEST = true; // for testing a hotdog deployment on localhost before pushing to live production
   
   if(isDEBUG){
     return localhost_dev
   }else{
-    return sketchdrawdoodle
+    if (TEST){
+      return localhost_hotdog
+    }else{
+      return sketchdrawdoodle
+    }
   }
 
   // Somethimes you need isDEBUG === false but you also need to use localhost

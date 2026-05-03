@@ -1,67 +1,102 @@
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 // components
 import CategoryPicker    from "@forms/draw/CategoryPicker";
 import SubCategoryPicker from "@forms/draw/SubcategoryPicker";
-import Spinner from "@components/Spinner";
+import SubzonePicker     from "@forms/draw/SubzonePicker";
+import PickerMessage     from "@forms/draw/PickerMessage";
 
-function Loading(){
-    return(
-        <div className="waiting-box writing fs5"> 
-            <Spinner />
-        </div>
-    )
-}
+
 
 export default function PicsSection({
-    userData,
     formData,
     setFormData,
+    categoryTree,
     categories,
     subcategories,
-    subzones,
     setSubcategories,
+    subzones,
     setSubzones,
-    setFormError,
+
 }
 ){
 
-    
-    // When a category is selected disolays the loading spinner in the subcategories section
-    const [isLoadingSubcategories, setIsLoadingSubcategories] = useState(false);
 
-    const [isLoadingSubzones, setIsLoadingSubzones] = useState(false);
+    function showMessage(){
 
-    
+        let messageHeader = "";
+        let messageBody = "";
+
+        if(formData.categoryChoice?.id){
+            messageHeader = formData.categoryChoice.name;
+            messageBody = "Pick a subcategory"
+        }else{
+            messageHeader = ""
+            messageBody = "Pick a Category"
+        };
+
+        if(formData.subcategoryChoice?.id){
+            if(subzones.length > 0){
+                messageHeader = formData.subcategoryChoice.name;
+                messageBody = "Pick a subzone"
+            }else{
+                messageHeader = "";
+                messageBody = "Click Go! to start"
+            }
+        }
+
+        if(formData.subzoneChoice?.id){
+            messageHeader = formData.subzoneChoice.name;
+            messageBody = "Click Go! to start"
+        }
+
+        return(
+            <PickerMessage
+                messageHeader={messageHeader}
+                messageBody={messageBody}
+            />
+        )
+    }
+  
     return(
     <section className="pics-setup-section">
         <div className="pictures-selection-title writing fs4"> Categories</div>
+        {/**Show Category Picker */}
         <CategoryPicker
             formData={formData} 
             setFormData={setFormData} 
-            categories={categories} 
+            categoryTree={categoryTree} 
+            categories={categories}
             setSubcategories={setSubcategories} 
-            setIsLoadingSubcategories={setIsLoadingSubcategories}
-            setFormError={setFormError}
+            setSubzones={setSubzones}
         />
-        {formData.categoryChoice?.id?(
-            isLoadingSubcategories ? (
-                <Loading />
-            ) : (
-                <SubCategoryPicker 
-                    userData={userData}
-                    formData={formData} 
-                    setFormData={setFormData} 
-                    setFormError={setFormError}
-                    subcategories={subcategories} 
-                />
-            )
-        ):(
-            <div className="waiting-box writing fs4">
-                Choose a Category!
-            </div>
+
+        {/**  if there exists a category choice show corresponding subcategories */}
+        {formData.categoryChoice?.id && ( 
+            <SubCategoryPicker 
+                formData={formData} 
+                setFormData={setFormData} 
+                categoryTree={categoryTree}
+                subcategories={subcategories}
+                setSubzones={setSubzones} 
+            />
         )}
+
+        {/* Show SubzonePicker if subcategory is chosen  */}
+        {formData.subcategoryChoice?.id && (
+            <SubzonePicker 
+                formData={formData} 
+                setFormData={setFormData} 
+                subzones={subzones}
+            />
+        )}
+
+        {/* Show instructional message to user */}
+        {showMessage()}
+
+
+
     </section> 
   )
 }

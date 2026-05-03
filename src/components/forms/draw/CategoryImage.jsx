@@ -1,4 +1,5 @@
 import getServer from "@modules/getServer.js";
+import {useEffect} from "react";
 
 /*******************************************************************
  * 
@@ -13,15 +14,71 @@ import getServer from "@modules/getServer.js";
  *******************************************************************/
 // The clickable image in the category scroller
 export default function CategoryImage({ 
-  formData,    // formData.categoryChoice{id, name}
-  setFormData, // set state
-  category,    // database instance of category {id, name, description, imageUrl}
-  setSubcategories, // subcategories for the chosen category
-  setIsLoadingSubcategories,
-  setFormError
+  index,            // index of category in the list of categories. allows staggered loading of the categoryImage icons
+  formData,         // formData.categoryChoice{id, name}
+  setFormData,      // update the contents of the form data
+  categoryTree,     // The entire categoryTree data category/subcategory/subzone
+  category,         // instance of category {id, name, description, imageUrl}
+  setSubcategories, // set new subcategories for the chosen category
+  setSubzones       // clear subzones whena new category is selected
 }) {
 
-  async function handleCategorySelect(e){
+  function handleCategorySelect(e){
+    e.stopPropagation();
+  
+    // fetch subcategories for selected category or get from cache
+    console.log(`DEBUG: handleCategorySelect: formData.subcategoryChoices type = ${formData.subcategoryChoices} isAray = ${Array.isArray(formData.subcategoryChoices)}`)
+    
+    // setFormData with new category, clear subcategoryChoices and trigger render
+    const clearChoice = {id: null, name:""}
+    setFormData( (prev)=> ({
+      ...prev, 
+      categoryChoice: {
+        id: category.id, // This CategoryImage id
+        name: category.name // This CategoryImage name
+      },
+      subcategoryChoice:clearChoice, // When a new Category is chosen, subcategory choices are reset to null
+      subzoneChoice:clearChoice  // clear subzone choices too
+    })
+    );
+    
+    // get the new subcategories from the categoryTree
+    console.log(`categoryTree = ${categoryTree}`)
+    let sub_list = []
+    for (const cat of categoryTree){
+      if(cat.id === category.id){ // The chosen category
+        sub_list = cat.subcategories.map(sub=> ( //iterate the subcategories and return a list containing an object for each
+          {
+            id: sub.id,
+            name: sub.name,
+            desciption: sub.description,
+            image_url: sub.image_url
+          }
+        ))
+      }
+    }
+    setSubcategories(sub_list); // set new subcategories
+    setSubzones([]); // clear subzones
+
+      
+  }
+  
+  return (
+      <div
+        className={`category-tile ${formData.category === category.id ? 'active' : ''}`}
+        onClick={handleCategorySelect}
+      >
+        <img src={category.image_url} alt={category.name} />
+        <div className="category-label">{category.name}</div>
+      </div>
+  );
+};
+
+/**
+ * 
+ * Fetch Subcategories from the Django Endpoint
+ * 
+  async function handleFetchCategorySelect(e){
     e.stopPropagation()
 
     const server = getServer();
@@ -55,14 +112,5 @@ export default function CategoryImage({
       setIsLoadingSubcategories(false)
     }
   }
-  
-  return (
-      <div
-        className={`category-tile ${formData.category === category.id ? 'active' : ''}`}
-        onClick={handleCategorySelect}
-      >
-        <img src={category.image_url} alt={category.name} />
-        <div className="category-label">{category.name}</div>
-      </div>
-  );
-};
+ * 
+ */
