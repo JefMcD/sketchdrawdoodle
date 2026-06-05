@@ -20,6 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   width: 100%;
   height: 100%;
   
@@ -56,14 +57,35 @@
   width: 10rem;
   padding: 0;
   height:4rem;
-  top: 3rem;
-  margin-left: 1rem;
+  top: 0.5rem;
+  left: 0.5rem;
   text-align: center;
   z-index: 5;
 
+  animation: fadeInOut 5s forwards;  // Fade Iin and then out over 5 seconds
   //border: 1px solid theme.$lt-003;
   //border-radius: 0.5rem; 
 }
+@keyframes fadeInOut{
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
+
+
+
+
 .player-label-flex{
   position:relative;
   display: flex;

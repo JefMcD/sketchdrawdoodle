@@ -175,9 +175,6 @@ export default function Draw({
 		const message = data.message;
 		const total_hits = data.total_hits;
 		const image_list = data.image_list; // array of objects 
-		for (let i of image_list){
-			console.log(`webFormatURL = ${i.webFormatURL}`)
-		}
 
 		// load practice drill
 		//const practice_settings = data.practice_settings; // Obj containing two objs and one array [{time_dicr}, {mode_dict}, [drill_list]]
