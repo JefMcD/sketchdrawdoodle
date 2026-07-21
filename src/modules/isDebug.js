@@ -1,6 +1,6 @@
 
-// false - initial data loaded from Django payload in index.html (hotdog production)
+// false - initial data loaded from Django payload in index.html (hotdog test and production)
 // true  - initial data loaded by React fetch using API endpoint (dev)
 
-const isDEBUG = true;
+const isDEBUG = false;
 export default isDEBUG;

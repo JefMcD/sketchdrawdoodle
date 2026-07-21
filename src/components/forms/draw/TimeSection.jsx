@@ -83,15 +83,21 @@ export default function TimeSection({
     .filter((practiceObj)=>practiceObj.mode === "draw")
     .map((practiceObj) => practiceObj);
 
+  // define array of freestyle drills
+  const freestyleList = drillList
+    .filter((practiceObj)=>practiceObj.mode === "freestyle")
+    .map((practiceObj) => practiceObj);
+
   return(
       <section className="pics-setup-section">
-          <div className="pictures-selection-title writing fs4"> Drill Selection</div>
+          <br />
+          <div className="pictures-selection-title writing fs7"> Drill Selection</div>
 
           <div className="time-section-options-box">
 
                 <div className="drill-grid">
 
-                  <span className="row-label">Doodle Dash:(mins) </span>
+                  <span className="row-label">Doodle Dash: </span>
                   {doodleDashList.map((dd) => (
                     <Drill
                       key={dd.id}
@@ -104,7 +110,7 @@ export default function TimeSection({
                     />
                   ))}
 
-                  <span className="row-label">WarmupSketch:(mins) </span>
+                  <span className="row-label">WarmupSketch: </span>
                   {warmupSketchList.map((dd) => (
                     <Drill
                       key={dd.id}
@@ -117,13 +123,25 @@ export default function TimeSection({
                     />
                   ))}
                   
-                  <span className="row-label">FocusDrawing:(mins)</span>
+                  <span className="row-label">FocusDrawing: </span>
                   {focusDrawingList.map((dd) => (
                     <Drill
                       key={dd.id}
                       id={dd.id}
                       duration_secs={dd.duration_secs}
                       drills={focusDrawingList}
+                      setFormData = {setFormData}
+                      selectedDrillId = {formData.drillChoice.id}
+
+                    />
+                  ))}
+                  <span className="row-label">Freestyle: </span>
+                  {freestyleList.map((dd) => (
+                    <Drill
+                      key={dd.id}
+                      id={dd.id}
+                      duration_secs={dd.duration_secs}
+                      drills={freestyleList}
                       setFormData = {setFormData}
                       selectedDrillId = {formData.drillChoice.id}
 

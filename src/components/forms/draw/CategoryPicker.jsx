@@ -21,6 +21,7 @@ export default function CategoryPicker({
   categoryTree,
   categories,
   setSubcategories,
+  setSubzones
 
 }){
     for (let category of categoryTree){
@@ -37,6 +38,7 @@ export default function CategoryPicker({
         categoryTree={categoryTree}
         category={category}
         setSubcategories={setSubcategories}
+        setSubzones={setSubzones}
       />
     ))}
   </div>
