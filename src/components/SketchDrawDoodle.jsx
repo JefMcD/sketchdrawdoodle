@@ -33,8 +33,7 @@ import Contact   from "@sections/Contact";
 
 // Drawing Practice COponent
 import DoodlePlayer from "@components/sections/player/DoodlePlayer";
-//import DoodlePlayerGrok from "@components/sections/player/DoodlePlayerGrok";
-//import AIPractice   from "@components/sections/player/AIPlayer";
+
 
 
 export default function SketchDrawDoodle({
@@ -56,24 +55,24 @@ export default function SketchDrawDoodle({
 				is_pro: false,
 				steps: [
 					{
-						'num_pics': 8, 
+						'num_pics': 2, 
 						'step_order': 0, 
-						'display_time': 30
-					}, 
-					{
-						'num_pics': 6, 
-						'step_order': 1, 
 						'display_time': 60
 					}, 
 					{
-						'num_pics': 5, 
-						'step_order': 2, 
+						'num_pics': 4, 
+						'step_order': 1, 
 						'display_time': 120
 					}, 
 					{
 						'num_pics': 2, 
-						'step_order': 3, 
+						'step_order': 2, 
 						'display_time': 300
+					}, 
+					{
+						'num_pics': 1, 
+						'step_order': 3, 
+						'display_time': 600
 					}
 				]
 			},
