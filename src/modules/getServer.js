@@ -10,7 +10,7 @@ export default function getServer(){
   const sketchdrawdoodle = "https://www.sketchdrawdoodle.com/";
   const production_host  = "https://sketchdrawdoodle.pythonanywhere.com/";
 
-  const TEST = false; // TEST=false for testing a hotdog deployment on localhost before pushing to live production
+  const TEST = false; // TEST=true for testing a hotdog deployment on localhost before pushing to live production
   
   if(isDEBUG){
     return localhost_dev

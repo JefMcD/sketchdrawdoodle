@@ -23,6 +23,8 @@
 
   width: 100%;
   height: 100%;
+
+  overflow: clip;
   
   //border: 2px solid theme.$lt-003;
 }
@@ -467,6 +469,7 @@
   
 }
 
+// rotation applied to this container
 .active-pic-container {
   position: relative;
   display: flex;
@@ -476,7 +479,7 @@
   width: 100vw;     // full viewport width
   height: 100vh;    // full viewport height
 
-  overflow: hidden; // prevent accidental overflow
+  overflow: hidden; // prevent scroll bars on overflow
 
   .active-pic {
     max-width: 100%;
@@ -484,19 +487,9 @@
     object-fit: contain;
     //transition: transform 0.4s ease;
   }
-
-  // &.rotate-90 {
-  //   .active-pic {
-  //     /* Rotate the image itself */
-  //     transform: rotate(90deg);
-
-  //     /* Swap max-width and max-height */
-  //     max-width: 100vh;
-  //     max-height: 100vw;
-  //   }
-  // }
   
-  //border: 2px solid white;
+  overflow: visible;
+  //border: 2px solid orange;
 }
 
 .active-pic-container.rotate-90{
@@ -513,7 +506,7 @@
 }
 
 
-
+// Pan/Move applied to this container
 .active-pic-position{
   display: flex;
   position: relative;
@@ -530,22 +523,25 @@
     cursor: grabbing;
   }
   
-  overflow: clip;
-  //border: 1px solid red;
+  overflow: visible;
+  //border: 3px solid blue;
 }
 
 
 
 
-
+// Zoom applied to this container
 .image-container{
   display: flex;
   position: relative;
   justify-content: center;
   align-items:center;
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+
+
+  //border: 2px solid white;
 }
 
 

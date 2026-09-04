@@ -7,8 +7,6 @@ import PauseBtn      from "@components/sections/player/buttons/PauseBtn";
 import StopBtn       from "@components/sections/player/buttons/StopBtn";
 import NextBtn       from "@components/sections/player/buttons/NextBtn";
 import PrevBtn       from "@components/sections/player/buttons/PrevBtn";
-import LandscapeBtn  from "@components/sections/player/buttons/LandscapeBtn";
-import PortraitBtn   from "@components/sections/player/buttons/PortraitBtn";
 import TagsToggleBtn from "@components/sections/player/buttons/TagsToggleBtn";
 
 import ConfirmQuit   from "@components/sections/player/ConfirmQuit";
@@ -34,14 +32,15 @@ const ACTIONS = {
   TOGGLE_TAGS    : "TOGGLE_TAGS",    // Toggle the pictures tags on/off
   STEP_COMPLETE  : "STEP_COMPLETE",  // Individual step has displayed all pics
   ALL_STEPS_COMPLETE: "ALL_STEPS_COMPLETE", // Every step completed
-  TOGGLE_ROTATION: "TOGGLE_ROTATION",
   STOP           : "STOP",            // Player is stopped and waiting confirmation to quit
   CANCEL_QUIT    : "CANCEL_QUIT",
   CONFIRM_QUIT   : "CONFIRM_QUIT",
   FINISHED       : "FINISHED",
   ZOOM           : "ZOOM",           // Wheel Scroll initiates to zoom in or out
-  TOGGLE_DRAG    : "TOGGLE_DRAG",    // Toggle whether image is being moved around or not
-  PAN            : "PAN"             // Click and Drag Pans image around
+  TOGGLE_PANNING : "TOGGLE_PANNING", // Toggle whether image is being moved around or not
+  PAN            : "PAN",            // Click and Drag Pans image around
+  TOGGLE_ROTATING: "TOGGLE_ROTATING", // New Rotating state. Click middle button and drag to rotate
+  UPDATE_ROTATION: "UPDATE_ROTATION"  // Set the new value for the number of degrees rotation
 };
 
 // === INITIAL STATE ===
@@ -55,8 +54,6 @@ const initialState = {
   preloadImgURL     : null,   // the preloaded image to be displayed after the current active image
   isPaused          : null,   // If the pause button pressed and waiting to return to drawing
   isStopped         : null,   // viewer has been stopped and is waiting confirmation to quit or return to drawing
-  isPortrait        : null,   // orientation of the image
-  rotationClass     : "rotate-0",// The initial class applie dto the container to rotate it vertically or horizontally
   error             : null,   // Error occurred
   timeStart         : 0,      // Time when a picture started in viewer          
   timeRemaining     : 0,      // The time the picture has remaining in the setTimeout(). Can be full or partial if it is paused/stopped and resumed
@@ -67,9 +64,12 @@ const initialState = {
   pageURL           : "",     // The URL of the pixabay page 
   isLoading         : false,  // Something is waiting to finish
   zoom              : 1,      // Zoom is normal size
-  isDragging        : false,  // Is the image being moved around
+  isPanning         : false,   // Is the image being moved around
   panX              : 0,      // amount image is panned in the X-axis
-  panY              : 0       // amount image is panned in the y-axis
+  panY              : 0,      // amount image is panned in the y-axis
+
+  isRotating        : false,  // is the image being rotated (middle click and drag left or right)
+  angle             : null    // Number of degrees the image is rotated
 };
 
 
@@ -164,8 +164,6 @@ function playerReducer(state, action){
         preloadImgURL : firstPreload,// webformatURL of second image to be displayed
         isPaused      : false,       // Not paused
         isStopped     : false,       // viewer is playing
-        isPortrait    : true,        // Portrait orientation
-        rotationClass : "rotate-0",  // The rotation of the image (rotate-0 ie unrotated)
         error         : false,       // Error occurred
         timeStart     : startTimer,  // The time in Ms when the pic is loaded into the viewer 
         timeRemaining : displayTimeMs, // The full display time in milliseconds
@@ -176,9 +174,11 @@ function playerReducer(state, action){
         picURL        : action.imageList[0].page_url,  // The url of an image 
         isLoading     : true,          // The player is setting up and an image is loading
         zoom          : 1,             // Default zoom size aka normal picture fills container
-        isDragging    : false,         // Is the image being moved around
+        isPanning     : false,         // Is the image being moved around
         panX          : 0,             // amount image is panned in the X-axis
-        panY          : 0              // amount image is panned in the y-axis
+        panY          : 0,             // amount image is panned in the y-axis
+        isRotating    : false,         // is the image being rotated (middle click and drag left or right)
+        angle         : 0              // Number of degrees the image is rotated
       };
 
     } // End START case
@@ -214,7 +214,8 @@ function playerReducer(state, action){
         picURL        : action.imageList[newIndex].page_url,
         zoom          : 1,
         panX          : 0,
-        panY          : 0
+        panY          : 0,
+        angle         : 0
       }
     } // End TIME_ELAPSED case
 
@@ -240,13 +241,15 @@ function playerReducer(state, action){
         picsShown : newPicsShownCount,
         timeStart: now, 
         timeRemaining: displayTimeMs,
-        picTime       : action.stepList[newStep].display_time, // The time a picture is displayed in seconds
-        picNum: picNum,
-        tagList       : action.imageList[newIndex].tag_list,
-        picURL        : action.imageList[newIndex].page_url,
-        zoom          : 1,
-        panX          : 0,
-        panY          : 0
+        picTime  : action.stepList[newStep].display_time, // The time a picture is displayed in seconds
+        picNum   : picNum,
+        tagList  : action.imageList[newIndex].tag_list,
+        picURL   : action.imageList[newIndex].page_url,
+        zoom     : 1,
+        panX     : 0,
+        panY     : 0,
+        angle    : 0
+
       }
     } // End STEP_COMPLETE case
 
@@ -265,11 +268,13 @@ function playerReducer(state, action){
         status: "Playing",
         activeImgIndex: newIndex,
         activeImgURL : newURL,
-        tagList       : action.imageList[newIndex].tag_list,
-        picURL        : action.imageList[newIndex].page_url,
-        zoom          : 1,
-        panX          : 0,
-        panY          : 0
+        tagList      : action.imageList[newIndex].tag_list,
+        picURL       : action.imageList[newIndex].page_url,
+        zoom         : 1,
+        panX         : 0,
+        panY         : 0,
+        angle        : 0
+
       }
     } // End NEXT_PIC case
 
@@ -280,11 +285,13 @@ function playerReducer(state, action){
         status: "Playing",
         activeImgIndex: newIndex,
         activeImgURL : newURL,
-        tagList       : action.imageList[newIndex].tag_list,
-        picURL        : action.imageList[newIndex].page_url,
-        zoom          : 1,
-        panX          : 0,
-        panY          : 0
+        tagList      : action.imageList[newIndex].tag_list,
+        picURL       : action.imageList[newIndex].page_url,
+        zoom         : 1,
+        panX         : 0,
+        panY         : 0,
+        angle        : 0
+
       }
     } // End PREV_PIC case
 
@@ -294,6 +301,7 @@ function playerReducer(state, action){
         MIN_ZOOM,
         Math.min(MAX_ZOOM, state.zoom + action.delta)
       );
+      //console.log(`current zomm ${state.zoom} updating to ${newZoom}`)
       return{
         ...state,
         zoom:newZoom
@@ -311,11 +319,29 @@ function playerReducer(state, action){
       }
     }
 
-    case ACTIONS.TOGGLE_DRAG: {
-      const drag_status = state.isDragging;
+    case ACTIONS.TOGGLE_PANNING: {
+      const panning_status = state.isPanning;
       return{
         ...state,
-        isDragging: !drag_status
+        isPanning: !panning_status
+      }
+    }
+
+    case ACTIONS.TOGGLE_ROTATING: {
+      const rotatingState = state.isRotating;
+      console.log(`Setting isRotating to ${!state.isRotating}`)
+      return{
+        ...state,
+        isRotating: !rotatingState
+      }
+    }
+
+    case ACTIONS.UPDATE_ROTATION:{
+      const newRotation = state.angle + action.deltaX
+      console.log(`Rotating. ${state.angle} deg to ${newRotation} deg`)
+      return{
+        ...state,
+        angle: newRotation
       }
     }
 
@@ -381,16 +407,7 @@ function playerReducer(state, action){
       }
     }
  
-    case ACTIONS.TOGGLE_ROTATION:{ // toggle Rotation of the image in the viewer
-      const rotation = state.isPortrait;
 
-      return{
-        ...state,
-        isPortrait    : !rotation,
-        rotationClass : rotation ? "rotate-90" : "rotate-0"
-      }
-
-    } // End TOGGLE_ROTATION case
 
     case ACTIONS.TOGGLE_TAGS:{ // Show/Hide Tags
       const visibility = state.isTagsOn;
@@ -455,11 +472,13 @@ export default function DoodlePlayerWithZoomFunction({
   const handleWheel = (e) => {
     // Prevent the browser/page from scrolling
     // e.preventDefault();
-    e.stopPropagation();
+    // e.stopPropagation();
 
     // Wheel up = zoom in
     // Wheel down = zoom out
     const delta = e.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP;
+
+    //console.log("Wheel scroll")
 
     dispatch({
       type : ACTIONS.ZOOM,
@@ -476,7 +495,7 @@ export default function DoodlePlayerWithZoomFunction({
   // ===================================================================================
 
   // useRef is a variable that holds its value acroos renders without triggering a render when a change hjappens
-  //const isDraggingRef = useRef(false); // Is the left mouse down (is in dragging mode)
+  //const isPanningRef = useRef(false); // Is the left mouse down (is in dragging mode)
 
   const lastPositionRef = useRef({
     x:0,
@@ -491,34 +510,27 @@ export default function DoodlePlayerWithZoomFunction({
         return;
     }
 
-    console.log(`pointerId = ${e.pointerId}`)
     // Capture this pointer so we continue receiving
     // pointer events even if the pointer leaves the element
     e.currentTarget.setPointerCapture(e.pointerId);
-
-    //isDraggingRef.current = true;
 
     lastPositionRef.current = {
         x: e.clientX,
         y: e.clientY
     };
 
-    const drag_active = true;
     dispatch({
-      type: ACTIONS.TOGGLE_DRAG
+      type: ACTIONS.TOGGLE_PANNING
     })
 
-    console.log(`Pointer Down X:${e.clientX}, Y:${e.clientY}`);
 };
 
 
 const handlePointerMove = (e) => {
 
-    if (!state.isDragging) {
+    if (!state.isPanning) {
         return;
     }
-
-    console.log("Pointer Move");
 
     let deltaX =
         e.clientX - lastPositionRef.current.x;
@@ -532,18 +544,25 @@ const handlePointerMove = (e) => {
         y: e.clientY
     };
 
-    if(!state.isPortrait){ // image is rotated 90deg
-      //swap axes ie x and y coords when image is rotated
-      let temp = deltaX;
-      deltaX = deltaY;
-      deltaY = temp * -1; // reverses direction 
-    }
+
+    // Rotating the image rotates its axes so they are not aligned to the mouse x/y axes
+    // Translate the x and y coordinates by the rotation to map them to the image axes
+    // Javascript functions use Radians not degrees so the degrees need to be convertedto radians first
+  const radians = state.angle * Math.PI / 180;
+
+  const rotatedDeltaX =
+    deltaX * Math.cos(radians) +
+    deltaY * Math.sin(radians);
+
+  const rotatedDeltaY =
+    -deltaX * Math.sin(radians) +
+    deltaY * Math.cos(radians);
 
 
     dispatch({
         type: ACTIONS.PAN,
-        deltaX: deltaX,
-        deltaY: deltaY
+        deltaX: rotatedDeltaX,
+        deltaY: rotatedDeltaY
     });
 
 };
@@ -555,11 +574,8 @@ const handlePointerUp = (e) => {
         return;
     }
 
-    console.log("Pointer Up");
-
-    const drag_status = false;
     dispatch({
-      type: ACTIONS.TOGGLE_DRAG
+      type: ACTIONS.TOGGLE_PANNING
     })
 
     // Release the pointer capture
@@ -574,73 +590,68 @@ const handlePointerUp = (e) => {
 
 
 
+const lastRotationRef = useRef(0); // Default zerodegrees angle of rotation
+
+// Press the scroll wheel down
+const handleScrollClickDown = (e) => {
+  
+  if (e.button !== 1){ // If not scroll wheel click
+    return;
+  };
+  console.log(`Scroll Click Down lastRotationRef ${lastRotationRef.current}`)
+  
+  // establish starting mouse position
+  lastRotationRef.current = e.clientX;
+  console.log(`clientX = ${e.clientX}`)
+  console.log(`lastRotationRef = ${lastRotationRef.current}`)
+
+  dispatch({
+    type: ACTIONS.TOGGLE_ROTATING
+  })
+}
+
+// Click and hold the scroll wheel down while moving the mouse
+const handleScrollClickMove = (e) => {
+  
+  if (!state.isRotating){
+    return
+  };
+
+  console.log("Scroll Click Move")
+
+  // get the change in the mouse position along the x-axis
+  let deltaX = e.clientX - lastRotationRef.current;
+
+  // Update the lastRotationRef
+  lastRotationRef.current = e.clientX;
+
+  // dispatch the updated amount of rotation to apply
+  dispatch({
+    type: ACTIONS.UPDATE_ROTATION,
+    deltaX: deltaX
+  })
+
+
+}
+
+// Release the click on the scroll wheel
+const handleScrollClickUp = (e) => {
+  if(e.button!==1){ // scroll wheel clicked
+    return
+  };
+  console.log("Scroll Click Up")
+
+  dispatch({
+    type: ACTIONS.TOGGLE_ROTATING
+  })
+}
 
 
 
 
 
-  const handleMouseDown = (e) => {
-
-    // Only respond to left mouse button
-    if (e.button !== 0) {
-        return;
-    }
-
-    isDraggingRef.current = true;
-
-    lastPositionRef.current = {
-        x: e.clientX,
-        y: e.clientY
-    };
-
-    console.log(`Mouse Down X:${e.clientX}, Y:${e.clientY}`);
-};
 
 
-const handleMouseMove = (e) => {
-
-    if (!isDraggingRef.current) {
-        return;
-    }
-
-    console.log("Mouse Move");
-
-    const deltaX =
-        e.clientX - lastPositionRef.current.x;
-
-    const deltaY =
-        e.clientY - lastPositionRef.current.y;
-
-
-    lastPositionRef.current = {
-        x: e.clientX,
-        y: e.clientY
-    };
-
-
-    dispatch({
-        type: ACTIONS.PAN,
-        deltaX: deltaX,
-        deltaY: deltaY
-    });
-
-};
-
-
-const handleMouseUp = (e) => {
-
-    if (e.button !== 0) {
-        return;
-    }
-
-    console.log("Mouse Up");
-
-    isDraggingRef.current = false;
-
-    // Release the pointer capture
-    // e.currentTarget.releasePointerCapture(e.pointerId);
-
-};
 
 
 
@@ -805,24 +816,30 @@ const handleMouseUp = (e) => {
 
             {/* ================ ACTIVE IMAGE =========================== */}
             {/* React rerenders img contents when it sees src value has changed  */}
-            <div className={`active-pic-container ${state.rotationClass}`}   
+            <div className={`active-pic-container`}
+                onMouseDown={handleScrollClickDown}
+                onMouseMove={handleScrollClickMove}
+                onMouseUp={handleScrollClickUp}
+                style={{
+                  transform: `rotate(${state.angle}deg)`,
+                
+                }}
             > {/* Rotation applies to this container */}
 
-              <div className={`active-pic-position ${state.isDragging ? "dragging" : ""}`}
+              <div className={`active-pic-position ${state.isPanning ? "dragging" : ""}`}
                    onPointerDown={handlePointerDown}
                    onPointerMove={handlePointerMove}
                    onPointerUp={handlePointerUp}
-              >
-                <div className="image-container" onWheel={handleWheel} >  
+                   style={{transform:`translate(${state.panX}px, ${state.panY}px) `}}
+                    > {/* move/pan applied to this container */}
+                <div className="image-container" onWheel={handleWheel} 
+                    style={{transform: `scale(${state.zoom})`}}
+                    >  
                   <img 
-                    className="active-pic" 
                     draggable={false} // prevents browser intercepting the click and drag
+                    className="active-pic" 
                     src={state.activeImgURL} 
                     alt="" 
-                    style={{
-                      transform:
-                        `translate(${state.panX}px, ${state.panY}px) scale(${state.zoom})   `
-                    }}
                     />
                     {/* Zoom applied to this container */}
                 </div>
@@ -868,11 +885,6 @@ const handleMouseUp = (e) => {
                 )}
                 <StopBtn onClick={()=>dispatch({type: ACTIONS.STOP})}/>
                 <NextBtn onClick={() => dispatch({ type: ACTIONS.NEXT_PIC, imageList: imageList, stepList: stepList })}/>
-                {state.isPortrait ? (
-                  <LandscapeBtn onClick={()=>dispatch({type:ACTIONS.TOGGLE_ROTATION})}/>
-                ): (
-                  <PortraitBtn onClick={()=>dispatch({type:ACTIONS.TOGGLE_ROTATION})}/>
-                )}
                 <TagsToggleBtn onClick={()=>dispatch({type:ACTIONS.TOGGLE_TAGS})} />
 
               </div>
